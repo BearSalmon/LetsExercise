@@ -18,10 +18,13 @@ public class ButtonEvent : MonoBehaviour
 
     int numOfButton;
 
+    public CharacterDeorate characterDeorate;
+
     void Start()
     {
         m_Scene = SceneManager.GetActiveScene();
         f_Scene = SceneManager.GetActiveScene();
+        SetButtonList();
     }
 
     // Update is called once per frame
@@ -55,13 +58,18 @@ public class ButtonEvent : MonoBehaviour
         {
             numOfButton = 3;
         }
+        else if (m_Scene.name == "CharacterDecorate")
+        {
+            numOfButton = 7;
+            characterDeorate = GameObject.Find("Manager").GetComponent<CharacterDeorate>();
+        }
         else if (m_Scene.name == "SelectPart")
         {
             numOfButton = 6;
         }
         else if (m_Scene.name == "Investigation")
         {
-            numOfButton = 0;
+            numOfButton = 4;
         }
 
         mouse = GameObject.Find("Mouse");
@@ -70,6 +78,7 @@ public class ButtonEvent : MonoBehaviour
         for (var i = 1; i <= numOfButton; i++)
         {
             Button btn = GameObject.Find("Btn" + i).GetComponent<Button>();
+            btn.onClick.AddListener(() => ButtonClick(btn));
 
             buttons[i-1] = btn; 
         }
@@ -77,6 +86,7 @@ public class ButtonEvent : MonoBehaviour
 
 
     }
+
 
     private void ButtonClick(Button btn)
     {
@@ -113,6 +123,30 @@ public class ButtonEvent : MonoBehaviour
             }
 
         }
+        else if (m_Scene.name == "CharacterDecorate")
+        {
+            if (btn.name == "Btn1" || btn.name == "Btn2" || btn.name == "Btn3" || btn.name == "Btn4" || btn.name == "Btn5" || btn.name == "Btn6")
+            {
+                Color color = btn.GetComponent<Image>().color;
+                characterDeorate.changeColor(color);
+                
+            }
+            else if (btn.name == "Btn7")
+            {
+                if (characterDeorate.state == 0 || characterDeorate.state == 1)
+                {
+                    characterDeorate.state += 1;
+                    characterDeorate.changeState();
+                    SetButtonList();
+                }
+                else
+                {
+                    SceneManager.LoadScene(5);
+                }
+                    
+            }
+            
+        }
         else if (m_Scene.name == "SelectPart")
         {
             if (btn.name == "Btn1")
@@ -137,9 +171,28 @@ public class ButtonEvent : MonoBehaviour
             }
             else if (btn.name == "Btn6")
             {
-                SceneManager.LoadScene(5);
+                SceneManager.LoadScene(6);
             }
 
+        }
+        else if (m_Scene.name == "Investigation")
+        {
+            if (btn.name == "Btn1")
+            {
+                
+            }
+            else if (btn.name == "Btn2")
+            {
+                
+            }
+            else if (btn.name == "Btn3")
+            {
+                
+            }
+            else if (btn.name == "Btn4")
+            {
+                SceneManager.LoadScene(7);
+            }
         }
 
 
