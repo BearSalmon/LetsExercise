@@ -10,7 +10,6 @@ using UnityEngine.SceneManagement;
 
 public class UDPReceive : MonoBehaviour
 {
-
     Thread receiveHandThread, receiveAngleThread;
     UdpClient clientHand, clientAngle;
     public int portHand = 5052, portAngle = 5051;
