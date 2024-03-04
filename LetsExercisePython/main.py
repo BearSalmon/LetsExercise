@@ -31,8 +31,13 @@ if __name__ == "__main__":
     udp_port_hand = 5052
     udp_port_angle = 5051
 
+    recv_ip = '127.0.0.1'  # Listen on all network interfaces
+    recv_port = 1234  # Port number
+
     # Communication
     udp_sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)  # UDP
+    udp_sock.setblocking(False)  # 將此socket設成非阻塞
+    udp_sock.bind((recv_ip, recv_port))
     serverAddressPort_hand = (udp_ip, udp_port_hand)
     serverAddressPort_angle = (udp_ip, udp_port_angle)
 
@@ -140,8 +145,12 @@ if __name__ == "__main__":
         # udp
         udp_sock.sendto(str.encode(wrong_message), serverAddressPort_angle)
 
-        salmon = "fuck you"
-
+        # Receive data from unity
+        try:
+            data_from_unity, addr = udp_sock.recvfrom(1024)  # Buffer size is 1024 bytes
+            print(f"Received data from {addr}: {data_from_unity.decode()}")
+        except:
+            pass
 
         #cv2.imshow("Image", img)
         tcp_sock.close()
