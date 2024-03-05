@@ -20,6 +20,8 @@ public class ButtonEvent : MonoBehaviour
 
     public CharacterDeorate characterDeorate;
 
+    public DBUtils dBUtils;
+
     void Start()
     {
         m_Scene = SceneManager.GetActiveScene();
@@ -45,7 +47,10 @@ public class ButtonEvent : MonoBehaviour
         {
             numOfButton = 1;
         }
-
+        else if (m_Scene.name == "CheckIfNew")
+        {
+            numOfButton = 1;
+        }
         else if (m_Scene.name == "Trainer")
         {
             numOfButton = 1;
@@ -73,6 +78,7 @@ public class ButtonEvent : MonoBehaviour
         }
 
         mouse = GameObject.Find("Mouse");
+        dBUtils = GetComponent<DBUtils>();
 
         buttons = new Button[numOfButton];
         for (var i = 1; i <= numOfButton; i++)
@@ -98,7 +104,15 @@ public class ButtonEvent : MonoBehaviour
             }
 
         }
-        
+        else if (m_Scene.name == "CheckIfNew")
+        {
+            if (btn.name == "Btn1")
+            {
+                dBUtils.AddPlayer();
+            }
+
+        }
+
         else if (m_Scene.name == "Trainer")
         {
             if (btn.name == "Btn1")
