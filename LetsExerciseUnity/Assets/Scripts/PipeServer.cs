@@ -126,7 +126,7 @@ public class PipeServer : MonoBehaviour
                     //float z = float.Parse(points[2 + (i * 3)]) /20;
                     float x = float.Parse(points[0 + (i * 3)]) / 20;
                     float y = float.Parse(points[1 + (i * 3)]) / 20;
-                    float z = float.Parse(points[2 + (i * 3)]) / 50;
+                    float z = float.Parse(points[2 + (i * 3)]) / 500;
 
                     h.positionsBuffer[i].value += new Vector3(x, y, z);
                     h.positionsBuffer[i].accumulatedValuesCount += 1;

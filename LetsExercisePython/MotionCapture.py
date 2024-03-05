@@ -1,9 +1,10 @@
 import cv2
 from cvzone.PoseModule import PoseDetector
+import os
 
 cap = cv2.VideoCapture('video.mp4')
 detector = PoseDetector()
-
+os.remove("lmList.txt")
 postList = []
 
 while True:
@@ -22,6 +23,6 @@ while True:
        
     cv2.imshow("Image",img)
 
-    if cv2.waitKey(1) == ord('q'):
+    if cv2.waitKey(30) == ord('q'):
          break
        
