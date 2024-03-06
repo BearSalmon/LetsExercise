@@ -19,8 +19,11 @@ public class ButtonEvent : MonoBehaviour
     int numOfButton;
 
     public CharacterDeorate characterDeorate;
+    public SelectPlayer selectPlayer;
 
     public DBUtils dBUtils;
+
+    Player player;
 
     void Start()
     {
@@ -49,7 +52,12 @@ public class ButtonEvent : MonoBehaviour
         }
         else if (m_Scene.name == "CheckIfNew")
         {
-            numOfButton = 1;
+            numOfButton = 2;
+        }
+        else if (m_Scene.name == "SelectPlayer")
+        {
+            numOfButton = 3;
+            selectPlayer = GameObject.Find("Manager").GetComponent<SelectPlayer>();
         }
         else if (m_Scene.name == "Trainer")
         {
@@ -61,12 +69,14 @@ public class ButtonEvent : MonoBehaviour
         }
         else if (m_Scene.name == "SelectSex")
         {
+            player = dBUtils.GetPlayerByName(dBUtils.nowPlayer);
             numOfButton = 3;
         }
         else if (m_Scene.name == "CharacterDecorate")
         {
             numOfButton = 7;
             characterDeorate = GameObject.Find("Manager").GetComponent<CharacterDeorate>();
+            player = dBUtils.GetPlayerByName(dBUtils.nowPlayer);
         }
         else if (m_Scene.name == "SelectPart")
         {
@@ -109,6 +119,28 @@ public class ButtonEvent : MonoBehaviour
             if (btn.name == "Btn1")
             {
                 dBUtils.AddPlayer();
+                SceneManager.LoadScene(3);
+            }
+            else if (btn.name == "Btn2")
+            {
+                SceneManager.LoadScene(2);
+            }
+
+        }
+        else if (m_Scene.name == "SelectPlayer")
+        {
+            if (btn.name == "Btn1")
+            {
+                selectPlayer.Save();
+                SceneManager.LoadScene(9);
+            }
+            else if (btn.name == "Btn2")
+            {
+                selectPlayer.backOption();
+            }
+            else if (btn.name == "Btn3")
+            {
+                selectPlayer.nextOption();
             }
 
         }
@@ -117,23 +149,24 @@ public class ButtonEvent : MonoBehaviour
         {
             if (btn.name == "Btn1")
             {
-                SceneManager.LoadScene(3);
+                SceneManager.LoadScene(4);
             }
 
         }
         else if (m_Scene.name == "SelectSex")
         {
-            if(btn.name == "Btn1")
+            if (btn.name == "Btn1")
             {
-
+                player.Gender = "Girl";
             }
             else if (btn.name == "Btn2")
             {
-
+                player.Gender = "Boy";
             }
             else if (btn.name == "Btn3")
             {
-                SceneManager.LoadScene(4);
+                dBUtils.UpdatePlayer(player);
+                SceneManager.LoadScene(5);
             }
 
         }
@@ -143,10 +176,23 @@ public class ButtonEvent : MonoBehaviour
             {
                 Color color = btn.GetComponent<Image>().color;
                 characterDeorate.changeColor(color);
+                if (characterDeorate.state == 0)
+                {
+                    player.Hair = ColorUtility.ToHtmlStringRGBA(color);
+                }
+                else if (characterDeorate.state == 1)
+                {
+                    player.Body = ColorUtility.ToHtmlStringRGBA(color);
+                }
+                else
+                {
+                    player.Cloth = ColorUtility.ToHtmlStringRGBA(color);
+                }
                 
             }
             else if (btn.name == "Btn7")
             {
+                dBUtils.UpdatePlayer(player);
                 if (characterDeorate.state == 0 || characterDeorate.state == 1)
                 {
                     characterDeorate.state += 1;
@@ -155,7 +201,7 @@ public class ButtonEvent : MonoBehaviour
                 }
                 else
                 {
-                    SceneManager.LoadScene(5);
+                    SceneManager.LoadScene(6);
                 }
                     
             }
@@ -185,7 +231,7 @@ public class ButtonEvent : MonoBehaviour
             }
             else if (btn.name == "Btn6")
             {
-                SceneManager.LoadScene(6);
+                SceneManager.LoadScene(7);
             }
 
         }
@@ -205,7 +251,7 @@ public class ButtonEvent : MonoBehaviour
             }
             else if (btn.name == "Btn4")
             {
-                SceneManager.LoadScene(7);
+                SceneManager.LoadScene(8);
             }
         }
 
