@@ -25,4 +25,23 @@ public class PlayerService
     {
         return dataBase.GetConnection().Table<Player>();
     }
+
+
+    // get player by name
+    public Player GetPlayerByName(string name)
+    {
+        return dataBase.GetConnection().Table<Player>().Where(x => x.Name == name).FirstOrDefault();
+    }
+
+    // update player by name
+    public int UpdatePlayer(Player player)
+    {
+        return dataBase.GetConnection().Update(player);
+    }
+
+    // Count player number
+    public int CountPlayers()
+    {
+        return dataBase.GetConnection().Table<Player>().Count();
+    }
 }

@@ -9,18 +9,38 @@ public class CharacterDeorate : MonoBehaviour
     public GameObject palette_hair;
     public GameObject palette_body;
     public GameObject palette_cloth;
+    public GameObject girl;
+    public GameObject boy;
 
-    public RawImage hair;
-    public RawImage body;
-    public RawImage cloth;
+    public RawImage hair_girl;
+    public RawImage body_girl;
+    public RawImage cloth_girl;
+
+    public RawImage hair_boy;
+    public RawImage body_boy;
+    public RawImage cloth_boy;
+
+    public DBUtils dBUtils;
+
+    Player player;
 
     // Start is called before the first frame update
     void Start()
     {
-        hair = GameObject.Find("hair_girl").GetComponent<RawImage>();
-        body = GameObject.Find("body_girl").GetComponent<RawImage>();
-        cloth = GameObject.Find("cloth_girl").GetComponent<RawImage>();
+        dBUtils = GameObject.Find("WholeManager").GetComponent<DBUtils>();
 
+        player = dBUtils.GetPlayerByName(dBUtils.nowPlayer);
+
+        if (player.Gender == "Girl")
+        {
+            girl.SetActive(true);
+            boy.SetActive(false);
+        }
+        else
+        {
+            girl.SetActive(false);
+            boy.SetActive(boy);
+        }
     }
 
     public void changeState()
@@ -39,24 +59,39 @@ public class CharacterDeorate : MonoBehaviour
 
     public void changeColor(Color color)
     {
-        if (state == 0)
+        if (player.Gender == "Girl")
         {
-            hair.color = color;
-        }
-        else if (state == 1)
-        {
-            body.color = color;
-        }
-        else
-        {
-            cloth.color = color;
-        }
+            if (state == 0)
+            {
+                hair_girl.color = color;
+            }
+            else if (state == 1)
+            {
+                body_girl.color = color;
+            }
+            else
+            {
+                cloth_girl.color = color;
+            }
 
-    }
+        }
+        else 
+        {
+            if (state == 0)
+            {
+                hair_boy.color = color;
+            }
+            else if (state == 1)
+            {
+                body_boy.color = color;
+            }
+            else
+            {
+                cloth_boy.color = color;
+            }
 
-    // Update is called once per frame
-    void Update()
-    {
+        }
         
+
     }
 }

@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/CheckIfNew.unity
     guid: c7ad9ecf7f6d54a7bb2e4f8c2a429fe9
   - enabled: 1
+    path: Assets/Scenes/SelectPlayer.unity
+    guid: 3addbb0444ebb488991c88ee5a27af89
+  - enabled: 1
     path: Assets/Scenes/Trainer.unity
     guid: d000f11d1f4f24b0ba9e07e87276b25b
   - enabled: 1
