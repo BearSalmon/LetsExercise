@@ -166,10 +166,15 @@ public class UDPReceive : MonoBehaviour
 
         mouse.transform.position = new Vector3(transformPosition[0], transformPosition[1], transformPosition[2]);
 
+        
+        if (parts.Length == 2)
+        {
+            buttonEvent.Check_if_button(0);
+        }
         // 是否點擊
         if (parts.Length == 3 && buttonEvent.canClickButton == true)
         {
-            buttonEvent.Check_if_button();
+            buttonEvent.Check_if_button(1);
         }
 
     }

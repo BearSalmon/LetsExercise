@@ -112,12 +112,14 @@ if __name__ == "__main__":
             hand = hands[0]
             hand_lmlist = hand['lmList']
             fingers = hand_detector.fingersUp(hand)
+            # 傳送食指 x , y 值 (只要有吃到手就傳)
+            index_finger = hand_lmlist[8][0], hand_lmlist[8][1]
+            index_finger_json = json.dumps(index_finger)
+            udp_sock.sendto(str.encode(index_finger_json), serverAddressPort_hand)
+
             if fingers == [1,1,1,1,1]:
-                # 傳送食指 x , y 值
-                index_finger = hand_lmlist[8][0], hand_lmlist[8][1]
-                index_finger_json = json.dumps(index_finger)
-                udp_sock.sendto(str.encode(index_finger_json), serverAddressPort_hand)
-            # 兩隻手指頭 點擊
+                #五根手指頭點擊三秒
+                print()
             if fingers == [0,1,1,0,0]:
                 index_finger = hand_lmlist[8][0], hand_lmlist[8][1],1
                 index_finger_json = json.dumps(index_finger)
@@ -129,16 +131,16 @@ if __name__ == "__main__":
         video_lmlist = [[int(point) for point in points[i:i+3]] for i in range(0, len(points)-1, 3)]
         wrong_message = "nice"
 
-        for index in range(len(check_point)):
-            point1,point2,ref_point = get_landmark_features(lmList,dict_features,check_point[index],frame_width,frame_height)
-            video_point1,video_point2,video_ref_point = get_landmark_features(video_lmlist,dict_features,check_point[index],video_frame_width,video_frame_height)
-            offset_angle = find_angle(point1,point2,ref_point)
-            video_offset_angle = find_angle(video_point1,video_point2,video_ref_point)
-            wrong = offset_angle - video_offset_angle
-            wrong = abs(wrong)
-            # 這裡comparison先隨便寫的
-            if wrong > 10 :
-               wrong_message = "too high"
+        # for index in range(len(check_point)):
+        #     point1,point2,ref_point = get_landmark_features(lmList,dict_features,check_point[index],frame_width,frame_height)
+        #     video_point1,video_point2,video_ref_point = get_landmark_features(video_lmlist,dict_features,check_point[index],video_frame_width,video_frame_height)
+        #     offset_angle = find_angle(point1,point2,ref_point)
+        #     video_offset_angle = find_angle(video_point1,video_point2,video_ref_point)
+        #     wrong = offset_angle - video_offset_angle
+        #     wrong = abs(wrong)
+        #     這裡comparison先隨便寫的
+        #     if wrong > 10 :
+        #        wrong_message = "too high"
 
         counter+=1
 

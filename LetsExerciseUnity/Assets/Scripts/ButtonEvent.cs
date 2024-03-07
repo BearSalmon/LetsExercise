@@ -42,6 +42,7 @@ public class ButtonEvent : MonoBehaviour
             SetButtonList();
         }
         f_Scene = SceneManager.GetActiveScene();
+
     }
 
     void SetButtonList()
@@ -258,25 +259,30 @@ public class ButtonEvent : MonoBehaviour
 
     }
 
-    public void Check_if_button()
+    public void Check_if_button(int type)
     {
-        int yes = 0;
         foreach (Button btn in buttons)
         {
             if (Check_touch_button(btn))
             {
-                yes = 1;
-                Debug.Log("RawImage is touching Button: " + btn.name);
-                ButtonClick(btn);
-                canClickButton = false;
-                StartCoroutine(DelayedAction());
+                if (type == 0)
+                {
+                    btn.transform.localScale = new Vector3(1.1f, 1.1f, 1f);
+                }
+                else
+                {
+                    ButtonClick(btn);
+                    canClickButton = false;
+                    StartCoroutine(DelayedAction());
+
+                }
 
                 return;
             }
-        }
-        if (yes == 0)
-        {
-            Debug.Log("Your are not clicking a button");
+            else
+            {
+                btn.transform.localScale = new Vector3(1f, 1f, 1f);
+            }
         }
 
     }
