@@ -1195,6 +1195,7 @@ MonoBehaviour:
   forInvestigate: 0
   canClickButton: 1
   characterDeorate: {fileID: 0}
+  selectPlayer: {fileID: 0}
   dBUtils: {fileID: 0}
 --- !u!114 &1768877322
 MonoBehaviour:
