@@ -39,7 +39,7 @@ public class CharacterDeorate : MonoBehaviour
         else
         {
             girl.SetActive(false);
-            boy.SetActive(boy);
+            boy.SetActive(true);
         }
     }
 

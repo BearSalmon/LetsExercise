@@ -45,7 +45,6 @@ public class DBUtils : MonoBehaviour
             Body = "FFDBC6FF",
             Cloth = "CAEE8AFF",
             LastLogin = currentTimeString,
-            DominantHand = "Left"
         };
         int pk = playerService.AddPlayer(player);
         Debug.Log("Primary key = " + pk);
@@ -58,7 +57,6 @@ public class DBUtils : MonoBehaviour
             Body = "FFDBC6FF",
             Cloth = "CAEE8AFF",
             LastLogin = currentTimeString,
-            DominantHand = "Left"
         };
         pk = playerService.AddPlayer(player);
         Debug.Log("Primary key = " + pk);
@@ -71,7 +69,6 @@ public class DBUtils : MonoBehaviour
             Body = "FFDBC6FF",
             Cloth = "CAEE8AFF",
             LastLogin = currentTimeString,
-            DominantHand = "Left"
         };
         pk = playerService.AddPlayer(player);
         Debug.Log("Primary key = " + pk);
