@@ -2,7 +2,7 @@
 pose = {
     "pose_name":
     {
-        "path" : "video_lmlist/lmList.txt",
+        "path" : "./arm1.txt",
         "check_angle":[
             {
                 "point1": "left_elbow",

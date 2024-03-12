@@ -16,6 +16,7 @@ public class UDPReceive : MonoBehaviour
     public bool startRecieving = true;
     public bool printToConsole = false;
     public string dataHand, dataAngle;
+    public bool canContinue = false;
 
     public ButtonEvent buttonEvent;
 
@@ -116,6 +117,10 @@ public class UDPReceive : MonoBehaviour
                 IPEndPoint anyIP = new IPEndPoint(IPAddress.Any, 1);
                 byte[] dataByte = clientAngle.Receive(ref anyIP);
                 dataAngle = Encoding.UTF8.GetString(dataByte);
+                if (dataAngle != "")
+                {
+                    canContinue = true;
+                }
                 // Debug.Log(dataAngle);
 
                 //parts = dataHand.Trim('[', ']').Split(',');
