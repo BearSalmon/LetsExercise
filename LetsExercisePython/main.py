@@ -6,6 +6,7 @@ import socket
 from utils import find_angle, get_landmark_features
 from pose_dataset import get_pose_db
 import json
+import time
 
 
 if __name__ == "__main__":
@@ -52,7 +53,7 @@ if __name__ == "__main__":
 
     # Get the actual width and height of the webcam frames
     frame_width = int(cap.get(3))
-    print(frame_width)
+    # print(frame_width)
     frame_height = int(cap.get(4))
 
     # Pose Detector
@@ -78,10 +79,15 @@ if __name__ == "__main__":
     }
     wrong_message = "nice"
     counter = 0 #video_counter
+    loop_cnt = 0
 
     while True:
-        if counter >= len(lines):
-            counter = 0
+        # if counter == 0:
+        #     loop_cnt += 1
+        #     print(loop_cnt)
+        # if counter >= len(lines):
+        #     counter = 0
+        #     loop_cnt += 1
         success, img = cap.read()
         # 640 * 480
         # img = cv2.resize(img,(480, 720))
@@ -120,43 +126,56 @@ if __name__ == "__main__":
             if fingers == [1,1,1,1,1]:
                 #五根手指頭點擊三秒
                 print()
-                
+
             if fingers == [0,1,1,0,0]:
                 index_finger = hand_lmlist[8][0], hand_lmlist[8][1],1
                 index_finger_json = json.dumps(index_finger)
                 udp_sock.sendto(str.encode(index_finger_json), serverAddressPort_hand)
 
+        # Receive data from unity
+        received_data = ""
+        try:
+            data_from_unity, addr = udp_sock.recvfrom(1024)  # Buffer size is 1024 bytes
+            received_data = data_from_unity.decode()
+            # print(f"Received data from {addr}: {received_data}")
+        except:
+            pass
+        # if received_data == "start":
+        #     loop_cnt = 0
+        #     seconds1 = time.time()
+        # elif received_data == "stop":
+        #     print(loop_cnt)
+        #     seconds2 = time.time()
+        #     print(seconds2 - seconds1)
+        #     break
 
+        if received_data:
+            counter = int(received_data)
+            points = lines[counter].split(',')
+            video_lmlist = [[int(point) for point in points[i:i+3]] for i in range(0, len(points)-1, 3)]
+            wrong_message = "nice"
 
-        points = lines[counter].split(',')
-        video_lmlist = [[int(point) for point in points[i:i+3]] for i in range(0, len(points)-1, 3)]
-        wrong_message = "nice"
-
-        # for index in range(len(check_point)):
-        #     point1,point2,ref_point = get_landmark_features(lmList,dict_features,check_point[index],frame_width,frame_height)
-        #     video_point1,video_point2,video_ref_point = get_landmark_features(video_lmlist,dict_features,check_point[index],video_frame_width,video_frame_height)
-        #     offset_angle = find_angle(point1,point2,ref_point)
-        #     video_offset_angle = find_angle(video_point1,video_point2,video_ref_point)
-        #     wrong = offset_angle - video_offset_angle
-        #     wrong = abs(wrong)
-        #     這裡comparison先隨便寫的
-        #     if wrong > 10 :
-        #        wrong_message = "too high"
-
-        counter+=1
+            for index in range(len(check_point)):
+                point1,point2,ref_point = get_landmark_features(lmList,dict_features,check_point[index],frame_width,frame_height)
+                video_point1,video_point2,video_ref_point = get_landmark_features(video_lmlist,dict_features,check_point[index],video_frame_width,video_frame_height)
+                offset_angle = find_angle(point1,point2,ref_point)
+                video_offset_angle = find_angle(video_point1,video_point2,video_ref_point)
+                wrong = offset_angle - video_offset_angle
+                wrong = abs(wrong)
+                # 這裡comparison先隨便寫的
+                if wrong > 10 :
+                    wrong_message = "too high"
 
         # udp
         udp_sock.sendto(str.encode(wrong_message), serverAddressPort_angle)
 
-        # Receive data from unity
-        try:
-            data_from_unity, addr = udp_sock.recvfrom(1024)  # Buffer size is 1024 bytes
-            print(f"Received data from {addr}: {data_from_unity.decode()}")
-        except:
-            pass
-
         #cv2.imshow("Image", img)
         tcp_sock.close()
 
-        if cv2.waitKey(30) == ord('q'):
+        # time.sleep(0.003)
+        if cv2.waitKey(1) == ord('q'):
             break  # press q to quit
+
+    # 釋放該攝影機裝置
+    cap.release()
+    cv2.destroyAllWindows()

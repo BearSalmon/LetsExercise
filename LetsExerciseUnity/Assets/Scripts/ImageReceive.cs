@@ -62,7 +62,7 @@ public class ImageReceive : MonoBehaviour
 
     private void ReceiveData()
     {
-        print("received somthing..."); //回應tcp連線
+        print("received something..."); //回應tcp連線
         try
         {
             while (true)
