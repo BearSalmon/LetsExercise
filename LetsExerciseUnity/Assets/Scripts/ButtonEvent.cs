@@ -10,8 +10,6 @@ public class ButtonEvent : MonoBehaviour
     public GameObject mouse;
     public Button[] buttons;
 
-    public int forInvestigate = 1;
-
     public bool canClickButton = true;
     Scene m_Scene;
     Scene f_Scene;
@@ -24,6 +22,10 @@ public class ButtonEvent : MonoBehaviour
     public DBUtils dBUtils;
 
     Player player;
+
+    public string nowSelectChoice;
+
+    public CircleDrawer circleDrawer;
 
     void Start()
     {
@@ -45,6 +47,8 @@ public class ButtonEvent : MonoBehaviour
 
     }
 
+
+    // 每次 change scene 後都會呼叫 ， 重新設定 button list
     void SetButtonList()
     {
         if (m_Scene.name == "GameStart")
@@ -82,29 +86,36 @@ public class ButtonEvent : MonoBehaviour
         else if (m_Scene.name == "SelectPart")
         {
             numOfButton = 6;
+            player = dBUtils.GetPlayerByName(dBUtils.nowPlayer);
         }
         else if (m_Scene.name == "Investigation")
         {
+            player = dBUtils.GetPlayerByName(dBUtils.nowPlayer);
             numOfButton = 4;
         }
 
+        
         mouse = GameObject.Find("Mouse");
         dBUtils = GetComponent<DBUtils>();
+        circleDrawer = GetComponent<CircleDrawer>();
+        nowSelectChoice = "";
 
         buttons = new Button[numOfButton];
         for (var i = 1; i <= numOfButton; i++)
         {
             Button btn = GameObject.Find("Btn" + i).GetComponent<Button>();
+
+            // 每個 button 新增鼠標點擊功能
             btn.onClick.AddListener(() => ButtonClick(btn));
 
             buttons[i-1] = btn; 
         }
 
-
-
     }
 
 
+    // 所有關於點擊 button 後的動作統一寫在這邊
+    // button 命名格式 : Btn + 編號
     private void ButtonClick(Button btn)
     {
         if ( m_Scene.name == "GameStart")
@@ -150,7 +161,7 @@ public class ButtonEvent : MonoBehaviour
         {
             if (btn.name == "Btn1")
             {
-                SceneManager.LoadScene(4);
+                SceneManager.LoadScene(5);
             }
 
         }
@@ -159,15 +170,17 @@ public class ButtonEvent : MonoBehaviour
             if (btn.name == "Btn1")
             {
                 player.Gender = "Girl";
+                nowSelectChoice = btn.name;
             }
             else if (btn.name == "Btn2")
             {
                 player.Gender = "Boy";
+                nowSelectChoice = btn.name;
             }
             else if (btn.name == "Btn3")
             {
                 dBUtils.UpdatePlayer(player);
-                SceneManager.LoadScene(5);
+                SceneManager.LoadScene(6);
             }
 
         }
@@ -202,7 +215,7 @@ public class ButtonEvent : MonoBehaviour
                 }
                 else
                 {
-                    SceneManager.LoadScene(6);
+                    SceneManager.LoadScene(7);
                 }
                     
             }
@@ -212,27 +225,34 @@ public class ButtonEvent : MonoBehaviour
         {
             if (btn.name == "Btn1")
             {
-                forInvestigate = 1;
+                player.PreferPart = "Arms";
+
             }
             else if (btn.name == "Btn2")
             {
-                forInvestigate = 2;
+                player.PreferPart = "Abs";
             }
             else if (btn.name == "Btn3")
             {
-                forInvestigate = 3;
+                player.PreferPart = "Buttocks";
             }
             else if (btn.name == "Btn4")
             {
-                forInvestigate = 3;
+                player.PreferPart = "Legs";
             }
             else if (btn.name == "Btn5")
             {
-                forInvestigate = 4;
+                player.PreferPart = "Whole Body";
             }
             else if (btn.name == "Btn6")
             {
-                SceneManager.LoadScene(7);
+                SceneManager.LoadScene(8);
+                dBUtils.UpdatePlayer(player);
+            }
+
+            if (btn.name != "Btn6")
+            {
+                nowSelectChoice = btn.name;
             }
 
         }
@@ -240,19 +260,24 @@ public class ButtonEvent : MonoBehaviour
         {
             if (btn.name == "Btn1")
             {
-                
+                player.Level = "Easy";
             }
             else if (btn.name == "Btn2")
             {
-                
+                player.Level = "Medium";
             }
             else if (btn.name == "Btn3")
             {
-                
+                player.Level = "Hard";
             }
             else if (btn.name == "Btn4")
             {
-                SceneManager.LoadScene(8);
+                dBUtils.UpdatePlayer(player);
+                SceneManager.LoadScene(9);
+            }
+            if (btn.name != "Btn4")
+            {
+                nowSelectChoice = btn.name;
             }
         }
 
@@ -268,7 +293,9 @@ public class ButtonEvent : MonoBehaviour
                 // 只是hover ，沒有點擊
                 if (type == 0)
                 {
+                    // 放大 button
                     btn.transform.localScale = new Vector3(1.1f, 1.1f, 1f);
+                    
                 }
 
                 //點擊
@@ -276,7 +303,21 @@ public class ButtonEvent : MonoBehaviour
                 {
                     ButtonClick(btn);
                     canClickButton = false;
+                    circleDrawer.circleImage.GetComponent<Image>().fillAmount = 0f;
                     StartCoroutine(DelayedAction());
+
+                }
+
+                // 若為 CharacterDecorate 頁面 ，避免設定到選擇顏色的 button 
+                if (m_Scene.name == "CharacterDecorate" && btn.name != "Btn7")
+                {
+
+                }
+                else
+                {
+                    Color color;
+                    ColorUtility.TryParseHtmlString("#FFD870", out color);
+                    btn.GetComponent<Image>().color = color;
 
                 }
 
@@ -285,12 +326,32 @@ public class ButtonEvent : MonoBehaviour
             else
             {
                 btn.transform.localScale = new Vector3(1f, 1f, 1f);
+                if (nowSelectChoice == btn.name) // 此 button 已點選 ，避免重置顏色
+                {
+
+                }
+                else
+                {
+                    // 若為 CharacterDecorate 頁面 ，避免設定到選擇顏色的 button 
+                    if (m_Scene.name == "CharacterDecorate" && btn.name != "Btn7") {
+                        
+                    }
+                    else
+                    {
+                        Color color;
+                        ColorUtility.TryParseHtmlString("#FFFFFF", out color);
+                        btn.GetComponent<Image>().color = color;
+
+                    }
+
+                }
+                
             }
         }
 
     }
 
-
+    // mouse 是否 touch button 
     bool Check_touch_button(Button btn)
     {
         float[] button_info = Get_button_info(btn);
@@ -308,6 +369,7 @@ public class ButtonEvent : MonoBehaviour
         return button_info;
     }
 
+    // 不可連續點擊 button 
     private IEnumerator DelayedAction()
     {
         yield return new WaitForSeconds(1);

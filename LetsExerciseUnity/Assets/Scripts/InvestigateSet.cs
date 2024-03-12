@@ -13,47 +13,53 @@ public class InvestigateSet : MonoBehaviour
     public TextMeshProUGUI c2;
     public TextMeshProUGUI c3;
 
+    public DBUtils dBUtils;
+
+    Player player;
+
     // Start is called before the first frame update
     void Start()
     {
+        dBUtils = GameObject.Find("WholeManager").GetComponent<DBUtils>();
         buttonEvent = GameObject.Find("WholeManager").GetComponent<ButtonEvent>();
-        buttonEvent.forInvestigate = 2;
+        player = dBUtils.GetPlayerByName(dBUtils.nowPlayer);
 
-        if (buttonEvent.forInvestigate == 1)
+        if (player.PreferPart == "Arms")
         {
             bm.text = "push-up";
             des.text = "How many moves can you do in one minute?";
 
         }
-        else if (buttonEvent.forInvestigate == 2)
+        else if (player.PreferPart == "Abs")
         {
             bm.text = "plank";
             des.text = "How many seconds can you hold on before you feel tired?";
 
         }
-        else if (buttonEvent.forInvestigate == 3)
+        else if (player.PreferPart == "Legs" || player.PreferPart == "Buttocks")
         {
             bm.text = "squat";
             des.text = "How many moves can you do in one minute?";
 
         }
-        else if (buttonEvent.forInvestigate == 4)
+        else if (player.PreferPart == "Whole Body")
         {
             bm.text = "jumping jacks";
             des.text = "How many moves can you do in one minute?";
 
         }
-        if (buttonEvent.forInvestigate == 1 || buttonEvent.forInvestigate == 3 || buttonEvent.forInvestigate == 4)
-        {
-            c1.text = "less than 20 times";
-            c2.text = "20 times to 40 times";
-            c3.text = "more than 40 times";
-        }
-        else
+        if (player.PreferPart == "Abs")
         {
             c1.text = "less than 30 seconds";
             c2.text = "30 times to 60 seconds";
             c3.text = "more than 60 seconds";
+        }
+        else
+        {
+            c1.text = "less than 20 times";
+            c2.text = "20 times to 40 times";
+            c3.text = "more than 40 times";
+            
 
         }
     }

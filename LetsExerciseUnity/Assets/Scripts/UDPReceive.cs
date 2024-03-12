@@ -5,6 +5,8 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 
+using UnityEngine.UI;
+
 using UnityEngine.SceneManagement;
 using System.Collections;
 
@@ -178,6 +180,10 @@ public class UDPReceive : MonoBehaviour
         // 是否點擊
         if (parts.Length == 3 && buttonEvent.canClickButton == true )
         {
+            if (circleDrawer.circleImage == null)
+            {
+                circleDrawer.circleImage = GameObject.Find("Circle").GetComponent<Image>();
+            }
             circleDrawer.CallDrawer();
         }
 

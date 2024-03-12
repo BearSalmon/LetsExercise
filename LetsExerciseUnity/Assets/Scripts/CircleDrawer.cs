@@ -75,6 +75,7 @@ public class CircleDrawer : MonoBehaviour
         }
 
         circleImage.fillAmount = endProgress;
+        // click
         buttonEvent.Check_if_button(1);
         isIncreasing = false;
 
