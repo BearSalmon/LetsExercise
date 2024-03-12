@@ -265,10 +265,13 @@ public class ButtonEvent : MonoBehaviour
         {
             if (Check_touch_button(btn))
             {
+                // 只是hover ，沒有點擊
                 if (type == 0)
                 {
                     btn.transform.localScale = new Vector3(1.1f, 1.1f, 1f);
                 }
+
+                //點擊
                 else
                 {
                     ButtonClick(btn);

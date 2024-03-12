@@ -120,6 +120,7 @@ if __name__ == "__main__":
             if fingers == [1,1,1,1,1]:
                 #五根手指頭點擊三秒
                 print()
+                
             if fingers == [0,1,1,0,0]:
                 index_finger = hand_lmlist[8][0], hand_lmlist[8][1],1
                 index_finger_json = json.dumps(index_finger)

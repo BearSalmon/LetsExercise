@@ -6,7 +6,7 @@ using System.Net.Sockets;
 using System.Threading;
 
 using UnityEngine.SceneManagement;
-
+using System.Collections;
 
 public class UDPReceive : MonoBehaviour
 {
@@ -36,6 +36,8 @@ public class UDPReceive : MonoBehaviour
     Scene m_Scene;
     Scene f_Scene;
 
+    public CircleDrawer circleDrawer;
+
     public void Start()
     {
         receiveHandThread = new Thread(
@@ -64,6 +66,7 @@ public class UDPReceive : MonoBehaviour
 
         m_Scene = SceneManager.GetActiveScene();
         f_Scene = SceneManager.GetActiveScene();
+
     }
 
 
@@ -84,7 +87,7 @@ public class UDPReceive : MonoBehaviour
                 float normalizedValue1 = normalize(float.Parse(parts[0]), 0, 640, canva_xMin, canva_xMax) + (canva_width / 2);
                 float normalizedValue2 = canva_yMax - normalize(float.Parse(parts[1]), 0, 480, canva_yMin, canva_yMax);
                 string s = normalizedValue1.ToString() + "," + normalizedValue2.ToString();
-                Debug.Log(s);
+//                Debug.Log(s);
 
       
                 transformPosition[0] = normalizedValue1;
@@ -94,8 +97,6 @@ public class UDPReceive : MonoBehaviour
 
                 if (printToConsole) { print(dataHand); }
                
-
-
             }
             catch (Exception err)
             {
@@ -161,6 +162,7 @@ public class UDPReceive : MonoBehaviour
             canva_yMin = canvasRectTransform.rect.yMin;
             canva_yMax = canvasRectTransform.rect.yMax;
             buttonEvent = GetComponent<ButtonEvent>();
+            circleDrawer = GetComponent<CircleDrawer>();
         }
         f_Scene = SceneManager.GetActiveScene();
 
@@ -169,12 +171,14 @@ public class UDPReceive : MonoBehaviour
         
         if (parts.Length == 2)
         {
+            circleDrawer.StopIncreasing();
             buttonEvent.Check_if_button(0);
+            
         }
         // 是否點擊
-        if (parts.Length == 3 && buttonEvent.canClickButton == true)
+        if (parts.Length == 3 && buttonEvent.canClickButton == true )
         {
-            buttonEvent.Check_if_button(1);
+            circleDrawer.CallDrawer();
         }
 
     }
@@ -184,5 +188,7 @@ public class UDPReceive : MonoBehaviour
         return (value - minFrom) / (maxFrom - minFrom) * (maxTo - minTo) + minTo;
     }
 
+
+    
 
 }
