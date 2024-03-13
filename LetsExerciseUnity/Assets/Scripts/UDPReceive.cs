@@ -175,14 +175,17 @@ public class UDPReceive : MonoBehaviour
 
         mouse.transform.position = new Vector3(transformPosition[0], transformPosition[1], transformPosition[2]);
 
-
-        //circleDrawer.StopIncreasing();
-        buttonEvent.Check_if_button();
-
-        if (circleDrawer.circleImage == null)
+        if (m_Scene.name != "SampleScene")
         {
-           circleDrawer.circleImage = GameObject.Find("Circle").GetComponent<Image>();
+            //circleDrawer.StopIncreasing();
+            buttonEvent.Check_if_button();
+
+            if (circleDrawer.circleImage == null)
+            {
+                circleDrawer.circleImage = GameObject.Find("Circle").GetComponent<Image>();
+            }
         }
+        
         
 
     }
