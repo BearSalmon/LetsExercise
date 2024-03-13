@@ -109,28 +109,31 @@ if __name__ == "__main__":
         #傳送資料
         tcp_sock.sendall(bytes(data,encoding='utf-8'))
 
+        # 傳送手部資料
+        index_finger = lmList[20][0], lmList[20][1]
+        index_finger_json = json.dumps(index_finger)
+        udp_sock.sendto(str.encode(index_finger_json), serverAddressPort_hand)
+
         # 抓手的點
-        hands, imgg = hand_detector.findHands(img)
+        #hands, imgg = hand_detector.findHands(img)
 
-        cv2.imshow("Image",imgg)
+        # if hands:
+        #     hand = hands[0]
+        #     hand_lmlist = hand['lmList']
+        #     fingers = hand_detector.fingersUp(hand)
+        #     傳送食指 x , y 值 (只要有吃到手就傳)
+        #     index_finger = hand_lmlist[8][0], hand_lmlist[8][1]
+        #     index_finger_json = json.dumps(index_finger)
+        #     udp_sock.sendto(str.encode(index_finger_json), serverAddressPort_hand)
 
-        if hands:
-            hand = hands[0]
-            hand_lmlist = hand['lmList']
-            fingers = hand_detector.fingersUp(hand)
-            # 傳送食指 x , y 值 (只要有吃到手就傳)
-            index_finger = hand_lmlist[8][0], hand_lmlist[8][1]
-            index_finger_json = json.dumps(index_finger)
-            udp_sock.sendto(str.encode(index_finger_json), serverAddressPort_hand)
+        #     if fingers == [1,1,1,1,1]:
+        #         五根手指頭點擊三秒
+        #         print()
 
-            if fingers == [1,1,1,1,1]:
-                #五根手指頭點擊三秒
-                print()
-
-            if fingers == [0,1,1,0,0]:
-                index_finger = hand_lmlist[8][0], hand_lmlist[8][1],1
-                index_finger_json = json.dumps(index_finger)
-                udp_sock.sendto(str.encode(index_finger_json), serverAddressPort_hand)
+        #     if fingers == [0,1,1,0,0]:
+        #         index_finger = hand_lmlist[8][0], hand_lmlist[8][1],1
+        #         index_finger_json = json.dumps(index_finger)
+        #         udp_sock.sendto(str.encode(index_finger_json), serverAddressPort_hand)
 
         # Receive data from unity
         received_data = ""

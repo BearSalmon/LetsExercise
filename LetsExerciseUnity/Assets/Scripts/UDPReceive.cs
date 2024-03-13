@@ -175,22 +175,15 @@ public class UDPReceive : MonoBehaviour
 
         mouse.transform.position = new Vector3(transformPosition[0], transformPosition[1], transformPosition[2]);
 
+
+        //circleDrawer.StopIncreasing();
+        buttonEvent.Check_if_button();
+
+        if (circleDrawer.circleImage == null)
+        {
+           circleDrawer.circleImage = GameObject.Find("Circle").GetComponent<Image>();
+        }
         
-        if (parts.Length == 2)
-        {
-            circleDrawer.StopIncreasing();
-            buttonEvent.Check_if_button(0);
-            
-        }
-        // 是否點擊
-        if (parts.Length == 3 && buttonEvent.canClickButton == true )
-        {
-            if (circleDrawer.circleImage == null)
-            {
-                circleDrawer.circleImage = GameObject.Find("Circle").GetComponent<Image>();
-            }
-            circleDrawer.CallDrawer();
-        }
 
     }
 

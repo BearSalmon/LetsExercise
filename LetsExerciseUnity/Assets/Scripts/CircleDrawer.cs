@@ -42,7 +42,7 @@ public class CircleDrawer : MonoBehaviour
     {
         if (!isIncreasing) 
         {
-            increaseCoroutine = StartCoroutine(IncreaseProgressOverTime(1f));
+            increaseCoroutine = StartCoroutine(IncreaseProgressOverTime(1.5f));
         }
 
     }
@@ -76,7 +76,7 @@ public class CircleDrawer : MonoBehaviour
 
         circleImage.fillAmount = endProgress;
         // click
-        buttonEvent.Check_if_button(1);
+        buttonEvent.ButtonClick(buttonEvent.currentClickingButton);
         isIncreasing = false;
 
     }
