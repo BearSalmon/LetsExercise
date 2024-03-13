@@ -10,7 +10,6 @@ public class ButtonEvent : MonoBehaviour
     public GameObject mouse;
     public Button[] buttons;
 
-    public bool canClickButton = true;
     Scene m_Scene;
     Scene f_Scene;
 
@@ -26,6 +25,8 @@ public class ButtonEvent : MonoBehaviour
     public string nowSelectChoice;
 
     public CircleDrawer circleDrawer;
+
+    public Button currentClickingButton;
 
     void Start()
     {
@@ -91,6 +92,7 @@ public class ButtonEvent : MonoBehaviour
         else if (m_Scene.name == "Investigation")
         {
             player = dBUtils.GetPlayerByName(dBUtils.nowPlayer);
+         
             numOfButton = 4;
         }
 
@@ -116,7 +118,7 @@ public class ButtonEvent : MonoBehaviour
 
     // 所有關於點擊 button 後的動作統一寫在這邊
     // button 命名格式 : Btn + 編號
-    private void ButtonClick(Button btn)
+    public void ButtonClick(Button btn)
     {
         if ( m_Scene.name == "GameStart")
         {
@@ -284,29 +286,20 @@ public class ButtonEvent : MonoBehaviour
 
     }
 
-    public void Check_if_button(int type)
+    public void Check_if_button()
     {
         foreach (Button btn in buttons)
         {
+            // 若有碰到 button 
             if (Check_touch_button(btn))
             {
-                // 只是hover ，沒有點擊
-                if (type == 0)
-                {
-                    // 放大 button
-                    btn.transform.localScale = new Vector3(1.1f, 1.1f, 1f);
-                    
-                }
+                // 一放到 button 上面就開始計時
 
-                //點擊
-                else
-                {
-                    ButtonClick(btn);
-                    canClickButton = false;
-                    circleDrawer.circleImage.GetComponent<Image>().fillAmount = 0f;
-                    StartCoroutine(DelayedAction());
+                currentClickingButton = btn;
 
-                }
+                btn.transform.localScale = new Vector3(1.1f, 1.1f, 1f);
+                circleDrawer.CallDrawer();
+
 
                 // 若為 CharacterDecorate 頁面 ，避免設定到選擇顏色的 button 
                 if (m_Scene.name == "CharacterDecorate" && btn.name != "Btn7")
@@ -325,6 +318,16 @@ public class ButtonEvent : MonoBehaviour
             }
             else
             {
+                if (currentClickingButton == btn)
+                {
+                    circleDrawer.StopIncreasing();
+                }
+                
+                if (circleDrawer.circleImage == null)
+                {
+                    circleDrawer.circleImage = GameObject.Find("Circle").GetComponent<Image>();
+                }
+                circleDrawer.circleImage.GetComponent<Image>().fillAmount = 0f;
                 btn.transform.localScale = new Vector3(1f, 1f, 1f);
                 if (nowSelectChoice == btn.name) // 此 button 已點選 ，避免重置顏色
                 {
@@ -367,13 +370,5 @@ public class ButtonEvent : MonoBehaviour
         RectTransform buttonRectTransform = btn.GetComponent<RectTransform>();
         float[] button_info = { btn.transform.position.x, btn.transform.position.y , buttonRectTransform.sizeDelta.x , buttonRectTransform.sizeDelta.y };
         return button_info;
-    }
-
-    // 不可連續點擊 button 
-    private IEnumerator DelayedAction()
-    {
-        yield return new WaitForSeconds(1);
-
-        canClickButton = true;
     }
 }
