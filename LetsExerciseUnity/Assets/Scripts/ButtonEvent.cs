@@ -95,8 +95,12 @@ public class ButtonEvent : MonoBehaviour
          
             numOfButton = 4;
         }
+        else if (m_Scene.name == "MainPage")
+        {
+            numOfButton = 1;
+        }
 
-        
+
         mouse = GameObject.Find("Mouse");
         dBUtils = GetComponent<DBUtils>();
         circleDrawer = GetComponent<CircleDrawer>();
@@ -282,6 +286,14 @@ public class ButtonEvent : MonoBehaviour
                 nowSelectChoice = btn.name;
             }
         }
+        else if (m_Scene.name == "MainPage")
+        {
+            if (btn.name == "Btn1")
+            {
+                SceneManager.LoadScene(10);
+            }
+        }
+
 
 
     }
