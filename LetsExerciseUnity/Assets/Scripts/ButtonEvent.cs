@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class ButtonEvent : MonoBehaviour
 {
-    // Start is called before the first frame update
     public GameObject mouse;
     public Button[] buttons;
 
@@ -15,16 +14,18 @@ public class ButtonEvent : MonoBehaviour
 
     int numOfButton;
 
+
+    // imported components
     public CharacterDeorate characterDeorate;
     public SelectPlayer selectPlayer;
-
-    public DBUtils dBUtils;
-
-    Player player;
-
-    public string nowSelectChoice;
-
     public CircleDrawer circleDrawer;
+    public DBUtils dBUtils;
+    public TrainPageUI trainPageUI;
+    public MainPageSetUp mainPageSetUp;
+
+    User user;
+
+    public string nowSelectChoice; // for button
 
     public Button currentClickingButton;
 
@@ -75,29 +76,31 @@ public class ButtonEvent : MonoBehaviour
         }
         else if (m_Scene.name == "SelectSex")
         {
-            player = dBUtils.GetPlayerByName(dBUtils.nowPlayer);
+            user = dBUtils.GetUserByName(dBUtils.nowPlayer);
             numOfButton = 3;
         }
         else if (m_Scene.name == "CharacterDecorate")
         {
             numOfButton = 7;
             characterDeorate = GameObject.Find("Manager").GetComponent<CharacterDeorate>();
-            player = dBUtils.GetPlayerByName(dBUtils.nowPlayer);
+            user = dBUtils.GetUserByName(dBUtils.nowPlayer);
         }
         else if (m_Scene.name == "SelectPart")
         {
             numOfButton = 6;
-            player = dBUtils.GetPlayerByName(dBUtils.nowPlayer);
+            user = dBUtils.GetUserByName(dBUtils.nowPlayer);
         }
         else if (m_Scene.name == "Investigation")
         {
-            player = dBUtils.GetPlayerByName(dBUtils.nowPlayer);
+            user = dBUtils.GetUserByName(dBUtils.nowPlayer);
          
             numOfButton = 4;
         }
         else if (m_Scene.name == "MainPage")
         {
-            numOfButton = 1;
+            trainPageUI = GameObject.Find("Manager").GetComponent<TrainPageUI>();
+            mainPageSetUp = GameObject.Find("Manager").GetComponent<MainPageSetUp>();
+            numOfButton = 3;
         }
 
 
@@ -136,7 +139,7 @@ public class ButtonEvent : MonoBehaviour
         {
             if (btn.name == "Btn1")
             {
-                dBUtils.AddPlayer();
+                dBUtils.AddUser();
                 SceneManager.LoadScene(3);
             }
             else if (btn.name == "Btn2")
@@ -175,17 +178,17 @@ public class ButtonEvent : MonoBehaviour
         {
             if (btn.name == "Btn1")
             {
-                player.Gender = "Girl";
+                user.Gender = "Girl";
                 nowSelectChoice = btn.name;
             }
             else if (btn.name == "Btn2")
             {
-                player.Gender = "Boy";
+                user.Gender = "Boy";
                 nowSelectChoice = btn.name;
             }
             else if (btn.name == "Btn3")
             {
-                dBUtils.UpdatePlayer(player);
+                dBUtils.UpdateUser(user);
                 SceneManager.LoadScene(6);
             }
 
@@ -198,21 +201,21 @@ public class ButtonEvent : MonoBehaviour
                 characterDeorate.changeColor(color);
                 if (characterDeorate.state == 0)
                 {
-                    player.Hair = ColorUtility.ToHtmlStringRGBA(color);
+                    user.Hair = ColorUtility.ToHtmlStringRGBA(color);
                 }
                 else if (characterDeorate.state == 1)
                 {
-                    player.Body = ColorUtility.ToHtmlStringRGBA(color);
+                    user.Body = ColorUtility.ToHtmlStringRGBA(color);
                 }
                 else
                 {
-                    player.Cloth = ColorUtility.ToHtmlStringRGBA(color);
+                    user.Cloth = ColorUtility.ToHtmlStringRGBA(color);
                 }
                 
             }
             else if (btn.name == "Btn7")
             {
-                dBUtils.UpdatePlayer(player);
+                dBUtils.UpdateUser(user);
                 if (characterDeorate.state == 0 || characterDeorate.state == 1)
                 {
                     characterDeorate.state += 1;
@@ -231,29 +234,29 @@ public class ButtonEvent : MonoBehaviour
         {
             if (btn.name == "Btn1")
             {
-                player.PreferPart = "Arms";
+                user.PreferPart = "Arms";
 
             }
             else if (btn.name == "Btn2")
             {
-                player.PreferPart = "Abs";
+                user.PreferPart = "Abs";
             }
             else if (btn.name == "Btn3")
             {
-                player.PreferPart = "Buttocks";
+                user.PreferPart = "Buttocks";
             }
             else if (btn.name == "Btn4")
             {
-                player.PreferPart = "Legs";
+                user.PreferPart = "Legs";
             }
             else if (btn.name == "Btn5")
             {
-                player.PreferPart = "Whole Body";
+                user.PreferPart = "Whole Body";
             }
             else if (btn.name == "Btn6")
             {
                 SceneManager.LoadScene(8);
-                dBUtils.UpdatePlayer(player);
+                dBUtils.UpdateUser(user);
             }
 
             if (btn.name != "Btn6")
@@ -266,19 +269,19 @@ public class ButtonEvent : MonoBehaviour
         {
             if (btn.name == "Btn1")
             {
-                player.Level = "Easy";
+                user.Level = "Easy";
             }
             else if (btn.name == "Btn2")
             {
-                player.Level = "Medium";
+                user.Level = "Medium";
             }
             else if (btn.name == "Btn3")
             {
-                player.Level = "Hard";
+                user.Level = "Hard";
             }
             else if (btn.name == "Btn4")
             {
-                dBUtils.UpdatePlayer(player);
+                dBUtils.UpdateUser(user);
                 SceneManager.LoadScene(9);
             }
             if (btn.name != "Btn4")
@@ -290,9 +293,19 @@ public class ButtonEvent : MonoBehaviour
         {
             if (btn.name == "Btn1")
             {
-                SceneManager.LoadScene(10);
+                
+            }
+            else if (btn.name == "Btn2")
+            {
+                trainPageUI.nextOption();
+            }
+            else if (btn.name == "Btn3")
+            {
+                trainPageUI.backOption();
+                
             }
         }
+
 
 
 

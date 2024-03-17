@@ -123,24 +123,6 @@ public class UDPReceive : MonoBehaviour
                 {
                     canContinue = true;
                 }
-                // Debug.Log(dataAngle);
-
-                //parts = dataHand.Trim('[', ']').Split(',');
-
-                //float normalizedValue1 = normalize(float.Parse(parts[0]), 0, 1280, canva_xMin, canva_xMax) + 430;
-                //float normalizedValue2 = canva_yMax - normalize(float.Parse(parts[1]), 0, 1000, canva_yMin, canva_yMax) - 50;
-                ////Debug.Log(normalizedValue1);
-                ////Debug.Log(normalizedValue2);
-
-
-                //transformPosition[0] = normalizedValue1;
-                //transformPosition[1] = normalizedValue2;
-
-                ////Debug.Log(worldPos);
-
-                //if (printToConsole) { print(dataHand); }
-
-
 
             }
             catch (Exception err)
