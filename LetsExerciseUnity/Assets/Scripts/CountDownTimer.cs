@@ -53,9 +53,9 @@ public class CountDownTimer : MonoBehaviour
             progressBar.fillAmount += 1* Time.deltaTime / startingTime;
             
         }
-        else if (currentTime == 0)
+        else if (Mathf.RoundToInt(currentTime) == 0)
         {
-            count.text = startingTime.ToString(); // Or any message you want when the countdown reaches zero
+            count.text = startingTime.ToString(); 
             currentTime = -1;
             animationCode.StopAnimation();
         }

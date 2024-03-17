@@ -3,7 +3,7 @@ import PoseModule
 # from cvzone.PoseModule import PoseDetector
 from cvzone.HandTrackingModule import HandDetector
 import socket
-from utils import find_angle, get_landmark_features
+from utils import find_angle, get_landmark_features , get_Wrong_Message
 from pose_dataset import get_pose_db
 import json
 import time
@@ -16,8 +16,6 @@ if __name__ == "__main__":
 
     check_point = pose_db["pose_name"]["check_angle"]
     file_path = pose_db["pose_name"]["path"]
-    video_frame_width = pose_db["pose_name"]["video_size"]["width"]
-    video_frame_height = pose_db["pose_name"]["video_size"]["height"]
 
 
     with open(file_path, "r") as lm_file:
@@ -62,22 +60,23 @@ if __name__ == "__main__":
     hand_detector = HandDetector(detectionCon=0.8, maxHands=2)
 
     dict_features = {
-        'right_shoulder': 12,
-        'right_elbow'   : 14,
-        'right_wrist'   : 16,
-        'right_hip'     : 24,
-        'right_knee'    : 26,
-        'right_ankle'   : 28,
-        'right_foot'    : 32,
-        'left_shoulder': 11,
-        'left_elbow'   : 13,
-        'left_wrist'   : 15,
-        'left_hip'     : 23,
-        'left_knee'    : 25,
-        'left_ankle'   : 27,
-        'left_foot'    : 31,
+        'right_shoulder': 11,
+        'right_elbow'   : 13,
+        'right_wrist'   : 15,
+        'right_hip'     : 23,
+        'right_knee'    : 25,
+        'right_ankle'   : 27,
+        'right_foot'    : 31,
+        'left_shoulder': 12,
+        'left_elbow'   : 14,
+        'left_wrist'   : 16,
+        'left_hip'     : 24,
+        'left_knee'    : 26,
+        'left_ankle'   : 28,
+        'left_foot'    : 32,
         'nose' : 0
     }
+
     wrong_message = "nice"
     counter = 0 #video_counter
     loop_cnt = 0
@@ -120,7 +119,7 @@ if __name__ == "__main__":
         try:
             data_from_unity, addr = udp_sock.recvfrom(1024)  # Buffer size is 1024 bytes
             received_data = data_from_unity.decode()
-            # print(f"Received data from {addr}: {received_data}")
+            #print(f"Received data from {addr}: {received_data}")
         except:
             pass
 
@@ -133,7 +132,6 @@ if __name__ == "__main__":
         #     print(seconds2 - seconds1)
         #     break
 
-
         if received_data :
             if received_data == "start":
                 print(received_data)
@@ -142,20 +140,21 @@ if __name__ == "__main__":
                 counter = int(received_data)
                 points = lines[counter].split(',')
                 video_lmlist = [[int(point) for point in points[i:i+3]] for i in range(0, len(points)-1, 3)]
-                wrong_message = "nice"
+                
 
                 for index in range(len(check_point)):
-                    point1,point2,ref_point = get_landmark_features(lmList,dict_features,check_point[index],frame_width,frame_height)
-                    video_point1,video_point2,video_ref_point = get_landmark_features(video_lmlist,dict_features,check_point[index],video_frame_width,video_frame_height)
+                    point1,point2,ref_point = get_landmark_features(lmList,dict_features,check_point[index])
+                    video_point1,video_point2,video_ref_point = get_landmark_features(video_lmlist,dict_features,check_point[index])
                     offset_angle = find_angle(point1,point2,ref_point)
                     video_offset_angle = find_angle(video_point1,video_point2,video_ref_point)
                     wrong = offset_angle - video_offset_angle
-                    wrong = abs(wrong)
-                    # 這裡comparison先隨便寫的
-                    if wrong > 10 :
-                        wrong_message = "too high " + str(wrong)
+                    if wrong > 20 or abs(wrong) > 20:
+                        wrong_message = get_Wrong_Message(index,check_point[index],wrong,video_offset_angle,dict_features)
+                    else :
+                        wrong_message = "nice"
+                    
                 # udp
-                udp_sock.sendto(str.encode(wrong_message), serverAddressPort_angle)
+                udp_sock.sendto(str.encode(str(wrong_message)), serverAddressPort_angle)
         
 
         #cv2.imshow("Image", img)

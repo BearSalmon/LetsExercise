@@ -22,7 +22,7 @@ public class AnimationCode : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        lines = System.IO.File.ReadLines("Assets/PoseDataset/arms/arm1.txt").ToList();
+        lines = System.IO.File.ReadLines("Assets/PoseDataset/abs/abs1.txt").ToList();
         countDownTimer = GameObject.Find("ManagerToBeKeep").GetComponent<CountDownTimer>();
         isAnimating = false;
     }
