@@ -22,16 +22,16 @@ public class CharacterDeorate : MonoBehaviour
 
     public DBUtils dBUtils;
 
-    Player player;
+    User user;
 
     // Start is called before the first frame update
     void Start()
     {
         dBUtils = GameObject.Find("WholeManager").GetComponent<DBUtils>();
 
-        player = dBUtils.GetPlayerByName(dBUtils.nowPlayer);
+        user = dBUtils.GetUserByName(dBUtils.nowPlayer);
 
-        if (player.Gender == "Girl")
+        if (user.Gender == "Girl")
         {
             girl.SetActive(true);
             boy.SetActive(false);
@@ -59,7 +59,7 @@ public class CharacterDeorate : MonoBehaviour
 
     public void changeColor(Color color)
     {
-        if (player.Gender == "Girl")
+        if (user.Gender == "Girl")
         {
             if (state == 0)
             {

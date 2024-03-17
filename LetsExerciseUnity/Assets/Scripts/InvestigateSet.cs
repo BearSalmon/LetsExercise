@@ -15,40 +15,40 @@ public class InvestigateSet : MonoBehaviour
 
     public DBUtils dBUtils;
 
-    Player player;
+    User user;
 
     // Start is called before the first frame update
     void Start()
     {
         dBUtils = GameObject.Find("WholeManager").GetComponent<DBUtils>();
         buttonEvent = GameObject.Find("WholeManager").GetComponent<ButtonEvent>();
-        player = dBUtils.GetPlayerByName(dBUtils.nowPlayer);
+        user = dBUtils.GetUserByName(dBUtils.nowPlayer);
 
-        if (player.PreferPart == "Arms")
+        if (user.PreferPart == "Arms")
         {
             bm.text = "push-up";
             des.text = "How many moves can you do in one minute?";
 
         }
-        else if (player.PreferPart == "Abs")
+        else if (user.PreferPart == "Abs")
         {
             bm.text = "plank";
             des.text = "How many seconds can you hold on before you feel tired?";
 
         }
-        else if (player.PreferPart == "Legs" || player.PreferPart == "Buttocks")
+        else if (user.PreferPart == "Legs" || user.PreferPart == "Buttocks")
         {
             bm.text = "squat";
             des.text = "How many moves can you do in one minute?";
 
         }
-        else if (player.PreferPart == "Whole Body")
+        else if (user.PreferPart == "Whole Body")
         {
             bm.text = "jumping jacks";
             des.text = "How many moves can you do in one minute?";
 
         }
-        if (player.PreferPart == "Abs")
+        if (user.PreferPart == "Abs")
         {
             c1.text = "less than 30 seconds";
             c2.text = "30 times to 60 seconds";

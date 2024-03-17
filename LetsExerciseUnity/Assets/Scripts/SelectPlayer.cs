@@ -24,11 +24,13 @@ public class SelectPlayer : MonoBehaviour
 
     int nowSelect = 1;
     int number;
+    User user;
+
     // Start is called before the first frame update
     void Start()
     {
         dBUtils = GameObject.Find("WholeManager").GetComponent<DBUtils>();
-        number = dBUtils.CountPlayers();
+        number = dBUtils.CountUsers();
         updatePlayer(nowSelect);
     }
 
@@ -55,20 +57,20 @@ public class SelectPlayer : MonoBehaviour
 
     void updatePlayer(int nowSelect)
     {
-        Player player = dBUtils.GetPlayerByName("Player"+nowSelect.ToString());
-        playerName.text = player.Name;
-        lastLogin.text = player.LastLogin;
+        user = dBUtils.GetUserByName("User"+nowSelect.ToString());
+        playerName.text = user.Name;
+        lastLogin.text = user.LastLogin;
 
-        if (player.Gender == "Girl")
+        if (user.Gender == "Girl")
         {
             girl.SetActive(true);
             boy.SetActive(false);
             Color color;
-            ColorUtility.TryParseHtmlString("#".ToString()+player.Hair, out color);
+            ColorUtility.TryParseHtmlString("#".ToString()+ user.Hair, out color);
             hair_girl.color = color;
-            ColorUtility.TryParseHtmlString("#".ToString() + player.Body, out color);
+            ColorUtility.TryParseHtmlString("#".ToString() + user.Body, out color);
             body_girl.color = color;
-            ColorUtility.TryParseHtmlString("#".ToString() + player.Cloth, out color);
+            ColorUtility.TryParseHtmlString("#".ToString() + user.Cloth, out color);
             cloth_girl.color = color;
         }
         else
@@ -76,11 +78,11 @@ public class SelectPlayer : MonoBehaviour
             girl.SetActive(false);
             boy.SetActive(true);
             Color color;
-            ColorUtility.TryParseHtmlString("#".ToString() + player.Hair, out color);
+            ColorUtility.TryParseHtmlString("#".ToString() + user.Hair, out color);
             hair_boy.color = color;
-            ColorUtility.TryParseHtmlString("#".ToString() + player.Body, out color);
+            ColorUtility.TryParseHtmlString("#".ToString() + user.Body, out color);
             body_boy.color = color;
-            ColorUtility.TryParseHtmlString("#".ToString() + player.Cloth, out color);
+            ColorUtility.TryParseHtmlString("#".ToString() + user.Cloth, out color);
             cloth_boy.color = color;
         }
 
@@ -88,6 +90,6 @@ public class SelectPlayer : MonoBehaviour
 
     public void Save()
     {
-        dBUtils.nowPlayer = "Player" + nowSelect.ToString();
+        dBUtils.nowPlayer = "User" + nowSelect.ToString();
     }
 }

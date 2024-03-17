@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using SQLite4Unity3d;
 using UnityEngine;
 
-public class Player
+public class User
 {
 
     [PrimaryKey, AutoIncrement]

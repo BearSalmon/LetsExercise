@@ -1,6 +1,6 @@
 
 pose = {
-    "pose_name":
+    "很像在舉重":
     {
         "path" : "./video_lmlist/arms/arm1.txt",
         "check_angle":[
@@ -131,32 +131,7 @@ pose = {
             }
         ],
     },
-    "鋤頭式":
-    {
-        "path" : "./video_lmlist/abs/abs1.txt",
-        "check_angle":[
-            {
-                "point1": "left_shoulder",
-                "point2": "left_wrist",
-                "ref_point":"left_elbow"
-            },
-            {
-                "point1": "right_shoulder",
-                "point2": "right_wrist",
-                "ref_point":"right_elbow"
-            },
-            {
-                "point1": "left_elbow",
-                "point2": "left_hip",
-                "ref_point":"left_shoulder"
-            },
-            {
-                "point1": "right_elbow",
-                "point2": "right_hip",
-                "ref_point":"right_shoulder"
-            }
-        ],
-    }
+    
     
 }
 
