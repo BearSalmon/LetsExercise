@@ -16,7 +16,7 @@ public class AnimationCode : MonoBehaviour
 
     public CountDownTimer countDownTimer;
 
-    public bool isAnimating ;
+    public bool isAnimating;
     
 
     // Start is called before the first frame update

@@ -12,12 +12,12 @@ using System.Collections;
 
 public class UDPReceive : MonoBehaviour
 {
-    Thread receiveHandThread, receiveAngleThread;
-    UdpClient clientHand, clientAngle;
-    public int portHand = 5052, portAngle = 5051;
+    Thread receiveHandThread, receiveAngleThread, receivePosThread;
+    UdpClient clientHand, clientAngle, clientPos;
+    public int portHand = 5052, portAngle = 5051, portPos = 5054;
     public bool startRecieving = true;
     public bool printToConsole = false;
-    public string dataHand, dataAngle;
+    public string dataHand, dataAngle, dataPos;
     public bool canContinue = false;
 
     public ButtonEvent buttonEvent;
@@ -52,6 +52,11 @@ public class UDPReceive : MonoBehaviour
             new ThreadStart(ReceiveAngleData));
         receiveAngleThread.IsBackground = true;
         receiveAngleThread.Start();
+
+        receivePosThread = new Thread(
+            new ThreadStart(ReceivePosData));
+        receivePosThread.IsBackground = true;
+        receivePosThread.Start();
 
 
         transformPosition[0] = mouse.transform.localPosition.x;
@@ -90,7 +95,7 @@ public class UDPReceive : MonoBehaviour
                 float normalizedValue1 = normalize(float.Parse(parts[0]), 0, 640, canva_xMin, canva_xMax) + (canva_width / 2);
                 float normalizedValue2 = canva_yMax - normalize(float.Parse(parts[1]), 0, 480, canva_yMin, canva_yMax);
                 string s = normalizedValue1.ToString() + "," + normalizedValue2.ToString();
-//                Debug.Log(s);
+                //Debug.Log(s);
 
       
                 transformPosition[0] = normalizedValue1;
@@ -108,7 +113,7 @@ public class UDPReceive : MonoBehaviour
         }
     }
 
-    // receive thread
+    // receive angle thread
     private void ReceiveAngleData()
     {
         clientAngle = new UdpClient(portAngle);
@@ -124,6 +129,25 @@ public class UDPReceive : MonoBehaviour
                     canContinue = true;
                 }
 
+            }
+            catch (Exception err)
+            {
+                print(err.ToString());
+            }
+        }
+    }
+
+    // receive pos thread
+    private void ReceivePosData()
+    {
+        clientPos = new UdpClient(portPos);
+        while (startRecieving)
+        {
+            try
+            {
+                IPEndPoint anyIP = new IPEndPoint(IPAddress.Any, 2);
+                byte[] dataByte = clientPos.Receive(ref anyIP);
+                dataPos = Encoding.UTF8.GetString(dataByte);
             }
             catch (Exception err)
             {

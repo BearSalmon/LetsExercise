@@ -14,8 +14,8 @@ if __name__ == "__main__":
     # 取得資料庫
     pose_db = get_pose_db()
 
-    check_point = pose_db["pose_name"]["check_angle"]
-    file_path = pose_db["pose_name"]["path"]
+    check_point = pose_db["很像在舉重"]["check_angle"]
+    file_path = pose_db["很像在舉重"]["path"]
 
 
     with open(file_path, "r") as lm_file:
@@ -30,6 +30,7 @@ if __name__ == "__main__":
     udp_ip = '127.0.0.1'
     udp_port_hand = 5052
     udp_port_angle = 5051
+    udp_port_pos = 5054
 
     recv_ip = '127.0.0.1'  # Listen on all network interfaces
     recv_port = 1234  # Port number
@@ -40,6 +41,7 @@ if __name__ == "__main__":
     udp_sock.bind((recv_ip, recv_port))
     serverAddressPort_hand = (udp_ip, udp_port_hand)
     serverAddressPort_angle = (udp_ip, udp_port_angle)
+    serverAddressPort_pos = (udp_ip, udp_port_pos)
 
     # Parameters
     width, height = 1280, 1000
@@ -155,7 +157,17 @@ if __name__ == "__main__":
                     
                 # udp
                 udp_sock.sendto(str.encode(str(wrong_message)), serverAddressPort_angle)
-        
+
+        #print(lmList)
+        kp_inside = 0
+        for i in range(len(lmList)):
+            if 0 <= lmList[i][0] <= frame_width and 0 <= lmList[i][1] <= frame_height:
+                kp_inside += 1
+        if kp_inside == len(lmList):
+            udp_sock.sendto(str.encode(""), serverAddressPort_pos)
+        else:
+            udp_sock.sendto(str.encode("fit your whole body in the camera."), serverAddressPort_pos)
+
 
         #cv2.imshow("Image", img)
         tcp_sock.close()
