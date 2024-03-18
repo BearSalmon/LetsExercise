@@ -24,8 +24,7 @@ public class MainPageSetUp : MonoBehaviour
     public GameObject UserPage;
     public GameObject PlanPage;
     public GameObject TrainPage;
-
-    public int nowState = 0;
+    public int nowState;
 
     User user;
 
@@ -47,6 +46,8 @@ public class MainPageSetUp : MonoBehaviour
             boy.SetActive(true);
         }
         UserSetUp();
+        nowState = 2;
+        ChangeState(2);
 
     }
 
@@ -56,15 +57,15 @@ public class MainPageSetUp : MonoBehaviour
         
     }
 
-    public void ChangeState()
+    public void ChangeState(int state)
     {
-        if (nowState == 0)
+        if (state == 0)
         {
             UserPage.SetActive(true);
             PlanPage.SetActive(false);
             TrainPage.SetActive(false);
         }
-        else if (nowState == 1)
+        else if (state == 1)
         {
             UserPage.SetActive(false);
             PlanPage.SetActive(true);

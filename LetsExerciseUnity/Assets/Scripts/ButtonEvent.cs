@@ -100,7 +100,18 @@ public class ButtonEvent : MonoBehaviour
         {
             trainPageUI = GameObject.Find("Manager").GetComponent<TrainPageUI>();
             mainPageSetUp = GameObject.Find("Manager").GetComponent<MainPageSetUp>();
-            numOfButton = 3;
+            if (mainPageSetUp.nowState == 0)
+            {
+                numOfButton = 3;
+            }
+            else if (mainPageSetUp.nowState == 1)
+            {
+                numOfButton = 3;
+            }
+            else
+            {
+                numOfButton = 6;
+            }
         }
 
 
@@ -293,17 +304,51 @@ public class ButtonEvent : MonoBehaviour
         {
             if (btn.name == "Btn1")
             {
-                
+                mainPageSetUp.nowState = 1;
+                mainPageSetUp.ChangeState(1);
+                SetButtonList();
+
             }
             else if (btn.name == "Btn2")
             {
-                trainPageUI.nextOption();
+                mainPageSetUp.nowState = 2;
+                mainPageSetUp.ChangeState(2);
+                SetButtonList();
             }
             else if (btn.name == "Btn3")
             {
-                trainPageUI.backOption();
-                
+                mainPageSetUp.nowState = 0;
+                mainPageSetUp.ChangeState(0);
+                SetButtonList();
             }
+
+            // user page
+            if (mainPageSetUp.nowState == 0)
+            {
+
+            }
+            // plan page
+            else if (mainPageSetUp.nowState == 1)
+            {
+
+            }
+            // train page
+            else
+            {
+                if (btn.name == "Btn4")
+                {
+
+                }
+                else if (btn.name == "Btn5")
+                {
+                    trainPageUI.nextOption();
+                }
+                else if (btn.name == "Btn6")
+                {
+                    trainPageUI.backOption();
+                }
+            }
+            
         }
 
 
@@ -383,7 +428,11 @@ public class ButtonEvent : MonoBehaviour
     bool Check_touch_button(Button btn)
     {
         float[] button_info = Get_button_info(btn);
-        if (mouse.transform.position.x > button_info[0] - button_info[2]/2 && mouse.transform.position.x < button_info[0] +button_info[2] / 2 && mouse.transform.position.y > button_info[1] - button_info[3] / 2 && mouse.transform.position.y < button_info[1] + button_info[3] / 2)
+        float buffer = 25f;
+        if (mouse.transform.position.x > button_info[0] - button_info[2] / 2 + buffer
+            && mouse.transform.position.x < button_info[0] + button_info[2] / 2 - buffer
+            && mouse.transform.position.y > button_info[1] - button_info[3] / 2 +buffer
+            && mouse.transform.position.y < button_info[1] + button_info[3] / 2 - buffer)
         {
             return true;
         }
