@@ -1,6 +1,6 @@
 
 pose = {
-    "pose_name":
+    "很像在舉重":
     {
         "path" : "./video_lmlist/arms/arm1.txt",
         "check_angle":[
