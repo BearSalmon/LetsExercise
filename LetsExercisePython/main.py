@@ -157,7 +157,7 @@ if __name__ == "__main__":
                 udp_sock.sendto(str.encode(str(wrong_message)), serverAddressPort_angle)
         
 
-        #cv2.imshow("Image", img)
+        cv2.imshow("Image", img)
         tcp_sock.close()
 
         # time.sleep(0.003)

@@ -147,8 +147,9 @@ public class DBUtils : MonoBehaviour
             PoseSetName = "hello",
             Calories = 130f,
             NumberOfGesture = 10,
-            Part = "arms",
+            Part = "arms abs",
             Duration = 100,
+            Level = "Hard"
 
         };
         poseSetService.AddPoseSet(poseSet);
@@ -158,14 +159,27 @@ public class DBUtils : MonoBehaviour
             PoseSetName = "how to become a cute salmon",
             Calories = 500f,
             NumberOfGesture = 7,
-            Part = "abs",
+            Part = "body",
             Duration = 70,
+            Level = "Easy"
 
         };
 
         poseSetService.AddPoseSet(poseSet);
 
-        
+        poseSet = new PoseSet
+        {
+            PoseSetName = "hi hi",
+            Calories = 300f,
+            NumberOfGesture = 8,
+            Part = "body",
+            Duration = 200,
+            Level = "Mid"
+
+        };
+
+        poseSetService.AddPoseSet(poseSet);
+
 
 
     }

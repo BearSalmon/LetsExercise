@@ -12,6 +12,6 @@ public class PoseSet
     public int NumberOfGesture { get; set; }
     public int Duration { get; set; }
     public float Calories { get; set; }
-
+    public string Level { get; set; }
 
 }

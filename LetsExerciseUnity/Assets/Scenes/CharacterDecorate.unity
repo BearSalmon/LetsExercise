@@ -4463,9 +4463,9 @@ MonoBehaviour:
   hair_girl: {fileID: 1780384059}
   body_girl: {fileID: 631470910}
   cloth_girl: {fileID: 1307393335}
-  hair_boy: {fileID: 0}
-  body_boy: {fileID: 0}
-  cloth_boy: {fileID: 0}
+  hair_boy: {fileID: 793447355}
+  body_boy: {fileID: 311364557}
+  cloth_boy: {fileID: 587368596}
   dBUtils: {fileID: 0}
 --- !u!4 &1690886340
 Transform:
