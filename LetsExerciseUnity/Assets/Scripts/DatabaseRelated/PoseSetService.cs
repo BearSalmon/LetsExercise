@@ -31,6 +31,11 @@ public class PoseSetService
         return dataBase.GetPoseSetConnection().Table<PoseSet>().Where(x => x.Id == id).FirstOrDefault();
     }
 
+    public PoseSet GetPoseSetByName(string name)
+    {
+        return dataBase.GetPoseSetConnection().Table<PoseSet>().Where(x => x.PoseSetName == name).FirstOrDefault();
+    }
+
     public int UpdatePoseSet(PoseSet poseSet)
     {
         return dataBase.GetPoseSetConnection().Update(poseSet);

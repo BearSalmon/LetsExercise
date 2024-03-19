@@ -112,9 +112,10 @@ if __name__ == "__main__":
         tcp_sock.sendall(bytes(data,encoding='utf-8'))
 
         # 傳送手部資料
-        index_finger = lmList[20][0], lmList[20][1]
-        index_finger_json = json.dumps(index_finger)
-        udp_sock.sendto(str.encode(index_finger_json), serverAddressPort_hand)
+        if lmList and bboxInfo :  
+            index_finger = lmList[20][0], lmList[20][1] #left hand
+            index_finger_json = json.dumps(index_finger)
+            udp_sock.sendto(str.encode(index_finger_json), serverAddressPort_hand)
 
         # Receive data from unity
         received_data = ""

@@ -22,10 +22,13 @@ public class ButtonEvent : MonoBehaviour
     public DBUtils dBUtils;
     public TrainPageUI trainPageUI;
     public MainPageSetUp mainPageSetUp;
+    public SelectLevel selectLevel;
 
     User user;
 
     public string nowSelectChoice; // for button
+
+    public int poseSetID;
 
     public Button currentClickingButton;
 
@@ -112,6 +115,11 @@ public class ButtonEvent : MonoBehaviour
             {
                 numOfButton = 6;
             }
+        }
+        else if (m_Scene.name == "SelectLevel")
+        {
+            selectLevel = GameObject.Find("Manager").GetComponent<SelectLevel>();
+            numOfButton = 4;
         }
 
 
@@ -337,18 +345,41 @@ public class ButtonEvent : MonoBehaviour
             {
                 if (btn.name == "Btn4")
                 {
-
+                    SceneManager.LoadScene(10);
                 }
                 else if (btn.name == "Btn5")
                 {
-                    trainPageUI.nextOption();
+                    poseSetID = trainPageUI.nextOption();
                 }
                 else if (btn.name == "Btn6")
                 {
-                    trainPageUI.backOption();
+                    poseSetID = trainPageUI.backOption();
                 }
             }
             
+        }
+        else if (m_Scene.name == "SelectLevel")
+        {
+            if (btn.name == "Btn1")
+            {
+                selectLevel.updateLevel("easy");
+                nowSelectChoice = btn.name;
+            }
+            else if (btn.name == "Btn2")
+            {
+                selectLevel.updateLevel("medium");
+                nowSelectChoice = btn.name;
+            }
+            else if (btn.name == "Btn3")
+            {
+                selectLevel.updateLevel("hard");
+                nowSelectChoice = btn.name;
+            }
+            else if (btn.name == "Btn4")
+            {
+
+            }
+
         }
 
 
