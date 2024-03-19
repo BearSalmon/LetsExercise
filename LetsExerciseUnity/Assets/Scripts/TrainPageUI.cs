@@ -8,18 +8,13 @@ using static UnityEngine.UIElements.UxmlAttributeDescription;
 public class TrainPageUI : MonoBehaviour
 {
     public TextMeshProUGUI poseSetName;
-    public TextMeshProUGUI calories;
-    public TextMeshProUGUI duration;
     public TextMeshProUGUI numberOfGesture;
-    public TextMeshProUGUI level;
 
     public RawImage arms;
     public RawImage abs;
     public RawImage legs;
     public RawImage buttocks1;
     public RawImage buttocks2;
-
-    [SerializeField] Color hard, mid, easy;
 
     int number;
     int nowSelect = 1;
@@ -36,7 +31,7 @@ public class TrainPageUI : MonoBehaviour
     }
 
 
-    public void nextOption()
+    public int nextOption()
     {
         nowSelect++;
         if (nowSelect > number)
@@ -44,9 +39,10 @@ public class TrainPageUI : MonoBehaviour
             nowSelect = 1;
         }
         updateTrainSet(nowSelect);
+        return nowSelect;
     }
 
-    public void backOption()
+    public int backOption()
     {
         nowSelect--;
         if (nowSelect == 0)
@@ -55,7 +51,7 @@ public class TrainPageUI : MonoBehaviour
         }
         updateTrainSet(nowSelect);
 
-        
+        return nowSelect;
 
     }
 
@@ -78,26 +74,9 @@ public class TrainPageUI : MonoBehaviour
 
         poseSet = dBUtils.GetPoseSetById(nowSelect);
         poseSetName.text = poseSet.PoseSetName;
-        calories.text = poseSet.Calories.ToString() + " cal";
-        duration.text = poseSet.Duration.ToString() + " s";
         numberOfGesture.text = poseSet.NumberOfGesture.ToString();
-        level.text = poseSet.Level;
 
-        if (level.text == "Hard")
-        {
-            level.color = hard;
-        }
-        else if (level.text == "Mid")
-        {
-            level.color = mid;
-        }
-        else
-        {
-            level.color = easy;
-        }
-
-        
-
+      
         string[] parts = poseSet.Part.Split(" ");
 
         for (int i=0; i < parts.Length; i++)

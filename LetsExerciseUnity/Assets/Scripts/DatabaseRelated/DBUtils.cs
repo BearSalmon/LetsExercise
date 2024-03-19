@@ -149,7 +149,6 @@ public class DBUtils : MonoBehaviour
             NumberOfGesture = 10,
             Part = "arms abs",
             Duration = 100,
-            Level = "Hard"
 
         };
         poseSetService.AddPoseSet(poseSet);
@@ -161,7 +160,6 @@ public class DBUtils : MonoBehaviour
             NumberOfGesture = 7,
             Part = "body",
             Duration = 70,
-            Level = "Easy"
 
         };
 
@@ -174,7 +172,6 @@ public class DBUtils : MonoBehaviour
             NumberOfGesture = 8,
             Part = "body",
             Duration = 200,
-            Level = "Mid"
 
         };
 
@@ -297,6 +294,11 @@ public class DBUtils : MonoBehaviour
     public PoseSet GetPoseSetById(int id)
     {
         return poseSetService.GetPoseSetByID(id);
+    }
+
+    public PoseSet GetPoseSetByName(string name)
+    {
+        return poseSetService.GetPoseSetByName(name);
     }
 
     public void UpdatePoseSet(PoseSet poseSet)
