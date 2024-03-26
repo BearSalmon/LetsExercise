@@ -24,13 +24,13 @@ public class AnimationCode : MonoBehaviour
     {
         lines = System.IO.File.ReadLines("Assets/PoseDataset/arms/arm1.txt").ToList();
         countDownTimer = GameObject.Find("ManagerToBeKeep").GetComponent<CountDownTimer>();
-        isAnimating = false;
+        isAnimating = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isAnimating)
+        if (isAnimating && udpreceive.canContinue)
         {
             udpsend.SendData(counter.ToString());
             string[] points = lines[counter++].Split(',');
@@ -50,9 +50,8 @@ public class AnimationCode : MonoBehaviour
                 loop_cnt += 1;
             }
 
-            while (!udpreceive.canContinue) ;
-            udpreceive.canContinue = false;
-
+            while (!udpreceive.canReadNextLine) ;
+            udpreceive.canReadNextLine = false;
         }
         
     }

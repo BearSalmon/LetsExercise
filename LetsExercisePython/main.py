@@ -44,7 +44,7 @@ if __name__ == "__main__":
     serverAddressPort_pos = (udp_ip, udp_port_pos)
 
     # Parameters
-    width, height = 1280, 1000
+    width, height = 360, 480
 
     # Webcam
     cap = cv2.VideoCapture(0)
@@ -53,6 +53,7 @@ if __name__ == "__main__":
         exit()
 
     # Get the actual width and height of the webcam frames
+    # 640 * 480
     frame_width = int(cap.get(3))
     # print(frame_width)
     frame_height = int(cap.get(4))
@@ -94,6 +95,10 @@ if __name__ == "__main__":
         # 640 * 480
         # img = cv2.resize(img,(480, 720))
         img = cv2.flip(img, 1)
+
+        # crop camera
+        img = img[(frame_height - height) // 2:(frame_height + height) // 2, (frame_width - width) // 2:(frame_width + width) // 2]
+
         # 抓身體的點
         img = pose_detector.findPose(img, draw=True)
         lmList, bboxInfo = pose_detector.findPosition(img, draw=True)
@@ -162,7 +167,7 @@ if __name__ == "__main__":
         #print(lmList)
         kp_inside = 0
         for i in range(len(lmList)):
-            if 0 <= lmList[i][0] <= frame_width and 0 <= lmList[i][1] <= frame_height:
+            if 0 <= lmList[i][0] <= width and 0 <= lmList[i][1] <= height:
                 kp_inside += 1
         if kp_inside == len(lmList):
             udp_sock.sendto(str.encode(""), serverAddressPort_pos)

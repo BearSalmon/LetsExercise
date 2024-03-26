@@ -18,6 +18,7 @@ public class UDPReceive : MonoBehaviour
     public bool startRecieving = true;
     public bool printToConsole = false;
     public string dataHand, dataAngle, dataPos;
+    public bool canReadNextLine = false;
     public bool canContinue = false;
 
     public ButtonEvent buttonEvent;
@@ -126,9 +127,8 @@ public class UDPReceive : MonoBehaviour
                 dataAngle = Encoding.UTF8.GetString(dataByte);
                 if (dataAngle != "")
                 {
-                    canContinue = true;
+                    canReadNextLine = true;
                 }
-
             }
             catch (Exception err)
             {
@@ -148,6 +148,14 @@ public class UDPReceive : MonoBehaviour
                 IPEndPoint anyIP = new IPEndPoint(IPAddress.Any, 2);
                 byte[] dataByte = clientPos.Receive(ref anyIP);
                 dataPos = Encoding.UTF8.GetString(dataByte);
+                if (dataPos == "")
+                {
+                    canContinue = true;
+                }
+                else
+                {
+                    canContinue = false;
+                }
             }
             catch (Exception err)
             {
@@ -191,9 +199,6 @@ public class UDPReceive : MonoBehaviour
                 circleDrawer.circleImage = GameObject.Find("Circle").GetComponent<Image>();
             }
         }
-        
-        
-
     }
 
     float normalize(float value, float minFrom, float maxFrom, float minTo, float maxTo)
