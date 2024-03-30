@@ -175,7 +175,7 @@ if __name__ == "__main__":
             udp_sock.sendto(str.encode("fit your whole body in the camera."), serverAddressPort_pos)
 
 
-        cv2.imshow("Image", img)
+        #cv2.imshow("Image", img)
         tcp_sock.close()
 
         # time.sleep(0.003)
