@@ -24,14 +24,16 @@ public class AnimationCode : MonoBehaviour
     {
         lines = System.IO.File.ReadLines("Assets/PoseDataset/arms/arm1.txt").ToList();
         countDownTimer = GameObject.Find("ManagerToBeKeep").GetComponent<CountDownTimer>();
-        isAnimating = true;
+        isAnimating = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        udpreceive.canContinue = true;
         if (isAnimating && udpreceive.canContinue)
         {
+            Debug.Log("hi");
             udpsend.SendData(counter.ToString());
             string[] points = lines[counter++].Split(',');
 

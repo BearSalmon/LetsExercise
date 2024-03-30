@@ -19,7 +19,7 @@ public class UDPReceive : MonoBehaviour
     public bool printToConsole = false;
     public string dataHand, dataAngle, dataPos;
     public bool canReadNextLine = false;
-    public bool canContinue = false;
+    public bool canContinue = true;
 
     public ButtonEvent buttonEvent;
 
