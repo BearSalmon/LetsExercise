@@ -11,18 +11,19 @@ public class ExercisePageUI : MonoBehaviour
     public TextMeshProUGUI pos_message;
     public UDPReceive udpReceive;
 
+
     void Start()
     {
-        message = GameObject.Find("Message").GetComponent<TextMeshProUGUI>();
-        pos_message = GameObject.Find("PositionMessage").GetComponent<TextMeshProUGUI>();
+        //pos_message = GameObject.Find("PositionMessage").GetComponent<TextMeshProUGUI>();
         udpReceive = GameObject.Find("Manager").GetComponent<UDPReceive>();
     }
+
 
     // Update is called once per frame
     void Update()
     {
-        message.text = udpReceive.dataAngle;
-        pos_message.text = udpReceive.dataPos;
+        //message.text = udpReceive.dataAngle;
+        //pos_message.text = udpReceive.dataPos;
     }
 
    

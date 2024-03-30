@@ -13,6 +13,8 @@ public class DBUtils : MonoBehaviour
 
     public string nowPlayer;
 
+    public WholeSampleSceneManager wholeSampleSceneManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,12 +22,38 @@ public class DBUtils : MonoBehaviour
         userService = new UserService(dataBase);
         poseService = new PoseService(dataBase);
         poseSetService = new PoseSetService(dataBase);
+
+        // Create tables
         userService.CreateUserTable();
         poseService.CreatePoseTable();
         poseSetService.CreatePoseSetTable();
-        TestAddUsers();
+
+        // Add test data
+        //TestAddUsers();
         TestAddPoses();
-        TestAddPoseSets();
+        //TestAddPoseSets();
+        Debug.Log("Game start!");
+    }
+
+    IEnumerator SetupDatabase()
+    {
+        // Set up the database
+        dataBase = new DataBase();
+        userService = new UserService(dataBase);
+        poseService = new PoseService(dataBase);
+        poseSetService = new PoseSetService(dataBase);
+
+        // Create tables
+        userService.CreateUserTable();
+        poseService.CreatePoseTable();
+        poseSetService.CreatePoseSetTable();
+
+        // Add test data
+        //TestAddUsers();
+        TestAddPoses();
+        //TestAddPoseSets();
+
+        yield return null;
     }
 
     // for test only
@@ -44,7 +72,6 @@ public class DBUtils : MonoBehaviour
             LastLogin = currentTimeString,
         };
         int pk = userService.AddUser(user);
-        Debug.Log("Primary key = " + pk);
 
         user = new User
         {
@@ -56,7 +83,6 @@ public class DBUtils : MonoBehaviour
             LastLogin = currentTimeString,
         };
         pk = userService.AddUser(user);
-        Debug.Log("Primary key = " + pk);
 
         user = new User
         {
@@ -68,7 +94,6 @@ public class DBUtils : MonoBehaviour
             LastLogin = currentTimeString,
         };
         pk = userService.AddUser(user);
-        Debug.Log("Primary key = " + pk);
         
     }
 
@@ -78,7 +103,7 @@ public class DBUtils : MonoBehaviour
 
         Pose pose = new Pose
         {
-            Name = "",
+            Name = "arm1",
             Path = "Assets/PoseDataset/arms/arm1.txt",
             CheckPoint = 4,
             Part = "arms",
@@ -89,7 +114,7 @@ public class DBUtils : MonoBehaviour
 
         pose = new Pose
         {
-            Name = "",
+            Name = "arm2",
             Path = "Assets/PoseDataset/arms/arm2.txt",
             CheckPoint = 4,
             Part = "arms",
@@ -102,7 +127,7 @@ public class DBUtils : MonoBehaviour
 
         pose = new Pose
         {
-            Name = "",
+            Name = "arm3",
             Path = "Assets/PoseDataset/arms/arm3.txt",
             CheckPoint = 4,
             Part = "arms",
@@ -115,7 +140,7 @@ public class DBUtils : MonoBehaviour
 
         pose = new Pose
         {
-            Name = "",
+            Name = "arm4",
             Path = "Assets/PoseDataset/arms/arm4.txt",
             CheckPoint = 4,
             Part = "arms",
@@ -127,7 +152,7 @@ public class DBUtils : MonoBehaviour
 
         pose = new Pose
         {
-            Name = "",
+            Name = "arm5",
             Path = "Assets/PoseDataset/arms/arm5.txt",
             CheckPoint = 4,
             Part = "arms",
@@ -268,7 +293,7 @@ public class DBUtils : MonoBehaviour
 
     public IEnumerable<Pose> GetPoseByPart(string part)
     {
-        var poses = poseService.GetPoseByPart(part);
+        IEnumerable<Pose> poses = poseService.GetPoseByPart(part);
         ToConsole2(poses);
         return poses;
     }

@@ -1,18 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using UnityEngine;
 
 public class AnimationCode : MonoBehaviour
 {
-    public GameObject[] Body;
+    public GameObject[] Body_for_Exercise;
+    public GameObject[] Body_for_Ready;
     List<string> lines;
     public int counter = 0;
     public int loop_cnt = 0;
     public UDPSend udpsend;
     public UDPReceive udpreceive;
 
+    public WholeSampleSceneManager wholeSampleSceneManager;
 
     public CountDownTimer countDownTimer;
 
@@ -22,9 +25,9 @@ public class AnimationCode : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        lines = System.IO.File.ReadLines("Assets/PoseDataset/arms/arm1.txt").ToList();
         countDownTimer = GameObject.Find("ManagerToBeKeep").GetComponent<CountDownTimer>();
         isAnimating = false;
+        wholeSampleSceneManager = GameObject.Find("ManagerToBeKeep").GetComponent<WholeSampleSceneManager>();
     }
 
     // Update is called once per frame
@@ -33,7 +36,6 @@ public class AnimationCode : MonoBehaviour
         udpreceive.canContinue = true;
         if (isAnimating && udpreceive.canContinue)
         {
-            Debug.Log("hi");
             udpsend.SendData(counter.ToString());
             string[] points = lines[counter++].Split(',');
 
@@ -44,7 +46,16 @@ public class AnimationCode : MonoBehaviour
                 float y = float.Parse(points[1 + (i * 3)]) / 20;
                 float z = float.Parse(points[2 + (i * 3)]) / 500;
 
-                Body[i].transform.localPosition = new Vector3(x, y, z);
+
+                if (wholeSampleSceneManager.nowState == 0)
+                {
+                    Body_for_Exercise[i].transform.localPosition = new Vector3(x, y, z);
+                }
+                else
+                {
+                    Body_for_Ready[i].transform.localPosition = new Vector3(x, y, z);
+                }
+                
             }
             if (counter >= lines.Count)
             {
@@ -66,5 +77,11 @@ public class AnimationCode : MonoBehaviour
     public void StopAnimation()
     {
         isAnimating = false;
+    }
+
+    public void ChangeLineList(string path)
+    {
+        lines = System.IO.File.ReadLines(path).ToList();
+        counter = 0;
     }
 }
