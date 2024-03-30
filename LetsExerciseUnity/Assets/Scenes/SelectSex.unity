@@ -218,6 +218,7 @@ GameObject:
   - component: {fileID: 151764184}
   - component: {fileID: 151764186}
   - component: {fileID: 151764185}
+  - component: {fileID: 151764187}
   m_Layer: 5
   m_Name: T1
   m_TagString: Untagged
@@ -242,8 +243,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -138.03, y: 251}
-  m_SizeDelta: {x: 144, y: 50}
+  m_AnchoredPosition: {x: -84, y: 366}
+  m_SizeDelta: {x: 450.036, y: 140.354}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &151764185
 MonoBehaviour:
@@ -267,8 +268,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: What is your sex?
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b68f543b2e02c0f45a68bd562bfb84a6, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 280e96212fdf2a4428763bdf1e7ac985, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -292,8 +293,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 45
-  m_fontSizeBase: 45
+  m_fontSize: 100
+  m_fontSizeBase: 100
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -342,6 +343,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 151764183}
   m_CullTransparentMesh: 1
+--- !u!114 &151764187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 151764183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df822a9df2ab2a0459093c2a921cb3cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 151764185}
 --- !u!1 &224674869
 GameObject:
   m_ObjectHideFlags: 0
