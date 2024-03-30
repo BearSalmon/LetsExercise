@@ -18,6 +18,7 @@ public class ImageReceive : MonoBehaviour
     byte[] imageDatas = new byte[0];
     Texture2D tex;
 
+    public WholeSampleSceneManager wholeSampleSceneManager;
     Scene m_Scene;
 
     // Start is called before the first frame update
@@ -35,9 +36,15 @@ public class ImageReceive : MonoBehaviour
         m_Scene = SceneManager.GetActiveScene();
         if (m_Scene.name == "SampleScene")
         {
-            img = GameObject.Find("PlayerCamera").GetComponent<RawImage>();
-            tex.LoadImage(imageDatas);
-            img.texture = tex;
+
+            wholeSampleSceneManager = GameObject.Find("ManagerToBeKeep").GetComponent<WholeSampleSceneManager>();
+
+            if (wholeSampleSceneManager.nowState == 0)
+            {
+                img = GameObject.Find("PlayerCamera").GetComponent<RawImage>();
+                tex.LoadImage(imageDatas);
+                img.texture = tex;
+            }
 
         }
 
