@@ -20,6 +20,8 @@ public class AnimationCode : MonoBehaviour
     public CountDownTimer countDownTimer;
 
     public bool isAnimating;
+
+
     
 
     // Start is called before the first frame update
@@ -33,7 +35,7 @@ public class AnimationCode : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        udpreceive.canContinue = true;
+        //udpreceive.canContinue = true;
         if (isAnimating && udpreceive.canContinue)
         {
             udpsend.SendData(counter.ToString());
