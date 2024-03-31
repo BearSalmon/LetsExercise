@@ -172,7 +172,7 @@ if __name__ == "__main__":
         if kp_inside == len(lmList):
             udp_sock.sendto(str.encode(""), serverAddressPort_pos)
         else:
-            udp_sock.sendto(str.encode("fit your whole body in the camera."), serverAddressPort_pos)
+            udp_sock.sendto(str.encode("Align your body to the border"), serverAddressPort_pos)
 
 
         #cv2.imshow("Image", img)

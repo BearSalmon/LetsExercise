@@ -53,7 +53,7 @@ public class WholeSampleSceneManager : MonoBehaviour
             nowState = 0;
             Exercise.SetActive(true);
             Ready.SetActive(false);
-            countDownTimer.StartCountDown(5f);
+            countDownTimer.StartCountDown(30f);
         }
         else
         {

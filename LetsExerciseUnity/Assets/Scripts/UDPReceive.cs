@@ -4,9 +4,7 @@ using System.Text;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
-
 using UnityEngine.UI;
-
 using UnityEngine.SceneManagement;
 using System.Collections;
 
@@ -75,7 +73,6 @@ public class UDPReceive : MonoBehaviour
 
         m_Scene = SceneManager.GetActiveScene();
         f_Scene = SceneManager.GetActiveScene();
-
     }
 
 
