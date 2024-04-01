@@ -5,37 +5,40 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/GameStart.unity
     guid: 41ccb27185c4b4c098ae85f47d3d1dab
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/CheckIfNew.unity
     guid: c7ad9ecf7f6d54a7bb2e4f8c2a429fe9
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/SelectPlayer.unity
     guid: 3addbb0444ebb488991c88ee5a27af89
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Trainer.unity
     guid: d000f11d1f4f24b0ba9e07e87276b25b
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Intro.unity
     guid: aee770fc749454726978bb531dc0f50b
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/SelectSex.unity
     guid: 73e01b0548ce54608a671f687ac77dc3
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/CharacterDecorate.unity
     guid: 65c82923a1821435d86b6c02fafbdfbc
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/SelectPart.unity
     guid: c0ee7b31fd22649e48bf3f36a3ce9b77
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Investigation.unity
     guid: a627fb9cd83614d738f367887718e24a
-  - enabled: 0
+  - enabled: 1
+    path: Assets/Scenes/Trainer2.unity
+    guid: 6eb7feaf07f1540b7a37907b41c1ec8e
+  - enabled: 1
     path: Assets/Scenes/MainPage.unity
     guid: f0515e61edf284dc18fc6a8cd714f405
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/SelectLevel.unity
     guid: 23dce4375a07d4d9f9425330a315c2c2
   - enabled: 1

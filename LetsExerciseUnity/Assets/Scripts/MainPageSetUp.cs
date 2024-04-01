@@ -8,19 +8,6 @@ public class MainPageSetUp : MonoBehaviour
 {
     DBUtils dBUtils;
 
-    public GameObject girl;
-    public GameObject boy;
-
-    public RawImage hair_girl;
-    public RawImage body_girl;
-    public RawImage cloth_girl;
-
-    public RawImage hair_boy;
-    public RawImage body_boy;
-    public RawImage cloth_boy;
-
-    public TextMeshProUGUI playerName;
-
     public GameObject UserPage;
     public GameObject PlanPage;
     public GameObject TrainPage;
@@ -35,17 +22,7 @@ public class MainPageSetUp : MonoBehaviour
 
         user = dBUtils.GetUserByName(dBUtils.nowPlayer);
 
-        if (user.Gender == "Girl")
-        {
-            girl.SetActive(true);
-            boy.SetActive(false);
-        }
-        else
-        {
-            girl.SetActive(false);
-            boy.SetActive(true);
-        }
-        UserSetUp();
+        
         nowState = 2;
         ChangeState(2);
 
@@ -83,35 +60,7 @@ public class MainPageSetUp : MonoBehaviour
 
     }
 
-    void UserSetUp()
-    {
-        playerName.text = user.Name;
-        if (user.Gender == "Girl")
-        {
-            girl.SetActive(true);
-            boy.SetActive(false);
-            Color color;
-            ColorUtility.TryParseHtmlString("#".ToString() + user.Hair, out color);
-            hair_girl.color = color;
-            ColorUtility.TryParseHtmlString("#".ToString() + user.Body, out color);
-            body_girl.color = color;
-            ColorUtility.TryParseHtmlString("#".ToString() + user.Cloth, out color);
-            cloth_girl.color = color;
-        }
-        else
-        {
-            girl.SetActive(false);
-            boy.SetActive(true);
-            Color color;
-            ColorUtility.TryParseHtmlString("#".ToString() + user.Hair, out color);
-            hair_boy.color = color;
-            ColorUtility.TryParseHtmlString("#".ToString() + user.Body, out color);
-            body_boy.color = color;
-            ColorUtility.TryParseHtmlString("#".ToString() + user.Cloth, out color);
-            cloth_boy.color = color;
-        }
-
-    }
+    
 
 
 
