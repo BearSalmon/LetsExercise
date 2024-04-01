@@ -99,6 +99,10 @@ public class ButtonEvent : MonoBehaviour
          
             numOfButton = 4;
         }
+        else if (m_Scene.name == "Trainer2")
+        {
+            numOfButton = 0;
+        }
         else if (m_Scene.name == "MainPage")
         {
             trainPageUI = GameObject.Find("Manager").GetComponent<TrainPageUI>();

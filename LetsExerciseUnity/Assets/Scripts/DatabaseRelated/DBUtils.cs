@@ -29,9 +29,9 @@ public class DBUtils : MonoBehaviour
         poseSetService.CreatePoseSetTable();
 
         // Add test data
-        //TestAddUsers();
+        TestAddUsers();
         TestAddPoses();
-        //TestAddPoseSets();
+        TestAddPoseSets();
         Debug.Log("Game start!");
     }
 
