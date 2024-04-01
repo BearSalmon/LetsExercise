@@ -3,7 +3,7 @@ import PoseModule
 # from cvzone.PoseModule import PoseDetector
 from cvzone.HandTrackingModule import HandDetector
 import socket
-from utils import find_angle, get_landmark_features , get_Wrong_Message
+from utils import find_angle, get_landmark_features , get_Wrong_Message , get_WrongPart_Message
 from pose_dataset import get_pose_db
 import json
 import time
@@ -31,6 +31,7 @@ if __name__ == "__main__":
     udp_port_hand = 5052
     udp_port_angle = 5051
     udp_port_pos = 5054
+    udp_port_wrongPart = 5056
 
     recv_ip = '127.0.0.1'  # Listen on all network interfaces
     recv_port = 1234  # Port number
@@ -42,6 +43,7 @@ if __name__ == "__main__":
     serverAddressPort_hand = (udp_ip, udp_port_hand)
     serverAddressPort_angle = (udp_ip, udp_port_angle)
     serverAddressPort_pos = (udp_ip, udp_port_pos)
+    serverAddressPort_wrongPart = (udp_ip, udp_port_wrongPart)
 
     # Parameters
     width, height = 360, 480
@@ -148,7 +150,7 @@ if __name__ == "__main__":
                 counter = int(received_data)
                 points = lines[counter].split(',')
                 video_lmlist = [[int(point) for point in points[i:i+3]] for i in range(0, len(points)-1, 3)]
-                
+                wrongPart_message = ""
 
                 for index in range(len(check_point)):
                     point1,point2,ref_point = get_landmark_features(lmList,dict_features,check_point[index])
@@ -157,12 +159,14 @@ if __name__ == "__main__":
                     video_offset_angle = find_angle(video_point1,video_point2,video_ref_point)
                     wrong = offset_angle - video_offset_angle
                     if wrong > 20 or abs(wrong) > 20:
-                        wrong_message = get_Wrong_Message(index,check_point[index],wrong,video_offset_angle,dict_features)
+                        wrongPart_message += get_WrongPart_Message(check_point[index],dict_features)
+                        wrong_message = get_Wrong_Message(check_point[index],wrong,dict_features)
                     else :
                         wrong_message = "nice"
                     
                 # udp
                 udp_sock.sendto(str.encode(str(wrong_message)), serverAddressPort_angle)
+                udp_sock.sendto(str.encode(str(wrongPart_message[:-1])), serverAddressPort_wrongPart)
 
         #print(lmList)
         kp_inside = 0

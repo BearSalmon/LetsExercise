@@ -46,16 +46,29 @@ dict_features_return = {
     32 : 'left foot',
     0 : 'nose'
 }
+
+dict_features_return_part = {
+    13 : "right fore arm",
+    14 : "left fore arm",
+    11 : "right upper arm",
+    12 : "left upper arm",
+
+}
+
+def get_WrongPart_Message(check_point,dict_features):
+    ref_point = dict_features[check_point["ref_point"]]
+    return dict_features_return_part[ref_point]+","
     
-def get_Wrong_Message(index,check_point,wrong_offset,video_offset_angle,dict_features):
-    wrong_message = str(index) + ":"
+def get_Wrong_Message(check_point,wrong_offset,dict_features):
+    wrong_message = ""
     ref_point = dict_features[check_point["ref_point"]]
 
     if (check_point["ref_point"] == "right_elbow" or check_point["ref_point"] == "left_elbow"):
-        if video_offset_angle > 170:
+        if wrong_offset < 0 :
             wrong_message += "Your " + dict_features_return[ref_point] + "is not straight enough"
         else :
-            wrong_message += "Your " + dict_features_return[ref_point] + " has "+str(wrong_offset) +" offset"
+            wrong_message += "Your " + dict_features_return[ref_point] + ""
+
     elif check_point["ref_point"] == "left_shoulder" or check_point["ref_point"] == "right_shoulder":
         if wrong_offset < 0 :
             wrong_message += "Please raise your " + dict_features_return[ref_point] + " higher"

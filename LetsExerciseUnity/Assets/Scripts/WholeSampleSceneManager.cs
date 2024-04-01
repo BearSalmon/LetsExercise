@@ -18,6 +18,7 @@ public class WholeSampleSceneManager : MonoBehaviour
     public CountDownTimer countDownTimer;
     public AnimationCode animationCode;
     public ReadyPageUi readyPageUi;
+    public ExercisePageUI exercisePageUI;
 
     public GameObject Exercise;
     public GameObject Ready;
@@ -26,11 +27,15 @@ public class WholeSampleSceneManager : MonoBehaviour
 
     void Start()
     {
+
+        Exercise.SetActive(false);
+        Ready.SetActive(true);
         nowState = 1;
         animationCode = GameObject.Find("Manager").GetComponent<AnimationCode>();
         dBUtils = GameObject.Find("Manager").GetComponent<DBUtils>();
         countDownTimer = GetComponent<CountDownTimer>();
         readyPageUi = GetComponent<ReadyPageUi>();
+        exercisePageUI = GetComponent<ExercisePageUI>();
 
         nowPose = 1;
         poses = dBUtils.GetPoseByPart("arms");
@@ -53,7 +58,12 @@ public class WholeSampleSceneManager : MonoBehaviour
             nowState = 0;
             Exercise.SetActive(true);
             Ready.SetActive(false);
-            countDownTimer.StartCountDown(30f);
+
+
+            exercisePageUI.SetUp(poses.Skip(nowPose - 1).FirstOrDefault().Name);
+
+            exercisePageUI.CallDrawer();
+            countDownTimer.StartCountDown(10f);
         }
         else
         {

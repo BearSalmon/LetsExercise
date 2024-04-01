@@ -35,7 +35,7 @@ public class AnimationCode : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //udpreceive.canContinue = true;
+        udpreceive.canContinue = true;
         if (isAnimating && udpreceive.canContinue)
         {
             udpsend.SendData(counter.ToString());
