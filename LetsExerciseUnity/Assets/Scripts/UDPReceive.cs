@@ -10,12 +10,12 @@ using System.Collections;
 
 public class UDPReceive : MonoBehaviour
 {
-    Thread receiveHandThread, receiveAngleThread, receivePosThread;
-    UdpClient clientHand, clientAngle, clientPos;
-    public int portHand = 5052, portAngle = 5051, portPos = 5054;
+    Thread receiveHandThread, receiveAngleThread, receivePosThread , receiveWrongPartThread;
+    UdpClient clientHand, clientAngle, clientPos , clientWrongPart;
+    public int portHand = 5052, portAngle = 5051, portPos = 5054 , portWrongPart = 5056;
     public bool startRecieving = true;
     public bool printToConsole = false;
-    public string dataHand, dataAngle, dataPos;
+    public string dataHand, dataAngle, dataPos , dataWrongPart;
     public bool canReadNextLine = false;
     public bool canContinue = true;
 
@@ -57,6 +57,10 @@ public class UDPReceive : MonoBehaviour
         receivePosThread.IsBackground = true;
         receivePosThread.Start();
 
+        receiveWrongPartThread = new Thread(
+            new ThreadStart(ReceiveWrongPartData));
+        receiveWrongPartThread.IsBackground = true;
+        receiveWrongPartThread.Start();
 
         transformPosition[0] = mouse.transform.localPosition.x;
         transformPosition[1] = mouse.transform.localPosition.y;
@@ -159,6 +163,25 @@ public class UDPReceive : MonoBehaviour
                 print(err.ToString());
             }
         }
+    }
+
+    private void ReceiveWrongPartData()
+    {
+        clientWrongPart = new UdpClient(portWrongPart);
+        while (startRecieving)
+        {
+            try
+            {
+                IPEndPoint anyIP = new IPEndPoint(IPAddress.Any, 3);
+                byte[] dataByte = clientWrongPart.Receive(ref anyIP);
+                dataWrongPart = Encoding.UTF8.GetString(dataByte);
+            }
+            catch (Exception err)
+            {
+                print(err.ToString());
+            }
+        }
+
     }
 
     void Update()
