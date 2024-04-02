@@ -23,6 +23,7 @@ public class ButtonEvent : MonoBehaviour
     public TrainPageUI trainPageUI;
     public MainPageSetUp mainPageSetUp;
     public SelectLevel selectLevel;
+    public InquireDataPageUI inquireDataPageUI;
 
     User user;
 
@@ -87,6 +88,13 @@ public class ButtonEvent : MonoBehaviour
             numOfButton = 7;
             characterDeorate = GameObject.Find("Manager").GetComponent<CharacterDeorate>();
             user = dBUtils.GetUserByName(dBUtils.nowPlayer);
+        }
+        else if (m_Scene.name == "InquireData")
+        {
+            numOfButton = 3;
+            inquireDataPageUI = GameObject.Find("Manager").GetComponent<InquireDataPageUI>();
+            user = dBUtils.GetUserByName(dBUtils.nowPlayer);
+
         }
         else if (m_Scene.name == "SelectPart")
         {
@@ -251,6 +259,36 @@ public class ButtonEvent : MonoBehaviour
                 }
                     
             }
+            
+        }
+        else if (m_Scene.name == "InquireData")
+        {
+            if (btn.name == "Btn3" && inquireDataPageUI.state != 2)
+            {
+          
+                inquireDataPageUI.state += 1;
+                inquireDataPageUI.ChangeSetUp();
+                SetButtonList();
+
+            }
+            else if (btn.name == "Btn3" && inquireDataPageUI.state == 2)
+            {
+                user.Age = inquireDataPageUI.age_num;
+                user.Height = inquireDataPageUI.height_num;
+                user.Weight += inquireDataPageUI.weight + ",";
+
+                dBUtils.UpdateUser(user);
+                SceneManager.LoadScene(8);
+            }
+            else if (btn.name == "Btn1")
+            {
+                inquireDataPageUI.Increase();
+            }
+            else if (btn.name == "Btn2")
+            {
+                inquireDataPageUI.Decrease();
+            }
+
             
         }
         else if (m_Scene.name == "SelectPart")

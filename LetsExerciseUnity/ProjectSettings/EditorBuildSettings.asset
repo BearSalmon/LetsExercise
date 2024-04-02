@@ -27,6 +27,9 @@ EditorBuildSettings:
     path: Assets/Scenes/CharacterDecorate.unity
     guid: 65c82923a1821435d86b6c02fafbdfbc
   - enabled: 1
+    path: Assets/Scenes/InquireData.unity
+    guid: be57da584006901448f4260b50a8ce88
+  - enabled: 1
     path: Assets/Scenes/SelectPart.unity
     guid: c0ee7b31fd22649e48bf3f36a3ce9b77
   - enabled: 1
