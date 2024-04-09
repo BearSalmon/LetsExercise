@@ -2,11 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.UI;
 using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 public class UserPageUI : MonoBehaviour
 {
+    public RectTransform chartContainer;
+    public GameObject pointPrefab;
+    public Color lineColor = Color.blue;
 
     DBUtils dBUtils;
     public GameObject girl;
@@ -22,13 +26,14 @@ public class UserPageUI : MonoBehaviour
 
     public TextMeshProUGUI playerName;
 
+
     User user;
 
     // Start is called before the first frame update
     void Start()
     {
         dBUtils = GameObject.Find("WholeManager").GetComponent<DBUtils>();
-
+        
         user = dBUtils.GetUserByName(dBUtils.nowPlayer);
 
         if (user.Gender == "Girl")
@@ -42,6 +47,19 @@ public class UserPageUI : MonoBehaviour
             boy.SetActive(true);
         }
         UserSetUp();
+
+        List<int> dataPoints = new List<int>();
+        string[] dataValues = user.Weight.Split(',');
+        foreach (string value in dataValues)
+        {
+            int dataPoint;
+            if (int.TryParse(value, out dataPoint))
+            {
+                dataPoints.Add(dataPoint);
+            }
+        }
+        DrawLineChart(dataPoints);
+
     }
 
     // Update is called once per frame
@@ -79,4 +97,40 @@ public class UserPageUI : MonoBehaviour
         }
 
     }
+
+    void DrawLineChart(List<int> dataPoints) 
+    {
+        float chartWidth = chartContainer.rect.width;
+        float chartHeight = chartContainer.rect.height;
+
+        float chartYMin = chartContainer.rect.yMin;
+
+        float xStep = chartWidth / (dataPoints.Count - 1);
+        float yMax = Mathf.Max(dataPoints.ToArray());
+
+        Vector2 startPoint = new Vector2(0, dataPoints[0] / yMax * chartHeight*5 );
+        for (int i = 1; i < dataPoints.Count; i++)
+        {
+            Vector2 endPoint = new Vector2(i * xStep, dataPoints[i] / yMax * chartHeight*5 );
+            DrawLine(startPoint, endPoint);
+            startPoint = endPoint;
+        }
+    }
+
+    void DrawLine(Vector2 startPoint, Vector2 endPoint)
+    {
+        GameObject line = new GameObject("Line", typeof(Image));
+        line.transform.SetParent(chartContainer, false);
+        Image lineImage = line.GetComponent<Image>();
+        lineImage.color = lineColor;
+
+        RectTransform lineRect = line.GetComponent<RectTransform>();
+        Vector2 direction = endPoint - startPoint;
+        float distance = direction.magnitude;
+        lineRect.sizeDelta = new Vector2(distance, 10f);
+        lineRect.anchoredPosition = startPoint + direction / 2f;
+        lineRect.localEulerAngles = new Vector3(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
+
+    }
+
 }

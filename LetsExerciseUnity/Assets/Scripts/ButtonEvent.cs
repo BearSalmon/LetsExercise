@@ -33,6 +33,7 @@ public class ButtonEvent : MonoBehaviour
 
     public Button currentClickingButton;
 
+
     void Start()
     {
         m_Scene = SceneManager.GetActiveScene();
@@ -184,7 +185,7 @@ public class ButtonEvent : MonoBehaviour
             if (btn.name == "Btn1")
             {
                 selectPlayer.Save();
-                SceneManager.LoadScene(9);
+                SceneManager.LoadScene(11);
             }
             else if (btn.name == "Btn2")
             {

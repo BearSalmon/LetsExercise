@@ -18,6 +18,8 @@ public class User
     public string Body { get; set; }
     public string Cloth { get; set; }
     public string LastLogin { get; set; }
+    public int Duration { get; set; }
+    public int Calories { get; set; }
 
     public override string ToString()
     {
