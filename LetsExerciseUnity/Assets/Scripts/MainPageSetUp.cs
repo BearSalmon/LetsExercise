@@ -13,6 +13,7 @@ public class MainPageSetUp : MonoBehaviour
     public GameObject TrainPage;
     public int nowState;
 
+
     User user;
 
     // Start is called before the first frame update
@@ -22,9 +23,9 @@ public class MainPageSetUp : MonoBehaviour
 
         user = dBUtils.GetUserByName(dBUtils.nowPlayer);
 
-        
         nowState = 2;
         ChangeState(2);
+        
 
     }
 

@@ -72,7 +72,7 @@ public class Trainer2PageUI : MonoBehaviour
     void progress3()
     {
         P3.SetActive(true);
-        T3.text = "Choosing your fitness plan : ";
+        T3.text = "Choosing your fitness plan : " + user.PreferPart;
         StartCoroutine(IncreaseProgressOverTime(2f, progressBar3,3));
         
     }
@@ -80,7 +80,7 @@ public class Trainer2PageUI : MonoBehaviour
     void progress4()
     {
         P4.SetActive(true);
-        T4.text = "Select fitness level : ";
+        T4.text = "Select fitness level : " + user.Level;
         StartCoroutine(IncreaseProgressOverTime(1f, progressBar4,4));
     }
 
