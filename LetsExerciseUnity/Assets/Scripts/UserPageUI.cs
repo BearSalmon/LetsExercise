@@ -25,9 +25,13 @@ public class UserPageUI : MonoBehaviour
     public RawImage cloth_boy;
 
     public TextMeshProUGUI playerName;
-
+    public TextMeshProUGUI duration;
+    public TextMeshProUGUI calories;
+    public TextMeshProUGUI curWeight;
+    public TextMeshProUGUI BMI;
 
     User user;
+    string[] dataValues;
 
     // Start is called before the first frame update
     void Start()
@@ -49,7 +53,8 @@ public class UserPageUI : MonoBehaviour
         UserSetUp();
 
         List<int> dataPoints = new List<int>();
-        string[] dataValues = user.Weight.Split(',');
+        dataValues = user.Weight.Split(',');
+
         foreach (string value in dataValues)
         {
             int dataPoint;
@@ -59,6 +64,14 @@ public class UserPageUI : MonoBehaviour
             }
         }
         DrawLineChart(dataPoints);
+        curWeight.text = dataValues[dataValues.Length - 1];
+        duration.text = user.Duration.ToString();
+        calories.text = user.Calories.ToString();
+        int weight = int.Parse(dataValues[dataValues.Length - 1]);
+        float heightInMeters = user.Height / 100f;
+        float bmi = weight / (heightInMeters * heightInMeters);
+        BMI.text = bmi.ToString("F1");
+
 
     }
 
@@ -100,21 +113,30 @@ public class UserPageUI : MonoBehaviour
 
     void DrawLineChart(List<int> dataPoints) 
     {
-        float chartWidth = chartContainer.rect.width;
         float chartHeight = chartContainer.rect.height;
+        float fixedChartWidth = 500f; // 假设为 500f
 
-        float chartYMin = chartContainer.rect.yMin;
-
-        float xStep = chartWidth / (dataPoints.Count - 1);
-        float yMax = Mathf.Max(dataPoints.ToArray());
-
-        Vector2 startPoint = new Vector2(0, dataPoints[0] / yMax * chartHeight*5 );
-        for (int i = 1; i < dataPoints.Count; i++)
+        if (dataPoints.Count == 1)
         {
-            Vector2 endPoint = new Vector2(i * xStep, dataPoints[i] / yMax * chartHeight*5 );
+            float yMax = Mathf.Max(dataPoints.ToArray());
+            Vector2 startPoint = new Vector2(0, dataPoints[0] / yMax * chartHeight * 5);
+            Vector2 endPoint = new Vector2(fixedChartWidth, dataPoints[0] / yMax * chartHeight * 5);
             DrawLine(startPoint, endPoint);
-            startPoint = endPoint;
         }
+        else
+        {
+            float xStep = fixedChartWidth / (dataPoints.Count - 1);
+            float yMax = Mathf.Max(dataPoints.ToArray());
+
+            Vector2 startPoint = new Vector2(0, dataPoints[0] / yMax * chartHeight * 5);
+            for (int i = 1; i < dataPoints.Count; i++)
+            {
+                Vector2 endPoint = new Vector2(i * xStep, dataPoints[i] / yMax * chartHeight * 5);
+                DrawLine(startPoint, endPoint);
+                startPoint = endPoint;
+            }
+        }
+        
     }
 
     void DrawLine(Vector2 startPoint, Vector2 endPoint)

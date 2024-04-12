@@ -13,6 +13,7 @@ public class MainPageSetUp : MonoBehaviour
     public GameObject TrainPage;
     public int nowState;
 
+    UserPageUI userPageUI;
 
     User user;
 
@@ -20,11 +21,12 @@ public class MainPageSetUp : MonoBehaviour
     void Start()
     {
         dBUtils = GameObject.Find("WholeManager").GetComponent<DBUtils>();
+        userPageUI = GetComponent<UserPageUI>();
 
         user = dBUtils.GetUserByName(dBUtils.nowPlayer);
 
-        nowState = 2;
-        ChangeState(2);
+        nowState = 0;
+        ChangeState(0);
         
 
     }
