@@ -25,6 +25,8 @@ public class ButtonEvent : MonoBehaviour
     public SelectLevel selectLevel;
     public InquireDataPageUI inquireDataPageUI;
 
+    public bool isAddingWeight;
+
     User user;
 
     public string nowSelectChoice; // for button
@@ -36,6 +38,7 @@ public class ButtonEvent : MonoBehaviour
 
     void Start()
     {
+        isAddingWeight = false;
         m_Scene = SceneManager.GetActiveScene();
         f_Scene = SceneManager.GetActiveScene();
         SetButtonList();
@@ -94,6 +97,7 @@ public class ButtonEvent : MonoBehaviour
         {
             numOfButton = 3;
             inquireDataPageUI = GameObject.Find("Manager").GetComponent<InquireDataPageUI>();
+
             user = dBUtils.GetUserByName(dBUtils.nowPlayer);
 
         }
@@ -118,7 +122,7 @@ public class ButtonEvent : MonoBehaviour
             mainPageSetUp = GameObject.Find("Manager").GetComponent<MainPageSetUp>();
             if (mainPageSetUp.nowState == 0)
             {
-                numOfButton = 3;
+                numOfButton = 4;
             }
             else if (mainPageSetUp.nowState == 1)
             {
@@ -176,6 +180,7 @@ public class ButtonEvent : MonoBehaviour
             }
             else if (btn.name == "Btn2")
             {
+                isAddingWeight = true;
                 SceneManager.LoadScene(2);
             }
 
@@ -264,24 +269,38 @@ public class ButtonEvent : MonoBehaviour
         }
         else if (m_Scene.name == "InquireData")
         {
-            if (btn.name == "Btn3" && inquireDataPageUI.state != 2)
+            if (isAddingWeight == false)
             {
-          
-                inquireDataPageUI.state += 1;
-                inquireDataPageUI.ChangeSetUp();
-                SetButtonList();
+                if (btn.name == "Btn3" && inquireDataPageUI.state != 2)
+                {
+                    inquireDataPageUI.state += 1;
+                    inquireDataPageUI.ChangeSetUp();
+                    SetButtonList();
+
+                }
+                else if (btn.name == "Btn3" && inquireDataPageUI.state == 2)
+                {
+                    user.Age = inquireDataPageUI.age_num;
+                    user.Height = inquireDataPageUI.height_num;
+                    user.Weight += inquireDataPageUI.weight.text + ",";
+
+                    dBUtils.UpdateUser(user);
+                    isAddingWeight = true;
+                    SceneManager.LoadScene(8);
+                }
 
             }
-            else if (btn.name == "Btn3" && inquireDataPageUI.state == 2)
+            else
             {
-                user.Age = inquireDataPageUI.age_num;
-                user.Height = inquireDataPageUI.height_num;
-                user.Weight += inquireDataPageUI.weight + ",";
-
-                dBUtils.UpdateUser(user);
-                SceneManager.LoadScene(8);
+                if (btn.name == "Btn3")
+                {
+                    user.Weight += inquireDataPageUI.weight.text + ",";
+                    dBUtils.UpdateUser(user);
+                    SceneManager.LoadScene(11);
+                }
             }
-            else if (btn.name == "Btn1")
+            
+            if (btn.name == "Btn1")
             {
                 inquireDataPageUI.Increase();
             }
@@ -376,7 +395,10 @@ public class ButtonEvent : MonoBehaviour
             // user page
             if (mainPageSetUp.nowState == 0)
             {
-
+                if (btn.name == "Btn4")
+                {
+                    SceneManager.LoadScene(7);
+                }
             }
             // plan page
             else if (mainPageSetUp.nowState == 1)

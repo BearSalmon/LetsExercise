@@ -35,26 +35,6 @@ public class DBUtils : MonoBehaviour
         Debug.Log("Game start!");
     }
 
-    IEnumerator SetupDatabase()
-    {
-        // Set up the database
-        dataBase = new DataBase();
-        userService = new UserService(dataBase);
-        poseService = new PoseService(dataBase);
-        poseSetService = new PoseSetService(dataBase);
-
-        // Create tables
-        userService.CreateUserTable();
-        poseService.CreatePoseTable();
-        poseSetService.CreatePoseSetTable();
-
-        // Add test data
-        //TestAddUsers();
-        TestAddPoses();
-        //TestAddPoseSets();
-
-        yield return null;
-    }
 
     // for test only
     public void TestAddUsers()
@@ -72,7 +52,7 @@ public class DBUtils : MonoBehaviour
             LastLogin = currentTimeString,
             Duration = 100,
             Calories = 100,
-            Weight = "63,60,57,65",
+            Weight = "63,65,",
             Height = 170,
         };
         int pk = userService.AddUser(user);
