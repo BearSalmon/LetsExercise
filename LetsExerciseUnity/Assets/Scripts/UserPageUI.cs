@@ -53,7 +53,7 @@ public class UserPageUI : MonoBehaviour
         UserSetUp();
 
         List<int> dataPoints = new List<int>();
-        dataValues = user.Weight.Split(',');
+        dataValues = user.Weight.TrimEnd(',').Split(',');
 
         foreach (string value in dataValues)
         {
@@ -114,24 +114,36 @@ public class UserPageUI : MonoBehaviour
     void DrawLineChart(List<int> dataPoints) 
     {
         float chartHeight = chartContainer.rect.height;
-        float fixedChartWidth = 500f; // 假设为 500f
+        float chartWidth = chartContainer.rect.width;
+        float chartStartX = chartContainer.rect.xMin;
+        float chartStartY = chartContainer.rect.yMin;
+        float weightMax = Mathf.Max(dataPoints.ToArray());
+        float weightMin = Mathf.Min(dataPoints.ToArray());
+
+        float dataHeightLength = weightMax - weightMin+1;
 
         if (dataPoints.Count == 1)
         {
-            float yMax = Mathf.Max(dataPoints.ToArray());
-            Vector2 startPoint = new Vector2(0, dataPoints[0] / yMax * chartHeight * 5);
-            Vector2 endPoint = new Vector2(fixedChartWidth, dataPoints[0] / yMax * chartHeight * 5);
+            Vector2 startPoint = new Vector2(chartStartX, chartStartY + chartHeight/2);
+            Vector2 endPoint = new Vector2(chartStartX + chartWidth, chartStartY + chartHeight / 2);
             DrawLine(startPoint, endPoint);
         }
         else
         {
-            float xStep = fixedChartWidth / (dataPoints.Count - 1);
-            float yMax = Mathf.Max(dataPoints.ToArray());
+            float xStep = chartWidth / (dataPoints.Count - 1);
+            float normalizeY(int y)
+            {
+                float result = (y - (weightMax - dataHeightLength)) * (chartHeight + 1) / dataHeightLength;
+                return result;
+            }
 
-            Vector2 startPoint = new Vector2(0, dataPoints[0] / yMax * chartHeight * 5);
+            float y = chartStartY + normalizeY(dataPoints[0]);
+
+            Vector2 startPoint = new Vector2(chartStartX, y);
             for (int i = 1; i < dataPoints.Count; i++)
             {
-                Vector2 endPoint = new Vector2(i * xStep, dataPoints[i] / yMax * chartHeight * 5);
+                y = chartStartY + normalizeY(dataPoints[i]);
+                Vector2 endPoint = new Vector2(chartStartX + i * xStep, y);
                 DrawLine(startPoint, endPoint);
                 startPoint = endPoint;
             }

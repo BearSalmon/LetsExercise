@@ -19,21 +19,36 @@ public class InquireDataPageUI : MonoBehaviour
     public int weight_num;
     public int age_num;
 
+    ButtonEvent buttonEvent;
 
     public int state;
 
     // Start is called before the first frame update
     void Start()
     {
-        state = 0;
+        buttonEvent = GameObject.Find("WholeManager").GetComponent<ButtonEvent>();
+        if (buttonEvent.isAddingWeight == false)
+        {
+            state = 0;
+            height_num = Int32.Parse(height.text);
+            weight_num = Int32.Parse(weight.text);
+            age_num = Int32.Parse(age.text);
 
-        height_num = Int32.Parse(height.text);
-        weight_num = Int32.Parse(weight.text);
-        age_num = Int32.Parse(age.text);
+            Height.SetActive(true);
+            Weight.SetActive(false);
+            Age.SetActive(false);
 
-        Height.SetActive(true);
-        Weight.SetActive(false);
-        Age.SetActive(false);
+
+        }
+        else
+        {
+            state = 1;
+            weight_num = Int32.Parse(weight.text);
+            Height.SetActive(false);
+            Weight.SetActive(true);
+            Age.SetActive(false);
+        }
+
     }
 
     // Update is called once per frame
