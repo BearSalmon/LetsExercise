@@ -122,7 +122,7 @@ public class ButtonEvent : MonoBehaviour
             mainPageSetUp = GameObject.Find("Manager").GetComponent<MainPageSetUp>();
             if (mainPageSetUp.nowState == 0)
             {
-                numOfButton = 4;
+                numOfButton = 3;
             }
             else if (mainPageSetUp.nowState == 1)
             {
