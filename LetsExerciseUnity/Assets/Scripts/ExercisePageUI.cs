@@ -25,6 +25,7 @@ public class ExercisePageUI : MonoBehaviour
 
     // alignment
     public Image alignment;
+    public Image alignment_check;
     private Coroutine increaseCoroutine;
     private bool isIncreasing = false;
 
@@ -32,7 +33,8 @@ public class ExercisePageUI : MonoBehaviour
     void Start()
     {
         udpReceive = GameObject.Find("Manager").GetComponent<UDPReceive>();
-        alignment.fillAmount = 0f;
+        //alignment.fillAmount = 0f;
+        alignment.enabled = false;
         isIncreasing = false;
     }
 
@@ -52,6 +54,7 @@ public class ExercisePageUI : MonoBehaviour
         if (pos_message.text != "")
         {
             StopIncreasing();
+            alignment.enabled = true;
         }
 
         if (pos_message.text == "")
@@ -133,7 +136,7 @@ public class ExercisePageUI : MonoBehaviour
         if (isIncreasing && increaseCoroutine != null) // Check if increasing and coroutine is running
         {
             StopCoroutine(increaseCoroutine); // Stop the coroutine
-            alignment.fillAmount = 0f;
+            alignment_check.fillAmount = 0f;
             isIncreasing = false; // Reset the flag
 
         }
@@ -150,20 +153,20 @@ public class ExercisePageUI : MonoBehaviour
     IEnumerator IncreaseProgressOverTime(float duration)
     {
         float timer = 0f;
-        float startProgress = alignment.fillAmount;
+        float startProgress = alignment_check.fillAmount;
         float endProgress = 1f;
 
         isIncreasing = true;
         while (timer < duration)
         {
             timer += Time.deltaTime;
-            alignment.fillAmount = Mathf.Lerp(startProgress, endProgress, timer / duration);
+            alignment_check.fillAmount = Mathf.Lerp(startProgress, endProgress, timer / duration);
             yield return null; // Wait for the next frame
         }
 
-        alignment.fillAmount = endProgress;
+        alignment_check.fillAmount = endProgress;
 
-        alignment.fillAmount = 0f;
+        alignment_check.fillAmount = 0f;
         isIncreasing = false;
 
     }
