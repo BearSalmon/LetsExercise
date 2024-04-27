@@ -1261,6 +1261,8 @@ MonoBehaviour:
   trainPageUI: {fileID: 0}
   mainPageSetUp: {fileID: 0}
   selectLevel: {fileID: 0}
+  inquireDataPageUI: {fileID: 0}
+  isAddingWeight: 0
   nowSelectChoice: 
   poseSetID: 0
   currentClickingButton: {fileID: 0}
@@ -4319,7 +4321,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7647059, g: 1, b: 0.39215687, a: 1}
+  m_Color: {r: 1, g: 0, b: 0.010199547, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5084,6 +5086,7 @@ MonoBehaviour:
   rightForeArm: {fileID: 1900772206}
   leftForeArm: {fileID: 1107873176}
   alignment: {fileID: 729572391}
+  alignment_check: {fileID: 399641287}
 --- !u!114 &901737316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8105,8 +8108,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60
-  m_fontSizeBase: 60
+  m_fontSize: 100
+  m_fontSizeBase: 100
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -8141,7 +8144,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 2.4378514, y: 0, z: 1.6784515, w: 0}
+  m_margin: {x: -583.5641, y: 0, z: -586.61536, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
