@@ -85,7 +85,7 @@ public class ButtonEvent : MonoBehaviour
         else if (m_Scene.name == "SelectSex")
         {
             user = dBUtils.GetUserByName(dBUtils.nowPlayer);
-            numOfButton = 3;
+            numOfButton = 2;
         }
         else if (m_Scene.name == "CharacterDecorate")
         {
@@ -95,22 +95,29 @@ public class ButtonEvent : MonoBehaviour
         }
         else if (m_Scene.name == "InquireData")
         {
-            numOfButton = 3;
             inquireDataPageUI = GameObject.Find("Manager").GetComponent<InquireDataPageUI>();
-
+            if (inquireDataPageUI.state == 0)
+            {
+                numOfButton = 1;
+            }
+            else
+            {
+                numOfButton = 3;
+            }
+     
             user = dBUtils.GetUserByName(dBUtils.nowPlayer);
 
         }
         else if (m_Scene.name == "SelectPart")
         {
-            numOfButton = 6;
+            numOfButton = 5;
             user = dBUtils.GetUserByName(dBUtils.nowPlayer);
         }
         else if (m_Scene.name == "Investigation")
         {
             user = dBUtils.GetUserByName(dBUtils.nowPlayer);
          
-            numOfButton = 4;
+            numOfButton = 3;
         }
         else if (m_Scene.name == "Trainer2")
         {
@@ -216,18 +223,13 @@ public class ButtonEvent : MonoBehaviour
             if (btn.name == "Btn1")
             {
                 user.Gender = "Girl";
-                nowSelectChoice = btn.name;
             }
             else if (btn.name == "Btn2")
             {
                 user.Gender = "Boy";
-                nowSelectChoice = btn.name;
             }
-            else if (btn.name == "Btn3")
-            {
-                dBUtils.UpdateUser(user);
-                SceneManager.LoadScene(6);
-            }
+            dBUtils.UpdateUser(user);
+            SceneManager.LoadScene(6);
 
         }
         else if (m_Scene.name == "CharacterDecorate")
@@ -271,14 +273,14 @@ public class ButtonEvent : MonoBehaviour
         {
             if (isAddingWeight == false)
             {
-                if (btn.name == "Btn3" && inquireDataPageUI.state != 2)
+                if (btn.name == "Btn3" && inquireDataPageUI.state != 3)
                 {
                     inquireDataPageUI.state += 1;
                     inquireDataPageUI.ChangeSetUp();
                     SetButtonList();
 
                 }
-                else if (btn.name == "Btn3" && inquireDataPageUI.state == 2)
+                else if (btn.name == "Btn3" && inquireDataPageUI.state == 3)
                 {
                     user.Age = inquireDataPageUI.age_num;
                     user.Height = inquireDataPageUI.height_num;
@@ -302,7 +304,17 @@ public class ButtonEvent : MonoBehaviour
             
             if (btn.name == "Btn1")
             {
-                inquireDataPageUI.Increase();
+                if (inquireDataPageUI.state == 0)
+                {
+                    inquireDataPageUI.state += 1;
+                    inquireDataPageUI.ChangeSetUp();
+                    SetButtonList();
+                }
+                else
+                {
+                    inquireDataPageUI.Increase();
+                }
+                
             }
             else if (btn.name == "Btn2")
             {
@@ -334,16 +346,8 @@ public class ButtonEvent : MonoBehaviour
             {
                 user.PreferPart = "Whole Body";
             }
-            else if (btn.name == "Btn6")
-            {
-                SceneManager.LoadScene(9);
-                dBUtils.UpdateUser(user);
-            }
-
-            if (btn.name != "Btn6")
-            {
-                nowSelectChoice = btn.name;
-            }
+            SceneManager.LoadScene(9);
+            dBUtils.UpdateUser(user);
 
         }
         else if (m_Scene.name == "Investigation")
@@ -360,15 +364,8 @@ public class ButtonEvent : MonoBehaviour
             {
                 user.Level = "Hard";
             }
-            else if (btn.name == "Btn4")
-            {
-                dBUtils.UpdateUser(user);
-                SceneManager.LoadScene(10);
-            }
-            if (btn.name != "Btn4")
-            {
-                nowSelectChoice = btn.name;
-            }
+            dBUtils.UpdateUser(user);
+            SceneManager.LoadScene(10);
         }
         else if (m_Scene.name == "MainPage")
         {
