@@ -10,6 +10,7 @@ public class InquireDataPageUI : MonoBehaviour
     public GameObject Height;
     public GameObject Weight;
     public GameObject Age;
+    public GameObject Ask;
 
     public TextMeshProUGUI height;
     public TextMeshProUGUI weight;
@@ -34,7 +35,8 @@ public class InquireDataPageUI : MonoBehaviour
             weight_num = Int32.Parse(weight.text);
             age_num = Int32.Parse(age.text);
 
-            Height.SetActive(true);
+            Ask.SetActive(true);
+            Height.SetActive(false);
             Weight.SetActive(false);
             Age.SetActive(false);
 
@@ -44,6 +46,7 @@ public class InquireDataPageUI : MonoBehaviour
         {
             state = 1;
             weight_num = Int32.Parse(weight.text);
+            Ask.SetActive(false);
             Height.SetActive(false);
             Weight.SetActive(true);
             Age.SetActive(false);
@@ -51,21 +54,23 @@ public class InquireDataPageUI : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void ChangeSetUp()
     {
+        
         if (state == 1)
+        {
+            Ask.SetActive(false);
+            Height.SetActive(true);
+            Weight.SetActive(false);
+            Age.SetActive(false);
+        }
+        else if (state == 2)
         {
             Height.SetActive(false);
             Weight.SetActive(true);
             Age.SetActive(false);
         }
-        else
+        else if (state == 3)
         {
             Height.SetActive(false);
             Weight.SetActive(false);
@@ -75,17 +80,17 @@ public class InquireDataPageUI : MonoBehaviour
 
     public void Increase()
     {
-        if (state == 0)
+        if (state == 1)
         {
             height_num++;
             height.text = height_num.ToString();
         }
-        else if (state == 1)
+        else if (state == 2)
         {
             weight_num++;
             weight.text = weight_num.ToString();
         }
-        else
+        else if (state == 3)
         {
             age_num++;
             age.text = age_num.ToString();
@@ -94,17 +99,17 @@ public class InquireDataPageUI : MonoBehaviour
 
     public void Decrease()
     {
-        if (state == 0)
+        if (state == 1)
         {
             height_num--;
             height.text = height_num.ToString();
         }
-        else if (state == 1)
+        else if (state == 2)
         {
             weight_num--;
             weight.text = weight_num.ToString();
         }
-        else
+        else if (state == 3)
         {
             age_num--;
             age.text = age_num.ToString();
