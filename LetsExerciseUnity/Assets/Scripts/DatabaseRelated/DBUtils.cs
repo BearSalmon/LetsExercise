@@ -13,8 +13,6 @@ public class DBUtils : MonoBehaviour
 
     public string nowPlayer;
 
-    public WholeSampleSceneManager wholeSampleSceneManager;
-
     // Start is called before the first frame update
     void Start()
     {

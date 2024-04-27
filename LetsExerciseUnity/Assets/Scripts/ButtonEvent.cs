@@ -122,7 +122,7 @@ public class ButtonEvent : MonoBehaviour
             mainPageSetUp = GameObject.Find("Manager").GetComponent<MainPageSetUp>();
             if (mainPageSetUp.nowState == 0)
             {
-                numOfButton = 3;
+                numOfButton = 4;
             }
             else if (mainPageSetUp.nowState == 1)
             {
@@ -176,12 +176,12 @@ public class ButtonEvent : MonoBehaviour
             if (btn.name == "Btn1")
             {
                 dBUtils.AddUser();
-                SceneManager.LoadScene(3);
+                SceneManager.LoadScene(5);
             }
             else if (btn.name == "Btn2")
             {
                 isAddingWeight = true;
-                SceneManager.LoadScene(2);
+                SceneManager.LoadScene(4);
             }
 
         }
@@ -207,7 +207,7 @@ public class ButtonEvent : MonoBehaviour
         {
             if (btn.name == "Btn1")
             {
-                SceneManager.LoadScene(5);
+                SceneManager.LoadScene(3);
             }
 
         }
@@ -336,7 +336,7 @@ public class ButtonEvent : MonoBehaviour
             }
             else if (btn.name == "Btn6")
             {
-                SceneManager.LoadScene(8);
+                SceneManager.LoadScene(9);
                 dBUtils.UpdateUser(user);
             }
 
@@ -363,7 +363,7 @@ public class ButtonEvent : MonoBehaviour
             else if (btn.name == "Btn4")
             {
                 dBUtils.UpdateUser(user);
-                SceneManager.LoadScene(9);
+                SceneManager.LoadScene(10);
             }
             if (btn.name != "Btn4")
             {
@@ -410,7 +410,7 @@ public class ButtonEvent : MonoBehaviour
             {
                 if (btn.name == "Btn4")
                 {
-                    SceneManager.LoadScene(10);
+                    SceneManager.LoadScene(12);
                 }
                 else if (btn.name == "Btn5")
                 {
