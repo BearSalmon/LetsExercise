@@ -395,7 +395,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &61831853
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2394,7 +2394,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &681303794
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3942,6 +3942,7 @@ GameObject:
   - component: {fileID: 1063075640}
   - component: {fileID: 1063075642}
   - component: {fileID: 1063075643}
+  - component: {fileID: 1063075644}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -4027,6 +4028,21 @@ MonoBehaviour:
   calories: {fileID: 886343604}
   curWeight: {fileID: 707105557}
   BMI: {fileID: 1978805269}
+--- !u!114 &1063075644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1063075639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dd1ee62d2661437bbd873137c4d87d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sendButton: {fileID: 0}
+  textField: {fileID: 0}
+  inputField: {fileID: 0}
 --- !u!1 &1101727215
 GameObject:
   m_ObjectHideFlags: 0

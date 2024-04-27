@@ -27,8 +27,10 @@ public class MainPageSetUp : MonoBehaviour
 
         nowState = 0;
         ChangeState(0);
-        
 
+        UserPage.SetActive(false);
+        PlanPage.SetActive(false);
+        TrainPage.SetActive(false);
     }
 
     // Update is called once per frame
