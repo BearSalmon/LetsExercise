@@ -6,6 +6,23 @@ using UnityEngine.SceneManagement;
 
 public class ButtonEvent : MonoBehaviour
 {
+    public enum SceneName
+    {
+        GameStart = 0,
+        Trainer = 1,
+        Intro = 2,
+        CheckIfNew = 3,
+        SelectPlayer = 4,
+        SelectSex = 5,
+        CharacterDecorate = 6,
+        InquireData = 7,
+        SelectPart = 8,
+        Investigation = 9,
+        Trainer2 = 10,
+        MainPage = 11,
+        SelectLevel = 12,
+        SampleScene = 13
+    }
     public GameObject mouse;
     public Button[] buttons;
 
@@ -209,7 +226,7 @@ public class ButtonEvent : MonoBehaviour
         {
             if (btn.name == "Btn1")
             {
-                SceneManager.LoadScene(1);
+                SceneManager.LoadScene((int) SceneName.Trainer);
             }
 
         }
@@ -218,13 +235,13 @@ public class ButtonEvent : MonoBehaviour
             if (btn.name == "Btn1")
             {
                 dBUtils.AddUser();
-                SceneManager.LoadScene(5);
+                SceneManager.LoadScene((int)SceneName.SelectSex);
             }
             else if (btn.name == "Btn2")
             {
                 isAddingWeight = true;
                 isChangingColor = true;
-                SceneManager.LoadScene(4);
+                SceneManager.LoadScene((int)SceneName.SelectPlayer);
             }
 
         }
@@ -233,7 +250,7 @@ public class ButtonEvent : MonoBehaviour
             if (btn.name == "Btn1")
             {
                 selectPlayer.Save();
-                SceneManager.LoadScene(11);
+                SceneManager.LoadScene((int)SceneName.MainPage);
             }
             else if (btn.name == "Btn2")
             {
@@ -250,7 +267,7 @@ public class ButtonEvent : MonoBehaviour
         {
             if (btn.name == "Btn1")
             {
-                SceneManager.LoadScene(3);
+                SceneManager.LoadScene((int)SceneName.CheckIfNew);
             }
 
         }
@@ -265,7 +282,7 @@ public class ButtonEvent : MonoBehaviour
                 user.Gender = "Boy";
             }
             dBUtils.UpdateUser(user);
-            SceneManager.LoadScene(6);
+            SceneManager.LoadScene((int)SceneName.CharacterDecorate);
 
         }
         else if (m_Scene.name == "CharacterDecorate")
@@ -302,11 +319,11 @@ public class ButtonEvent : MonoBehaviour
                     if(isChangingColor == false)
                     {
                         isChangingColor = true;
-                        SceneManager.LoadScene(7);
+                        SceneManager.LoadScene((int)SceneName.InquireData);
                     }
                     else
                     {
-                        SceneManager.LoadScene(11);
+                        SceneManager.LoadScene((int)SceneName.MainPage);
 
                     }
                     
@@ -334,7 +351,7 @@ public class ButtonEvent : MonoBehaviour
 
                     dBUtils.UpdateUser(user);
                     isAddingWeight = true;
-                    SceneManager.LoadScene(8);
+                    SceneManager.LoadScene((int)SceneName.SelectPart);
                 }
 
             }
@@ -344,7 +361,7 @@ public class ButtonEvent : MonoBehaviour
                 {
                     user.Weight += inquireDataPageUI.weight.text + ",";
                     dBUtils.UpdateUser(user);
-                    SceneManager.LoadScene(11);
+                    SceneManager.LoadScene((int)SceneName.MainPage);
                 }
             }
             
@@ -392,7 +409,7 @@ public class ButtonEvent : MonoBehaviour
             {
                 user.PreferPart = "Whole Body";
             }
-            SceneManager.LoadScene(9);
+            SceneManager.LoadScene((int)SceneName.Investigation);
             dBUtils.UpdateUser(user);
 
         }
@@ -411,7 +428,7 @@ public class ButtonEvent : MonoBehaviour
                 user.Level = "Hard";
             }
             dBUtils.UpdateUser(user);
-            SceneManager.LoadScene(10);
+            SceneManager.LoadScene((int)SceneName.Trainer2);
         }
         else if (m_Scene.name == "MainPage")
         {
@@ -445,15 +462,15 @@ public class ButtonEvent : MonoBehaviour
             {
                 if (btn.name == "Btn5")
                 {
-                    SceneManager.LoadScene(7);
+                    SceneManager.LoadScene((int)SceneName.InquireData);
                 }
                 else if (btn.name == "Btn6")
                 {
-                    SceneManager.LoadScene(6);
+                    SceneManager.LoadScene((int)SceneName.CharacterDecorate);
                 }
                 else if (btn.name == "Btn7")
                 {
-                    SceneManager.LoadScene(4);
+                    SceneManager.LoadScene((int)SceneName.SelectPlayer);
                 }
                 else if (btn.name == "Btn8")
                 {
@@ -466,11 +483,11 @@ public class ButtonEvent : MonoBehaviour
             {
                 if (btn.name == "Btn5")
                 {
-                    SceneManager.LoadScene(6);
+                    SceneManager.LoadScene((int)SceneName.CharacterDecorate);
                 }
                 else if (btn.name == "Btn6")
                 {
-                    SceneManager.LoadScene(4);
+                    SceneManager.LoadScene((int)SceneName.SelectPlayer);
                 }
                 else if (btn.name == "Btn7")
                 {
@@ -482,7 +499,7 @@ public class ButtonEvent : MonoBehaviour
             {
                 if (btn.name == "Btn5")
                 {
-                    SceneManager.LoadScene(12);
+                    SceneManager.LoadScene((int)SceneName.SelectLevel);
                 }
                 else if (btn.name == "Btn6")
                 {
@@ -494,11 +511,11 @@ public class ButtonEvent : MonoBehaviour
                 }
                 else if (btn.name == "Btn8")
                 {
-                    SceneManager.LoadScene(6);
+                    SceneManager.LoadScene((int)SceneName.CharacterDecorate);
                 }
                 else if (btn.name == "Btn9")
                 {
-                    SceneManager.LoadScene(4);
+                    SceneManager.LoadScene((int)SceneName.SelectPlayer);
                 }
                 else if (btn.name == "Btn10")
                 {
