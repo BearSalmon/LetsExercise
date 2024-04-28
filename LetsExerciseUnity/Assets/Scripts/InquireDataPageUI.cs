@@ -44,7 +44,7 @@ public class InquireDataPageUI : MonoBehaviour
         }
         else
         {
-            state = 1;
+            state = 2;
             weight_num = Int32.Parse(weight.text);
             Ask.SetActive(false);
             Height.SetActive(false);

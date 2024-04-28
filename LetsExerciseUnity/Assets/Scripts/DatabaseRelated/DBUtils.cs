@@ -62,9 +62,11 @@ public class DBUtils : MonoBehaviour
             Hair = "000000FF",
             Body = "FFDBC6FF",
             Cloth = "CAEE8AFF",
+            Weight = "63,65,",
             LastLogin = currentTimeString,
             Duration = 100,
             Calories = 100,
+            Height = 170,
         };
         pk = userService.AddUser(user);
 
@@ -75,9 +77,11 @@ public class DBUtils : MonoBehaviour
             Hair = "000000FF",
             Body = "FFDBC6FF",
             Cloth = "CAEE8AFF",
+            Weight = "63,65,",
             LastLogin = currentTimeString,
             Duration = 100,
             Calories = 100,
+            Height = 170,
         };
         pk = userService.AddUser(user);
         
