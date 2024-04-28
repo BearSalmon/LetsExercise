@@ -13,7 +13,7 @@ public class ButtonEvent : MonoBehaviour
     Scene f_Scene;
 
     int numOfButton;
-
+    int count = 0;
 
     // imported components
     public CharacterDeorate characterDeorate;
@@ -26,6 +26,7 @@ public class ButtonEvent : MonoBehaviour
     public InquireDataPageUI inquireDataPageUI;
 
     public bool isAddingWeight;
+    public bool isChangingColor;
 
     User user;
 
@@ -39,6 +40,8 @@ public class ButtonEvent : MonoBehaviour
     void Start()
     {
         isAddingWeight = false;
+        isChangingColor = false;
+        numOfButton = 1;
         m_Scene = SceneManager.GetActiveScene();
         f_Scene = SceneManager.GetActiveScene();
         SetButtonList();
@@ -51,16 +54,26 @@ public class ButtonEvent : MonoBehaviour
 
         if (m_Scene.buildIndex != f_Scene.buildIndex)
         {
+            
             SetButtonList();
         }
         f_Scene = SceneManager.GetActiveScene();
 
     }
 
+    void RemoveListener()
+    {
+        for (var i = 1; i <= numOfButton; i++)
+        {
+            buttons[i - 1].onClick.RemoveAllListeners();
+        }
+    }
+
 
     // 每次 change scene 後都會呼叫 ， 重新設定 button list
     void SetButtonList()
     {
+        RemoveListener();
         if (m_Scene.name == "GameStart")
         {
             numOfButton = 1;
@@ -127,17 +140,35 @@ public class ButtonEvent : MonoBehaviour
         {
             trainPageUI = GameObject.Find("Manager").GetComponent<TrainPageUI>();
             mainPageSetUp = GameObject.Find("Manager").GetComponent<MainPageSetUp>();
-            if (mainPageSetUp.nowState == 0)
+            if (mainPageSetUp.isOpening == false) // menu is not opening
             {
-                numOfButton = 4;
-            }
-            else if (mainPageSetUp.nowState == 1)
-            {
-                numOfButton = 3;
+                if (mainPageSetUp.nowState == 0) // user page 
+                {
+                    numOfButton = 5;
+                }
+                else if (mainPageSetUp.nowState == 1) // plan page
+                {
+                    numOfButton = 4;
+                }
+                else if (mainPageSetUp.nowState == 2) // train page
+                {
+                    numOfButton = 7;
+                }
             }
             else
             {
-                numOfButton = 6;
+                if (mainPageSetUp.nowState == 0) // user page 
+                {
+                    numOfButton = 8;
+                }
+                else if (mainPageSetUp.nowState == 1) // plan page
+                {
+                    numOfButton = 7;
+                }
+                else if (mainPageSetUp.nowState == 2) // train page
+                {
+                    numOfButton = 10;
+                }
             }
         }
         else if (m_Scene.name == "SelectLevel")
@@ -166,10 +197,14 @@ public class ButtonEvent : MonoBehaviour
     }
 
 
+
+
     // 所有關於點擊 button 後的動作統一寫在這邊
     // button 命名格式 : Btn + 編號
     public void ButtonClick(Button btn)
     {
+        count += 1;
+        Debug.Log(count);
         if ( m_Scene.name == "GameStart")
         {
             if (btn.name == "Btn1")
@@ -188,6 +223,7 @@ public class ButtonEvent : MonoBehaviour
             else if (btn.name == "Btn2")
             {
                 isAddingWeight = true;
+                isChangingColor = true;
                 SceneManager.LoadScene(4);
             }
 
@@ -263,7 +299,17 @@ public class ButtonEvent : MonoBehaviour
                 }
                 else
                 {
-                    SceneManager.LoadScene(7);
+                    if(isChangingColor == false)
+                    {
+                        isChangingColor = true;
+                        SceneManager.LoadScene(7);
+                    }
+                    else
+                    {
+                        SceneManager.LoadScene(11);
+
+                    }
+                    
                 }
                     
             }
@@ -388,34 +434,75 @@ public class ButtonEvent : MonoBehaviour
                 mainPageSetUp.ChangeState(0);
                 SetButtonList();
             }
+            else if (btn.name == "Btn4")
+            {
+                mainPageSetUp.SetMenu();
+                SetButtonList();
+            }
 
             // user page
             if (mainPageSetUp.nowState == 0)
             {
-                if (btn.name == "Btn4")
+                if (btn.name == "Btn5")
                 {
                     SceneManager.LoadScene(7);
                 }
+                else if (btn.name == "Btn6")
+                {
+                    SceneManager.LoadScene(6);
+                }
+                else if (btn.name == "Btn7")
+                {
+                    SceneManager.LoadScene(4);
+                }
+                else if (btn.name == "Btn8")
+                {
+                   
+                }
+
             }
             // plan page
             else if (mainPageSetUp.nowState == 1)
             {
-
-            }
-            // train page
-            else
-            {
-                if (btn.name == "Btn4")
+                if (btn.name == "Btn5")
                 {
-                    SceneManager.LoadScene(12);
-                }
-                else if (btn.name == "Btn5")
-                {
-                    poseSetID = trainPageUI.nextOption();
+                    SceneManager.LoadScene(6);
                 }
                 else if (btn.name == "Btn6")
                 {
+                    SceneManager.LoadScene(4);
+                }
+                else if (btn.name == "Btn7")
+                {
+
+                }
+            }
+            // train page
+            else if (mainPageSetUp.nowState == 2)
+            {
+                if (btn.name == "Btn5")
+                {
+                    SceneManager.LoadScene(12);
+                }
+                else if (btn.name == "Btn6")
+                {
+                    poseSetID = trainPageUI.nextOption();
+                }
+                else if (btn.name == "Btn7")
+                {
                     poseSetID = trainPageUI.backOption();
+                }
+                else if (btn.name == "Btn8")
+                {
+                    SceneManager.LoadScene(6);
+                }
+                else if (btn.name == "Btn9")
+                {
+                    SceneManager.LoadScene(4);
+                }
+                else if (btn.name == "Btn10")
+                {
+
                 }
             }
             

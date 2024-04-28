@@ -22,6 +22,8 @@ public class CharacterDeorate : MonoBehaviour
 
     public DBUtils dBUtils;
 
+    ButtonEvent buttonEvent;
+
     User user;
 
     // Start is called before the first frame update
@@ -29,18 +31,69 @@ public class CharacterDeorate : MonoBehaviour
     {
         dBUtils = GameObject.Find("WholeManager").GetComponent<DBUtils>();
 
+        buttonEvent = GameObject.Find("WholeManager").GetComponent<ButtonEvent>();
+
         user = dBUtils.GetUserByName(dBUtils.nowPlayer);
 
+        UserSetUp();
+    }
+
+    void UserSetUp()
+    {
         if (user.Gender == "Girl")
         {
             girl.SetActive(true);
             boy.SetActive(false);
+            if (buttonEvent.isChangingColor == false)
+            {
+                Color color;
+                ColorUtility.TryParseHtmlString("#".ToString() + "000000FF", out color);
+                hair_girl.color = color;
+                ColorUtility.TryParseHtmlString("#".ToString() + "FFDBC6FF", out color);
+                body_girl.color = color;
+                ColorUtility.TryParseHtmlString("#".ToString() + "CAEE8AFF", out color);
+                cloth_girl.color = color;
+
+            }
+            else
+            {
+                Color color;
+                ColorUtility.TryParseHtmlString("#".ToString() + user.Hair, out color);
+                hair_girl.color = color;
+                ColorUtility.TryParseHtmlString("#".ToString() + user.Body, out color);
+                body_girl.color = color;
+                ColorUtility.TryParseHtmlString("#".ToString() + user.Cloth, out color);
+                cloth_girl.color = color;
+            }
+            
+            
         }
         else
         {
             girl.SetActive(false);
             boy.SetActive(true);
+            if (buttonEvent.isChangingColor == false)
+            {
+                Color color;
+                ColorUtility.TryParseHtmlString("#".ToString() + "000000FF", out color);
+                hair_boy.color = color;
+                ColorUtility.TryParseHtmlString("#".ToString() + "FFDBC6FF", out color);
+                body_boy.color = color;
+                ColorUtility.TryParseHtmlString("#".ToString() + "CAEE8AFF", out color);
+                cloth_boy.color = color;
+            }
+            else
+            {
+                Color color;
+                ColorUtility.TryParseHtmlString("#".ToString() + user.Hair, out color);
+                hair_boy.color = color;
+                ColorUtility.TryParseHtmlString("#".ToString() + user.Body, out color);
+                body_boy.color = color;
+                ColorUtility.TryParseHtmlString("#".ToString() + user.Cloth, out color);
+                cloth_boy.color = color;
+            }
         }
+
     }
 
     public void changeState()
