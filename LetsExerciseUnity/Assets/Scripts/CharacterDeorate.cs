@@ -22,7 +22,6 @@ public class CharacterDeorate : MonoBehaviour
 
     public DBUtils dBUtils;
 
-    ButtonEvent buttonEvent;
 
     User user;
 
@@ -30,8 +29,6 @@ public class CharacterDeorate : MonoBehaviour
     void Start()
     {
         dBUtils = GameObject.Find("WholeManager").GetComponent<DBUtils>();
-
-        buttonEvent = GameObject.Find("WholeManager").GetComponent<ButtonEvent>();
 
         user = dBUtils.GetUserByName(dBUtils.nowPlayer);
 
@@ -44,54 +41,27 @@ public class CharacterDeorate : MonoBehaviour
         {
             girl.SetActive(true);
             boy.SetActive(false);
-            if (buttonEvent.isChangingColor == false)
-            {
-                Color color;
-                ColorUtility.TryParseHtmlString("#".ToString() + "000000FF", out color);
-                hair_girl.color = color;
-                ColorUtility.TryParseHtmlString("#".ToString() + "FFDBC6FF", out color);
-                body_girl.color = color;
-                ColorUtility.TryParseHtmlString("#".ToString() + "CAEE8AFF", out color);
-                cloth_girl.color = color;
+            Color color;
+            ColorUtility.TryParseHtmlString("#".ToString() + user.Hair, out color);
+            hair_girl.color = color;
+            ColorUtility.TryParseHtmlString("#".ToString() + user.Body, out color);
+            body_girl.color = color;
+            ColorUtility.TryParseHtmlString("#".ToString() + user.Cloth, out color);
+            cloth_girl.color = color;
 
-            }
-            else
-            {
-                Color color;
-                ColorUtility.TryParseHtmlString("#".ToString() + user.Hair, out color);
-                hair_girl.color = color;
-                ColorUtility.TryParseHtmlString("#".ToString() + user.Body, out color);
-                body_girl.color = color;
-                ColorUtility.TryParseHtmlString("#".ToString() + user.Cloth, out color);
-                cloth_girl.color = color;
-            }
-            
-            
         }
         else
         {
             girl.SetActive(false);
             boy.SetActive(true);
-            if (buttonEvent.isChangingColor == false)
-            {
-                Color color;
-                ColorUtility.TryParseHtmlString("#".ToString() + "000000FF", out color);
-                hair_boy.color = color;
-                ColorUtility.TryParseHtmlString("#".ToString() + "FFDBC6FF", out color);
-                body_boy.color = color;
-                ColorUtility.TryParseHtmlString("#".ToString() + "CAEE8AFF", out color);
-                cloth_boy.color = color;
-            }
-            else
-            {
-                Color color;
-                ColorUtility.TryParseHtmlString("#".ToString() + user.Hair, out color);
-                hair_boy.color = color;
-                ColorUtility.TryParseHtmlString("#".ToString() + user.Body, out color);
-                body_boy.color = color;
-                ColorUtility.TryParseHtmlString("#".ToString() + user.Cloth, out color);
-                cloth_boy.color = color;
-            }
+            Color color;
+            ColorUtility.TryParseHtmlString("#".ToString() + user.Hair, out color);
+            hair_boy.color = color;
+            ColorUtility.TryParseHtmlString("#".ToString() + user.Body, out color);
+            body_boy.color = color;
+            ColorUtility.TryParseHtmlString("#".ToString() + user.Cloth, out color);
+            cloth_boy.color = color;
+            
         }
 
     }

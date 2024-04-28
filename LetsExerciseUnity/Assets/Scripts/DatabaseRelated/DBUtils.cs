@@ -217,6 +217,9 @@ public class DBUtils : MonoBehaviour
         User user = new User
         {
             Name = "User"+number.ToString(),
+            Hair = "000000FF",
+            Body = "FFDBC6FF",
+            Cloth = "CAEE8AFF",
         };
         int pk = userService.AddUser(user);
         Debug.Log("Primary key = " + pk);
