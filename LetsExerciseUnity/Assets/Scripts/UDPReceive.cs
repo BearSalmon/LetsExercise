@@ -83,6 +83,8 @@ public class UDPReceive : MonoBehaviour
     // receive hand thread
     private void ReceiveHandData()
     {
+        int screen_width = 360;
+        int screen_height = 480;
         clientHand = new UdpClient(portHand);
         while (startRecieving)
         {
@@ -94,8 +96,8 @@ public class UDPReceive : MonoBehaviour
 
                 parts = dataHand.Trim('[', ']').Split(',');
 
-                float normalizedValue1 = normalize(float.Parse(parts[0]), 0, 640, canva_xMin, canva_xMax) + (canva_width / 2) - 100;
-                float normalizedValue2 = canva_yMax - normalize(float.Parse(parts[1]), 0, 480, canva_yMin, canva_yMax);
+                float normalizedValue1 = normalize(float.Parse(parts[0]), 100, screen_width - 70, canva_xMin, canva_xMax) + (canva_width / 2);
+                float normalizedValue2 = canva_yMax - normalize(float.Parse(parts[1]), 0, screen_height - 275, canva_yMin, canva_yMax);
                 string s = normalizedValue1.ToString() + "," + normalizedValue2.ToString();
                 //Debug.Log(s);
 

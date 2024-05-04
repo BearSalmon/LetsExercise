@@ -120,7 +120,7 @@ if __name__ == "__main__":
 
         # 傳送手部資料
         if lmList and bboxInfo :  
-            index_finger = lmList[20][0], lmList[20][1] #left hand
+            index_finger = lmList[19][0], lmList[19][1] #right hand
             index_finger_json = json.dumps(index_finger)
             udp_sock.sendto(str.encode(index_finger_json), serverAddressPort_hand)
 
