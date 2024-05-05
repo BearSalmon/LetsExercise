@@ -35,12 +35,16 @@ if __name__ == "__main__":
     udp_port_wrongPart = 5056
 
     recv_ip = '127.0.0.1'  # Listen on all network interfaces
-    recv_port = 1234  # Port number
+    recv_port_for_counter = 1234  # Port number
+    recv_port_for_poseset = 1235  # Port number
 
     # Communication
     udp_sock_for_counter = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)  # UDP
     udp_sock_for_counter.setblocking(False)  # 將此socket設成非阻塞
-    udp_sock_for_counter.bind((recv_ip, recv_port))
+    udp_sock_for_counter.bind((recv_ip, recv_port_for_counter))
+    udp_sock_for_poseset = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)  # UDP
+    udp_sock_for_poseset.setblocking(False)  # 將此socket設成非阻塞
+    udp_sock_for_poseset.bind((recv_ip, recv_port_for_poseset))
     serverAddressPort_hand = (udp_ip, udp_port_hand)
     serverAddressPort_angle = (udp_ip, udp_port_angle)
     serverAddressPort_pos = (udp_ip, udp_port_pos)
@@ -126,10 +130,18 @@ if __name__ == "__main__":
             udp_sock_for_counter.sendto(str.encode(index_finger_json), serverAddressPort_hand)
 
         # Receive data from unity
-        received_data = ""
+        received_data_for_counter = ""
+        received_data_for_poseset = ""
         try:
-            data_from_unity, addr = udp_sock_for_counter.recvfrom(1024)  # Buffer size is 1024 bytes
-            received_data = data_from_unity.decode()
+            counter_from_unity, addr_counter = udp_sock_for_counter.recvfrom(1024)  # Buffer size is 1024 bytes
+            received_data_for_counter = counter_from_unity.decode()
+            #print(f"Received data from {addr}: {received_data}")
+        except:
+            pass
+
+        try:
+            poseset_from_unity, addr_poseset = udp_sock_for_poseset.recvfrom(1024)  # Buffer size is 1024 bytes
+            received_data_for_poseset = poseset_from_unity.decode()
             #print(f"Received data from {addr}: {received_data}")
         except:
             pass
@@ -142,13 +154,16 @@ if __name__ == "__main__":
         #     seconds2 = time.time()
         #     print(seconds2 - seconds1)
         #     break
+        if received_data_for_poseset:
+            # TODO: after receiving poseset from unity
+            print("hi")
 
-        if received_data :
-            if received_data == "start":
-                print(received_data)
+        if received_data_for_counter:
+            if received_data_for_counter == "start":
+                print(received_data_for_counter)
 
             else:
-                counter = int(received_data)
+                counter = int(received_data_for_counter)
 
                 points = lines[counter].split(',')
                 video_lmlist = [[int(point) for point in points[i:i+3]] for i in range(0, len(points)-1, 3)]
