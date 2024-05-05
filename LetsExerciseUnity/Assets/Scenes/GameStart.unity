@@ -1956,7 +1956,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ipAddress: 127.0.0.1
-  port: 1234
+  port_for_counter: 1234
+  port_for_poseset: 1235
 --- !u!114 &1768877328
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -38,7 +38,7 @@ public class AnimationCode : MonoBehaviour
         udpreceive.canContinue = true;
         if (isAnimating && udpreceive.canContinue)
         {
-            udpsend.SendData(counter.ToString());
+            udpsend.SendDataForCounter(counter.ToString());
             string[] points = lines[counter++].Split(',');
 
             for (int i = 0; i <= 32; i++)
