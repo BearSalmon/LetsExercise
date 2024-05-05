@@ -83,7 +83,7 @@ public class AnimationCode : MonoBehaviour
 
     public void ChangeLineList(string path)
     {
-        lines = System.IO.File.ReadLines(path).ToList();
+        lines = System.IO.File.ReadLines(Application.streamingAssetsPath + path).ToList();
         counter = 0;
     }
 }

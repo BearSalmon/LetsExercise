@@ -28,25 +28,39 @@ public class DataBase
         string userDbPath = string.Format(@"Assets/StreamingAssets/{0}", userDatabaseName);
         string poseDbPath = string.Format(@"Assets/StreamingAssets/{0}", poseDatabaseName);
         string poseSetDbPath = string.Format(@"Assets/StreamingAssets/{0}", poseSetDatabaseName);
+
 #else
+        // comment under this (bug)
         // Check if files exist in Application.persistentDataPath
-        string userDbPath = Path.Combine(Application.persistentDataPath, userDatabaseName);
-        string poseDbPath = Path.Combine(Application.persistentDataPath, poseDatabaseName);
+        string userDbPath = Application.streamingAssetsPath + "/" + userDatabaseName;
+        string poseDbPath = Application.streamingAssetsPath + "/" + poseDatabaseName;
+        string poseSetDbPath = Application.streamingAssetsPath + "/" + poseSetDatabaseName;
+
 
         if (!File.Exists(userDbPath))
         {
-            CopyDatabaseFromStreamingAssets(userDatabaseName, userDbPath);
+            //CopyDatabaseFromStreamingAssets(userDatabaseName, userDbPath);
+            Debug.Log(userDbPath);
         }
 
         if (!File.Exists(poseDbPath))
         {
-            CopyDatabaseFromStreamingAssets(poseDatabaseName, poseDbPath);
+            //CopyDatabaseFromStreamingAssets(poseDatabaseName, poseDbPath);
+            Debug.Log(poseDbPath);
+        }
+
+        if (!File.Exists(poseSetDbPath))
+        {
+            //CopyDatabaseFromStreamingAssets(poseDatabaseName, poseSetDbPath);
+            Debug.Log(poseSetDbPath);
         }
 #endif
 
         _userConnection = new SQLiteConnection(userDbPath, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create);
         _poseConnection = new SQLiteConnection(poseDbPath, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create);
         _poseSetConnection = new SQLiteConnection(poseSetDbPath, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create);
+
+        // end of comment (bug)
     }
 
     public SQLiteConnection GetUserConnection()
