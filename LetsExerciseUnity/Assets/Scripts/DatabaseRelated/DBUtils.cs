@@ -94,7 +94,7 @@ public class DBUtils : MonoBehaviour
         Pose pose = new Pose
         {
             Name = "arm1",
-            Path = "Assets/PoseDataset/arms/arm1.txt",
+            Path = "/PoseDataset/arms/arm1.txt",
             CheckPoint = 4,
             Part = "arms",
             Description = ""
@@ -105,7 +105,7 @@ public class DBUtils : MonoBehaviour
         pose = new Pose
         {
             Name = "arm2",
-            Path = "Assets/PoseDataset/arms/arm2.txt",
+            Path = "/PoseDataset/arms/arm2.txt",
             CheckPoint = 4,
             Part = "arms",
             Description = ""
@@ -118,7 +118,7 @@ public class DBUtils : MonoBehaviour
         pose = new Pose
         {
             Name = "arm3",
-            Path = "Assets/PoseDataset/arms/arm3.txt",
+            Path = "/PoseDataset/arms/arm3.txt",
             CheckPoint = 4,
             Part = "arms",
             Description = ""
@@ -131,7 +131,7 @@ public class DBUtils : MonoBehaviour
         pose = new Pose
         {
             Name = "arm4",
-            Path = "Assets/PoseDataset/arms/arm4.txt",
+            Path = "/PoseDataset/arms/arm4.txt",
             CheckPoint = 4,
             Part = "arms",
             Description = ""
@@ -143,7 +143,7 @@ public class DBUtils : MonoBehaviour
         pose = new Pose
         {
             Name = "arm5",
-            Path = "Assets/PoseDataset/arms/arm5.txt",
+            Path = "/PoseDataset/arms/arm5.txt",
             CheckPoint = 4,
             Part = "arms",
             Description = ""

@@ -1826,6 +1826,7 @@ GameObject:
   - component: {fileID: 1768877327}
   - component: {fileID: 1768877328}
   - component: {fileID: 1768877329}
+  - component: {fileID: 1768877330}
   m_Layer: 0
   m_Name: WholeManager
   m_TagString: Untagged
@@ -1983,6 +1984,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   circleImage: {fileID: 487026971}
   buttonEvent: {fileID: 1768877321}
+--- !u!114 &1768877330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1768877320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c4f05eb946971443851d5a56f4c09cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2008575274
 GameObject:
   m_ObjectHideFlags: 0
