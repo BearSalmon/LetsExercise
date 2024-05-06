@@ -44,17 +44,6 @@ public class SelectPlayer : MonoBehaviour
         updatePlayer(nowSelect);
     }
 
-    public void backOption()
-    {
-        nowSelect--;
-        if (nowSelect < 0)
-        {
-            nowSelect = number;
-        }
-        updatePlayer(nowSelect);
-
-    }
-
     void updatePlayer(int nowSelect)
     {
         user = dBUtils.GetUserByName("User"+nowSelect.ToString());

@@ -30,7 +30,6 @@ public class ButtonEvent : MonoBehaviour
     Scene f_Scene;
 
     int numOfButton;
-    int count = 0;
 
     // imported components
     public CharacterDeorate characterDeorate;
@@ -119,7 +118,7 @@ public class ButtonEvent : MonoBehaviour
         }
         else if (m_Scene.name == "CharacterDecorate")
         {
-            numOfButton = 7;
+            numOfButton = 8;
             characterDeorate = GameObject.Find("Manager").GetComponent<CharacterDeorate>();
             user = dBUtils.GetUserByName(dBUtils.nowPlayer);
         }
@@ -128,11 +127,11 @@ public class ButtonEvent : MonoBehaviour
             inquireDataPageUI = GameObject.Find("Manager").GetComponent<InquireDataPageUI>();
             if (inquireDataPageUI.state == 0)
             {
-                numOfButton = 1;
+                numOfButton = 2;
             }
             else
             {
-                numOfButton = 3;
+                numOfButton = 4;
             }
      
             user = dBUtils.GetUserByName(dBUtils.nowPlayer);
@@ -140,14 +139,14 @@ public class ButtonEvent : MonoBehaviour
         }
         else if (m_Scene.name == "SelectPart")
         {
-            numOfButton = 5;
+            numOfButton = 6;
             user = dBUtils.GetUserByName(dBUtils.nowPlayer);
         }
         else if (m_Scene.name == "Investigation")
         {
             user = dBUtils.GetUserByName(dBUtils.nowPlayer);
          
-            numOfButton = 3;
+            numOfButton = 4;
         }
         else if (m_Scene.name == "Trainer2")
         {
@@ -220,8 +219,7 @@ public class ButtonEvent : MonoBehaviour
     // button 命名格式 : Btn + 編號
     public void ButtonClick(Button btn)
     {
-        count += 1;
-        Debug.Log(count);
+        // Game Start
         if ( m_Scene.name == "GameStart")
         {
             if (btn.name == "Btn1")
@@ -230,6 +228,7 @@ public class ButtonEvent : MonoBehaviour
             }
 
         }
+        // Check If New User 
         else if (m_Scene.name == "CheckIfNew")
         {
             if (btn.name == "Btn1")
@@ -245,6 +244,7 @@ public class ButtonEvent : MonoBehaviour
             }
 
         }
+        // Select User 
         else if (m_Scene.name == "SelectPlayer")
         {
             if (btn.name == "Btn1")
@@ -254,7 +254,7 @@ public class ButtonEvent : MonoBehaviour
             }
             else if (btn.name == "Btn2")
             {
-                selectPlayer.backOption();
+                SceneManager.LoadScene((int)SceneName.CheckIfNew);
             }
             else if (btn.name == "Btn3")
             {
@@ -262,7 +262,7 @@ public class ButtonEvent : MonoBehaviour
             }
 
         }
-
+        // Trainer 1 
         else if (m_Scene.name == "Trainer")
         {
             if (btn.name == "Btn1")
@@ -271,6 +271,7 @@ public class ButtonEvent : MonoBehaviour
             }
 
         }
+        // Select Sex 
         else if (m_Scene.name == "SelectSex")
         {
             if (btn.name == "Btn1")
@@ -285,6 +286,7 @@ public class ButtonEvent : MonoBehaviour
             SceneManager.LoadScene((int)SceneName.CharacterDecorate);
 
         }
+        // Character Decorate 
         else if (m_Scene.name == "CharacterDecorate")
         {
             if (btn.name == "Btn1" || btn.name == "Btn2" || btn.name == "Btn3" || btn.name == "Btn4" || btn.name == "Btn5" || btn.name == "Btn6")
@@ -330,8 +332,13 @@ public class ButtonEvent : MonoBehaviour
                 }
                     
             }
+            else if (btn.name == "Btn8")
+            {
+                SceneManager.LoadScene((int)SceneName.SelectSex);
+            }
             
         }
+        // Inquire Data (Age , Weight , Height)
         else if (m_Scene.name == "InquireData")
         {
             if (isAddingWeight == false)
@@ -347,11 +354,18 @@ public class ButtonEvent : MonoBehaviour
                 {
                     user.Age = inquireDataPageUI.age_num;
                     user.Height = inquireDataPageUI.height_num;
-                    user.Weight += inquireDataPageUI.weight.text + ",";
+                    user.Weight = inquireDataPageUI.weight.text + ",";
 
                     dBUtils.UpdateUser(user);
-                    isAddingWeight = true;
+                    inquireDataPageUI.state = 0;
+              
                     SceneManager.LoadScene((int)SceneName.SelectPart);
+                }
+                if (btn.name == "Btn4")
+                {
+                    inquireDataPageUI.state -= 1;
+                    inquireDataPageUI.ChangeSetUp();
+                    SetButtonList();
                 }
 
             }
@@ -361,6 +375,10 @@ public class ButtonEvent : MonoBehaviour
                 {
                     user.Weight += inquireDataPageUI.weight.text + ",";
                     dBUtils.UpdateUser(user);
+                    SceneManager.LoadScene((int)SceneName.MainPage);
+                }
+                else if (btn.name == "Btn4")
+                {
                     SceneManager.LoadScene((int)SceneName.MainPage);
                 }
             }
@@ -381,54 +399,81 @@ public class ButtonEvent : MonoBehaviour
             }
             else if (btn.name == "Btn2")
             {
-                inquireDataPageUI.Decrease();
+                if (inquireDataPageUI.state == 0)
+                {
+                    SceneManager.LoadScene((int)SceneName.CharacterDecorate);
+                }
+                else
+                {
+                    inquireDataPageUI.Decrease();
+                }
+                
             }
 
             
         }
+        // Select Prefer Part 
         else if (m_Scene.name == "SelectPart")
         {
-            if (btn.name == "Btn1")
+            if (btn.name == "Btn6")
             {
-                user.PreferPart = "Arms";
+                SceneManager.LoadScene((int)SceneName.InquireData);
+            }
+            else
+            {
+                if (btn.name == "Btn1")
+                {
+                    user.PreferPart = "Arms";
 
-            }
-            else if (btn.name == "Btn2")
-            {
-                user.PreferPart = "Abs";
-            }
-            else if (btn.name == "Btn3")
-            {
-                user.PreferPart = "Buttocks";
-            }
-            else if (btn.name == "Btn4")
-            {
-                user.PreferPart = "Legs";
-            }
-            else if (btn.name == "Btn5")
-            {
-                user.PreferPart = "Whole Body";
-            }
-            SceneManager.LoadScene((int)SceneName.Investigation);
-            dBUtils.UpdateUser(user);
+                }
+                else if (btn.name == "Btn2")
+                {
+                    user.PreferPart = "Abs";
+                }
+                else if (btn.name == "Btn3")
+                {
+                    user.PreferPart = "Buttocks";
+                }
+                else if (btn.name == "Btn4")
+                {
+                    user.PreferPart = "Legs";
+                }
+                else if (btn.name == "Btn5")
+                {
+                    user.PreferPart = "Whole Body";
+                }
+
+                SceneManager.LoadScene((int)SceneName.Investigation);
+                dBUtils.UpdateUser(user);
+            } 
 
         }
+        // Investidation ( the level of user )
         else if (m_Scene.name == "Investigation")
         {
-            if (btn.name == "Btn1")
+            if (btn.name == "Btn4")
             {
-                user.Level = "Easy";
+                SceneManager.LoadScene((int)SceneName.SelectPart);
             }
-            else if (btn.name == "Btn2")
+            else
             {
-                user.Level = "Medium";
+                if (btn.name == "Btn1")
+                {
+                    user.Level = "Easy";
+                }
+                else if (btn.name == "Btn2")
+                {
+                    user.Level = "Medium";
+                }
+                else if (btn.name == "Btn3")
+                {
+                    user.Level = "Hard";
+                }
+                dBUtils.UpdateUser(user);
+                isAddingWeight = true;
+                SceneManager.LoadScene((int)SceneName.Trainer2);
             }
-            else if (btn.name == "Btn3")
-            {
-                user.Level = "Hard";
-            }
-            dBUtils.UpdateUser(user);
-            SceneManager.LoadScene((int)SceneName.Trainer2);
+            
         }
         else if (m_Scene.name == "MainPage")
         {
