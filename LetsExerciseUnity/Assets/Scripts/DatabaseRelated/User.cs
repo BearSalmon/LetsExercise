@@ -20,6 +20,7 @@ public class User
     public string LastLogin { get; set; }
     public int Duration { get; set; }
     public int Calories { get; set; }
+    public string RecommandList { get; set; } // array of string
 
     public override string ToString()
     {
