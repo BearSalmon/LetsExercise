@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 public class ButtonEvent : MonoBehaviour
 {
@@ -40,6 +41,7 @@ public class ButtonEvent : MonoBehaviour
     public MainPageSetUp mainPageSetUp;
     public SelectLevel selectLevel;
     public InquireDataPageUI inquireDataPageUI;
+    public SelectPartSet selectPartSet;
 
     public bool isAddingWeight;
     public bool isChangingColor;
@@ -90,6 +92,12 @@ public class ButtonEvent : MonoBehaviour
     void SetButtonList()
     {
         RemoveListener();
+
+        mouse = GameObject.Find("Mouse");
+        dBUtils = GetComponent<DBUtils>();
+        circleDrawer = GetComponent<CircleDrawer>();
+        nowSelectChoice = "";
+
         if (m_Scene.name == "GameStart")
         {
             numOfButton = 1;
@@ -140,6 +148,7 @@ public class ButtonEvent : MonoBehaviour
         else if (m_Scene.name == "SelectPart")
         {
             numOfButton = 6;
+            selectPartSet = GameObject.Find("Manager").GetComponent<SelectPartSet>(); ;
             user = dBUtils.GetUserByName(dBUtils.nowPlayer);
         }
         else if (m_Scene.name == "Investigation")
@@ -156,6 +165,7 @@ public class ButtonEvent : MonoBehaviour
         {
             trainPageUI = GameObject.Find("Manager").GetComponent<TrainPageUI>();
             mainPageSetUp = GameObject.Find("Manager").GetComponent<MainPageSetUp>();
+            user = dBUtils.GetUserByName(dBUtils.nowPlayer);
             if (mainPageSetUp.isOpening == false) // menu is not opening
             {
                 if (mainPageSetUp.nowState == 0) // user page 
@@ -168,18 +178,18 @@ public class ButtonEvent : MonoBehaviour
                 }
                 else if (mainPageSetUp.nowState == 2) // train page
                 {
-                    numOfButton = 7;
+                    numOfButton = 6;
                 }
             }
             else
             {
                 if (mainPageSetUp.nowState == 0) // user page 
                 {
-                    numOfButton = 8;
+                    numOfButton = 9;
                 }
                 else if (mainPageSetUp.nowState == 1) // plan page
                 {
-                    numOfButton = 7;
+                    numOfButton = 8;
                 }
                 else if (mainPageSetUp.nowState == 2) // train page
                 {
@@ -194,11 +204,7 @@ public class ButtonEvent : MonoBehaviour
         }
 
 
-        mouse = GameObject.Find("Mouse");
-        dBUtils = GetComponent<DBUtils>();
-        circleDrawer = GetComponent<CircleDrawer>();
-        nowSelectChoice = "";
-
+        
         buttons = new Button[numOfButton];
         for (var i = 1; i <= numOfButton; i++)
         {
@@ -442,7 +448,8 @@ public class ButtonEvent : MonoBehaviour
                 {
                     user.PreferPart = "Whole Body";
                 }
-
+                string recommandList = selectPartSet.SetRecommandList(user.PreferPart);
+                user.RecommandList = recommandList;
                 SceneManager.LoadScene((int)SceneName.Investigation);
                 dBUtils.UpdateUser(user);
             } 
@@ -521,6 +528,12 @@ public class ButtonEvent : MonoBehaviour
                 {
                    
                 }
+                else if (btn.name == "Btn9")
+                {
+                    user.LastLogin = DateTime.Now.ToString();
+                    dBUtils.UpdateUser(user);
+                    Application.Quit();
+                }
 
             }
             // plan page
@@ -538,6 +551,12 @@ public class ButtonEvent : MonoBehaviour
                 {
 
                 }
+                else if (btn.name == "Btn8")
+                {
+                    user.LastLogin = DateTime.Now.ToString();
+                    dBUtils.UpdateUser(user);
+                    Application.Quit();
+                }
             }
             // train page
             else if (mainPageSetUp.nowState == 2)
@@ -552,19 +571,21 @@ public class ButtonEvent : MonoBehaviour
                 }
                 else if (btn.name == "Btn7")
                 {
-                    poseSetID = trainPageUI.backOption();
+                    SceneManager.LoadScene((int)SceneName.CharacterDecorate);
                 }
                 else if (btn.name == "Btn8")
                 {
-                    SceneManager.LoadScene((int)SceneName.CharacterDecorate);
+                    SceneManager.LoadScene((int)SceneName.SelectPlayer);
                 }
                 else if (btn.name == "Btn9")
                 {
-                    SceneManager.LoadScene((int)SceneName.SelectPlayer);
+
                 }
                 else if (btn.name == "Btn10")
                 {
-
+                    user.LastLogin = DateTime.Now.ToString();
+                    dBUtils.UpdateUser(user);
+                    Application.Quit();
                 }
             }
             

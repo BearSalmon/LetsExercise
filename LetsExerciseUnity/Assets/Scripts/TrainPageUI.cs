@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 public class TrainPageUI : MonoBehaviour
 {
@@ -42,18 +41,6 @@ public class TrainPageUI : MonoBehaviour
         return nowSelect;
     }
 
-    public int backOption()
-    {
-        nowSelect--;
-        if (nowSelect == 0)
-        {
-            nowSelect = number;
-        }
-        updateTrainSet(nowSelect);
-
-        return nowSelect;
-
-    }
 
     public void updateTrainSet(int nowSelect)
     {
