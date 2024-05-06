@@ -55,7 +55,7 @@ public class Trainer2PageUI : MonoBehaviour
 
         // 身高體重
         P1.SetActive(true);
-        T1.text = "Analyzing data : ";
+        T1.text = "Analyzing data ... ";
 
         StartCoroutine(IncreaseProgressOverTime(1.5f,progressBar1,1));
 
@@ -64,7 +64,7 @@ public class Trainer2PageUI : MonoBehaviour
     void progress2()
     {
         P2.SetActive(true);
-        T2.text = "Calculating metabolism : ";
+        T2.text = "Calculating metabolism ...  ";
         StartCoroutine(IncreaseProgressOverTime(3f, progressBar2,2));
         
     }
@@ -72,7 +72,7 @@ public class Trainer2PageUI : MonoBehaviour
     void progress3()
     {
         P3.SetActive(true);
-        T3.text = "Choosing your fitness plan : " + user.PreferPart;
+        T3.text = "Choosing your fitness plan : \n" + user.PreferPart;
         StartCoroutine(IncreaseProgressOverTime(2f, progressBar3,3));
         
     }
@@ -80,8 +80,8 @@ public class Trainer2PageUI : MonoBehaviour
     void progress4()
     {
         P4.SetActive(true);
-        T4.text = "Select fitness level : " + user.Level;
-        StartCoroutine(IncreaseProgressOverTime(1f, progressBar4,4));
+        T4.text = "Select fitness level : \n" + user.Level;
+        StartCoroutine(IncreaseProgressOverTime(2.5f, progressBar4,4));
     }
 
     IEnumerator IncreaseProgressOverTime(float duration , Image progressBar , int now)

@@ -56,8 +56,15 @@ public class InquireDataPageUI : MonoBehaviour
 
     public void ChangeSetUp()
     {
-        
-        if (state == 1)
+        if (state == 0)
+        {
+            Ask.SetActive(true);
+            Height.SetActive(false);
+            Weight.SetActive(false);
+            Age.SetActive(false);
+        }
+
+        else if (state == 1)
         {
             Ask.SetActive(false);
             Height.SetActive(true);
@@ -66,12 +73,14 @@ public class InquireDataPageUI : MonoBehaviour
         }
         else if (state == 2)
         {
+            Ask.SetActive(false);
             Height.SetActive(false);
             Weight.SetActive(true);
             Age.SetActive(false);
         }
         else if (state == 3)
         {
+            Ask.SetActive(false);
             Height.SetActive(false);
             Weight.SetActive(false);
             Age.SetActive(true);
