@@ -76,15 +76,15 @@ public class InvestigateSet : MonoBehaviour
 
         if (level == "Easy")
         {
-            recommendValues[5] = "1";
+            recommendValues[5] = "5";
         }
         else if (level == "Medium")
         {
-            recommendValues[6] = "1";
+            recommendValues[6] = "5";
         }
         else if (level == "Hard")
         {
-            recommendValues[7] = "1";
+            recommendValues[7] = "5";
         }
 
         foreach (string part in recommendValues)

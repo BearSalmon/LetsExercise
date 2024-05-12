@@ -33,29 +33,30 @@ public class SelectPartSet : MonoBehaviour
 
         if (prefer == "Arms")
         {
-            recommendValues[0] = "1";
+            recommendValues[0] = "5";
         }
         else if (prefer == "Abs")
         {
-            recommendValues[1] = "1";
+            recommendValues[1] = "5";
         }
         else if (prefer == "Buttocks")
         {
-            recommendValues[2] = "1";
+            recommendValues[2] = "5";
         }
         else if (prefer == "Legs")
         {
-            recommendValues[3] = "1";
+            recommendValues[3] = "5";
         }
         else if (prefer == "Whole Body")
         {
-            recommendValues[4] = "1";
+            recommendValues[4] = "5";
         }
 
         foreach (string part in recommendValues)
         {
             recommendation += part + ",";
         }
+
         return recommendation;
 
     }

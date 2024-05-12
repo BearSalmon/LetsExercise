@@ -221,17 +221,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 335014362}
-  m_LocalRotation: {x: -0, y: -0, z: 0.2199888, w: 0.97550243}
+  m_LocalRotation: {x: -0, y: -0, z: 0.13960822, w: 0.99020684}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 744124348}
   m_RootOrder: 12
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 25.417}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 16.05}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 999, y: -75}
+  m_AnchoredPosition: {x: 918, y: -67}
   m_SizeDelta: {x: 264.53, y: 222.179}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &335014364
@@ -2155,6 +2155,8 @@ MonoBehaviour:
   selectLevel: {fileID: 0}
   inquireDataPageUI: {fileID: 0}
   selectPartSet: {fileID: 0}
+  investigateSet: {fileID: 0}
+  exitGameUI: {fileID: 0}
   isAddingWeight: 0
   isChangingColor: 0
   nowSelectChoice: 
