@@ -9,7 +9,7 @@ public class PlanPageUI : MonoBehaviour
 
     User user;
 
-    string[] recommandList;
+    
     void Start()
     {
         

@@ -55,6 +55,10 @@ public class ButtonEvent : MonoBehaviour
     public Button currentClickingButton;
 
 
+    // for test (click button count)
+    int count = 0;
+
+
     void Start()
     {
         isAddingWeight = false;
@@ -170,30 +174,30 @@ public class ButtonEvent : MonoBehaviour
             {
                 if (mainPageSetUp.nowState == 0) // user page 
                 {
-                    numOfButton = 5;
+                    numOfButton = 6;
                 }
                 else if (mainPageSetUp.nowState == 1) // plan page
                 {
-                    numOfButton = 4;
+                    numOfButton = 5;
                 }
                 else if (mainPageSetUp.nowState == 2) // train page
                 {
-                    numOfButton = 6;
+                    numOfButton = 7;
                 }
             }
             else
             {
                 if (mainPageSetUp.nowState == 0) // user page 
                 {
-                    numOfButton = 9;
+                    numOfButton = 10;
                 }
                 else if (mainPageSetUp.nowState == 1) // plan page
                 {
-                    numOfButton = 8;
+                    numOfButton = 9;
                 }
                 else if (mainPageSetUp.nowState == 2) // train page
                 {
-                    numOfButton = 10;
+                    numOfButton = 11;
                 }
             }
         }
@@ -225,6 +229,9 @@ public class ButtonEvent : MonoBehaviour
     // button 命名格式 : Btn + 編號
     public void ButtonClick(Button btn)
     {
+
+        count++;
+        Debug.Log(count);
         // Game Start
         if ( m_Scene.name == "GameStart")
         {
@@ -505,6 +512,9 @@ public class ButtonEvent : MonoBehaviour
             }
             else if (btn.name == "Btn4")
             {
+            }
+            else if (btn.name == "Btn5")
+            {
                 mainPageSetUp.SetMenu();
                 SetButtonList();
             }
@@ -512,23 +522,23 @@ public class ButtonEvent : MonoBehaviour
             // user page
             if (mainPageSetUp.nowState == 0)
             {
-                if (btn.name == "Btn5")
+                if (btn.name == "Btn6")
                 {
                     SceneManager.LoadScene((int)SceneName.InquireData);
                 }
-                else if (btn.name == "Btn6")
+                else if (btn.name == "Btn7")
                 {
                     SceneManager.LoadScene((int)SceneName.CharacterDecorate);
                 }
-                else if (btn.name == "Btn7")
+                else if (btn.name == "Btn8")
                 {
                     SceneManager.LoadScene((int)SceneName.SelectPlayer);
                 }
-                else if (btn.name == "Btn8")
+                else if (btn.name == "Btn9")
                 {
                    
                 }
-                else if (btn.name == "Btn9")
+                else if (btn.name == "Btn10")
                 {
                     user.LastLogin = DateTime.Now.ToString();
                     dBUtils.UpdateUser(user);
@@ -539,19 +549,19 @@ public class ButtonEvent : MonoBehaviour
             // plan page
             else if (mainPageSetUp.nowState == 1)
             {
-                if (btn.name == "Btn5")
+                if (btn.name == "Btn6")
                 {
                     SceneManager.LoadScene((int)SceneName.CharacterDecorate);
                 }
-                else if (btn.name == "Btn6")
+                else if (btn.name == "Btn7")
                 {
                     SceneManager.LoadScene((int)SceneName.SelectPlayer);
                 }
-                else if (btn.name == "Btn7")
+                else if (btn.name == "Btn8")
                 {
 
                 }
-                else if (btn.name == "Btn8")
+                else if (btn.name == "Btn9")
                 {
                     user.LastLogin = DateTime.Now.ToString();
                     dBUtils.UpdateUser(user);
@@ -561,27 +571,27 @@ public class ButtonEvent : MonoBehaviour
             // train page
             else if (mainPageSetUp.nowState == 2)
             {
-                if (btn.name == "Btn5")
+                if (btn.name == "Btn6")
                 {
                     SceneManager.LoadScene((int)SceneName.SelectLevel);
                 }
-                else if (btn.name == "Btn6")
+                else if (btn.name == "Btn7")
                 {
                     poseSetID = trainPageUI.nextOption();
                 }
-                else if (btn.name == "Btn7")
+                else if (btn.name == "Btn8")
                 {
                     SceneManager.LoadScene((int)SceneName.CharacterDecorate);
                 }
-                else if (btn.name == "Btn8")
+                else if (btn.name == "Btn9")
                 {
                     SceneManager.LoadScene((int)SceneName.SelectPlayer);
                 }
-                else if (btn.name == "Btn9")
+                else if (btn.name == "Btn10")
                 {
 
                 }
-                else if (btn.name == "Btn10")
+                else if (btn.name == "Btn11")
                 {
                     user.LastLogin = DateTime.Now.ToString();
                     dBUtils.UpdateUser(user);
