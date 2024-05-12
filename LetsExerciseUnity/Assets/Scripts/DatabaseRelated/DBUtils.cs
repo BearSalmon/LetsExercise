@@ -9,6 +9,7 @@ public class DBUtils : MonoBehaviour
     UserService userService;
     PoseService poseService;
     PoseSetService poseSetService;
+    
     DataBase dataBase;
 
     public string nowPlayer;
@@ -52,6 +53,7 @@ public class DBUtils : MonoBehaviour
             Calories = 100,
             Weight = "63,65,",
             Height = 170,
+            Recommendation = "1,0,0,0,0,1,0,0,",
         };
         int pk = userService.AddUser(user);
 
@@ -67,6 +69,7 @@ public class DBUtils : MonoBehaviour
             Duration = 100,
             Calories = 100,
             Height = 170,
+            Recommendation = "1,0,0,0,0,1,0,0,",
         };
         pk = userService.AddUser(user);
 
@@ -82,6 +85,7 @@ public class DBUtils : MonoBehaviour
             Duration = 100,
             Calories = 100,
             Height = 170,
+            Recommendation = "1,0,0,0,0,1,0,0,",
         };
         pk = userService.AddUser(user);
         
@@ -220,6 +224,7 @@ public class DBUtils : MonoBehaviour
             Hair = "000000FF",
             Body = "FFDBC6FF",
             Cloth = "CAEE8AFF",
+            Recommendation = "0,0,0,0,0,0,0,0,"
         };
         int pk = userService.AddUser(user);
         Debug.Log("Primary key = " + pk);

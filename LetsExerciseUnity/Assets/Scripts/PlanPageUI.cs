@@ -9,6 +9,9 @@ public class PlanPageUI : MonoBehaviour
 
     User user;
 
+
+
+
     
     void Start()
     {

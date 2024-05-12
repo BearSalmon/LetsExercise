@@ -42,6 +42,7 @@ public class ButtonEvent : MonoBehaviour
     public SelectLevel selectLevel;
     public InquireDataPageUI inquireDataPageUI;
     public SelectPartSet selectPartSet;
+    public InvestigateSet investigateSet;
 
     public bool isAddingWeight;
     public bool isChangingColor;
@@ -152,13 +153,13 @@ public class ButtonEvent : MonoBehaviour
         else if (m_Scene.name == "SelectPart")
         {
             numOfButton = 6;
-            selectPartSet = GameObject.Find("Manager").GetComponent<SelectPartSet>(); ;
+            selectPartSet = GameObject.Find("Manager").GetComponent<SelectPartSet>(); 
             user = dBUtils.GetUserByName(dBUtils.nowPlayer);
         }
         else if (m_Scene.name == "Investigation")
         {
+            investigateSet = GameObject.Find("Manager").GetComponent<InvestigateSet>();
             user = dBUtils.GetUserByName(dBUtils.nowPlayer);
-         
             numOfButton = 4;
         }
         else if (m_Scene.name == "Trainer2")
@@ -437,7 +438,6 @@ public class ButtonEvent : MonoBehaviour
                 if (btn.name == "Btn1")
                 {
                     user.PreferPart = "Arms";
-
                 }
                 else if (btn.name == "Btn2")
                 {
@@ -455,8 +455,8 @@ public class ButtonEvent : MonoBehaviour
                 {
                     user.PreferPart = "Whole Body";
                 }
-                string recommandList = selectPartSet.SetRecommandList(user.PreferPart);
-                user.RecommandList = recommandList;
+
+                user.Recommendation = selectPartSet.SetRecommandation(user.PreferPart);
                 SceneManager.LoadScene((int)SceneName.Investigation);
                 dBUtils.UpdateUser(user);
             } 
@@ -483,6 +483,7 @@ public class ButtonEvent : MonoBehaviour
                 {
                     user.Level = "Hard";
                 }
+                user.Recommendation = investigateSet.SetRecommandation(user.Level);
                 dBUtils.UpdateUser(user);
                 isAddingWeight = true;
                 SceneManager.LoadScene((int)SceneName.Trainer2);

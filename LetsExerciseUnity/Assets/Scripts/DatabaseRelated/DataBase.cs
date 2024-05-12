@@ -28,6 +28,7 @@ public class DataBase
         string userDbPath = string.Format(@"Assets/StreamingAssets/{0}", userDatabaseName);
         string poseDbPath = string.Format(@"Assets/StreamingAssets/{0}", poseDatabaseName);
         string poseSetDbPath = string.Format(@"Assets/StreamingAssets/{0}", poseSetDatabaseName);
+       
 
 #else
         // comment under this (bug)
@@ -59,6 +60,7 @@ public class DataBase
         _userConnection = new SQLiteConnection(userDbPath, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create);
         _poseConnection = new SQLiteConnection(poseDbPath, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create);
         _poseSetConnection = new SQLiteConnection(poseSetDbPath, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.Create);
+        
 
         // end of comment (bug)
     }
