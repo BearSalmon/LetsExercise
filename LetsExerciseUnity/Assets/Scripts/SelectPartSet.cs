@@ -1,33 +1,63 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 public class SelectPartSet : MonoBehaviour
 {
     // Start is called before the first frame update
+    DBUtils dBUtils;
+    User user;
+    string recommendation;
 
-    string recommandList;
-
-    List<string> parts = new List<string> { "Abs", "Arms", "Buttocks", "Legs", "Whole Body" };
+    // "Arms", "Abs",  "Buttocks", "Legs", "Whole Body" , "Easy" , "Medium" , "Hard"
 
     void Start()
     {
-        recommandList = "";
-
+        recommendation = "";
+        dBUtils = GameObject.Find("WholeManager").GetComponent<DBUtils>();
+        user = dBUtils.GetUserByName(dBUtils.nowPlayer);
     }
 
-    public string SetRecommandList( string prefer)
+    public string SetRecommandation( string prefer)
     {
-        recommandList = prefer + ",";
+        recommendation = "";
+        string[] recommendValues;
+        recommendValues = user.Recommendation.TrimEnd(',').Split(',');
 
-        parts.Remove(prefer);
+        recommendValues[0] = "0";
+        recommendValues[1] = "0";
+        recommendValues[2] = "0";
+        recommendValues[3] = "0";
+        recommendValues[4] = "0";
 
-        foreach (string s in parts)
+        if (prefer == "Arms")
         {
-            recommandList += s + ",";
+            recommendValues[0] = "5";
+        }
+        else if (prefer == "Abs")
+        {
+            recommendValues[1] = "5";
+        }
+        else if (prefer == "Buttocks")
+        {
+            recommendValues[2] = "5";
+        }
+        else if (prefer == "Legs")
+        {
+            recommendValues[3] = "5";
+        }
+        else if (prefer == "Whole Body")
+        {
+            recommendValues[4] = "5";
         }
 
-        return recommandList;
+        foreach (string part in recommendValues)
+        {
+            recommendation += part + ",";
+        }
+
+        return recommendation;
 
     }
 }

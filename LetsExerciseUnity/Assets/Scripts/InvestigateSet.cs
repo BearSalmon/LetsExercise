@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class InvestigateSet : MonoBehaviour
 {
-    [SerializeField] ButtonEvent buttonEvent;
     public TextMeshProUGUI bm;
     public TextMeshProUGUI des;
     public TextMeshProUGUI c1;
@@ -15,13 +14,15 @@ public class InvestigateSet : MonoBehaviour
 
     public DBUtils dBUtils;
 
+    string recommendation;
+
     User user;
 
     // Start is called before the first frame update
     void Start()
     {
+        recommendation = "";
         dBUtils = GameObject.Find("WholeManager").GetComponent<DBUtils>();
-        buttonEvent = GameObject.Find("WholeManager").GetComponent<ButtonEvent>();
         user = dBUtils.GetUserByName(dBUtils.nowPlayer);
 
         if (user.PreferPart == "Arms")
@@ -64,9 +65,34 @@ public class InvestigateSet : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public string SetRecommandation(string level)
     {
-        
+        recommendation = "";
+        string[] recommendValues;
+        recommendValues = user.Recommendation.TrimEnd(',').Split(',');
+        recommendValues[5] = "0";
+        recommendValues[6] = "0";
+        recommendValues[7] = "0";
+
+        if (level == "Easy")
+        {
+            recommendValues[5] = "5";
+        }
+        else if (level == "Medium")
+        {
+            recommendValues[6] = "5";
+        }
+        else if (level == "Hard")
+        {
+            recommendValues[7] = "5";
+        }
+
+        foreach (string part in recommendValues)
+        {
+            recommendation += part + ",";
+        }
+        return recommendation;
+
     }
+
 }

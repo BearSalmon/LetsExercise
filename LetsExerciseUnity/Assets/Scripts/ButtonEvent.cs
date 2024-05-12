@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
+using TMPro;
 
 public class ButtonEvent : MonoBehaviour
 {
@@ -22,7 +23,8 @@ public class ButtonEvent : MonoBehaviour
         Trainer2 = 10,
         MainPage = 11,
         SelectLevel = 12,
-        SampleScene = 13
+        SampleScene = 13,
+        ExitGame = 14
     }
     public GameObject mouse;
     public Button[] buttons;
@@ -42,6 +44,8 @@ public class ButtonEvent : MonoBehaviour
     public SelectLevel selectLevel;
     public InquireDataPageUI inquireDataPageUI;
     public SelectPartSet selectPartSet;
+    public InvestigateSet investigateSet;
+    public ExitGameUI exitGameUI;
 
     public bool isAddingWeight;
     public bool isChangingColor;
@@ -152,13 +156,13 @@ public class ButtonEvent : MonoBehaviour
         else if (m_Scene.name == "SelectPart")
         {
             numOfButton = 6;
-            selectPartSet = GameObject.Find("Manager").GetComponent<SelectPartSet>(); ;
+            selectPartSet = GameObject.Find("Manager").GetComponent<SelectPartSet>(); 
             user = dBUtils.GetUserByName(dBUtils.nowPlayer);
         }
         else if (m_Scene.name == "Investigation")
         {
+            investigateSet = GameObject.Find("Manager").GetComponent<InvestigateSet>();
             user = dBUtils.GetUserByName(dBUtils.nowPlayer);
-         
             numOfButton = 4;
         }
         else if (m_Scene.name == "Trainer2")
@@ -205,6 +209,28 @@ public class ButtonEvent : MonoBehaviour
         {
             selectLevel = GameObject.Find("Manager").GetComponent<SelectLevel>();
             numOfButton = 4;
+        }
+
+        else if (m_Scene.name == "ExitGame")
+        {
+            exitGameUI = GameObject.Find("Manager").GetComponent<ExitGameUI>();
+            user = dBUtils.GetUserByName(dBUtils.nowPlayer);
+            if (exitGameUI.nowState == 0)
+            {
+                numOfButton = 1;
+            }
+            else if (exitGameUI.nowState == 1)
+            {
+                numOfButton = 3;
+            }
+            else if (exitGameUI.nowState == 2)
+            {
+                numOfButton = 5;
+            }
+            else
+            {
+                numOfButton = 1;
+            }
         }
 
 
@@ -437,7 +463,6 @@ public class ButtonEvent : MonoBehaviour
                 if (btn.name == "Btn1")
                 {
                     user.PreferPart = "Arms";
-
                 }
                 else if (btn.name == "Btn2")
                 {
@@ -455,8 +480,8 @@ public class ButtonEvent : MonoBehaviour
                 {
                     user.PreferPart = "Whole Body";
                 }
-                string recommandList = selectPartSet.SetRecommandList(user.PreferPart);
-                user.RecommandList = recommandList;
+
+                user.Recommendation = selectPartSet.SetRecommandation(user.PreferPart);
                 SceneManager.LoadScene((int)SceneName.Investigation);
                 dBUtils.UpdateUser(user);
             } 
@@ -483,6 +508,7 @@ public class ButtonEvent : MonoBehaviour
                 {
                     user.Level = "Hard";
                 }
+                user.Recommendation = investigateSet.SetRecommandation(user.Level);
                 dBUtils.UpdateUser(user);
                 isAddingWeight = true;
                 SceneManager.LoadScene((int)SceneName.Trainer2);
@@ -540,9 +566,7 @@ public class ButtonEvent : MonoBehaviour
                 }
                 else if (btn.name == "Btn10")
                 {
-                    user.LastLogin = DateTime.Now.ToString();
-                    dBUtils.UpdateUser(user);
-                    Application.Quit();
+                    SceneManager.LoadScene((int)SceneName.ExitGame);
                 }
 
             }
@@ -563,9 +587,7 @@ public class ButtonEvent : MonoBehaviour
                 }
                 else if (btn.name == "Btn9")
                 {
-                    user.LastLogin = DateTime.Now.ToString();
-                    dBUtils.UpdateUser(user);
-                    Application.Quit();
+                    SceneManager.LoadScene((int)SceneName.ExitGame);
                 }
             }
             // train page
@@ -593,9 +615,7 @@ public class ButtonEvent : MonoBehaviour
                 }
                 else if (btn.name == "Btn11")
                 {
-                    user.LastLogin = DateTime.Now.ToString();
-                    dBUtils.UpdateUser(user);
-                    Application.Quit();
+                    SceneManager.LoadScene((int)SceneName.ExitGame);
                 }
             }
             
@@ -622,6 +642,55 @@ public class ButtonEvent : MonoBehaviour
 
             }
 
+        }
+
+        else if (m_Scene.name == "ExitGame")
+        {
+            if (exitGameUI.nowState == 0)
+            {
+                if (btn.name == "Btn1")
+                {
+                    exitGameUI.ChangeState(1);
+                    SetButtonList();
+                }
+            }
+            else if (exitGameUI.nowState == 1)
+            {
+                string level = "";
+                if (btn.name == "Btn1")
+                {
+                    level = "Easy";
+                }
+                else if (btn.name == "Btn2")
+                {
+                    level = "Medium";
+                }
+                else if (btn.name == "Btn3")
+                {
+                    level = "Hard";
+                }
+                user.Recommendation = exitGameUI.SetRecommandation(level);
+                dBUtils.UpdateUser(user);
+                exitGameUI.ChangeState(2);
+                SetButtonList();
+            }
+            else if (exitGameUI.nowState == 2)
+            {
+                Debug.Log(btn.GetComponentInChildren<TextMeshProUGUI>().text);
+                user.Recommendation = exitGameUI.SetRecommandation(btn.GetComponentInChildren<TextMeshProUGUI>().text);
+                dBUtils.UpdateUser(user);
+                exitGameUI.ChangeState(3);
+                SetButtonList();
+            }
+            else if(exitGameUI.nowState == 3)
+            {
+                if (btn.name == "Btn1")
+                {
+                    user.LastLogin = DateTime.Now.ToString();
+                    dBUtils.UpdateUser(user);
+                    Application.Quit();
+                }
+            }
         }
 
 
