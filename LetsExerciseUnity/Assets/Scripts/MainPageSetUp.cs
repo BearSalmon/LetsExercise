@@ -40,30 +40,30 @@ public class MainPageSetUp : MonoBehaviour
             UserPage.SetActive(true);
             PlanPage.SetActive(false);
             TrainPage.SetActive(false);
-            menuBtn1.name = "Btn6";
-            menuBtn2.name = "Btn7";
-            menuBtn3.name = "Btn8";
-            menuBtn4.name = "Btn9";
+            menuBtn1.name = "Btn7";
+            menuBtn2.name = "Btn8";
+            menuBtn3.name = "Btn9";
+            menuBtn4.name = "Btn10";
         }
         else if (state == 1)
         {
             UserPage.SetActive(false);
             PlanPage.SetActive(true);
             TrainPage.SetActive(false);
-            menuBtn1.name = "Btn5";
-            menuBtn2.name = "Btn6";
-            menuBtn3.name = "Btn7";
-            menuBtn4.name = "Btn8";
+            menuBtn1.name = "Btn6";
+            menuBtn2.name = "Btn7";
+            menuBtn3.name = "Btn8";
+            menuBtn4.name = "Btn9";
         }
         else if (state == 2)
         {
             UserPage.SetActive(false);
             PlanPage.SetActive(false);
             TrainPage.SetActive(true);
-            menuBtn1.name = "Btn7";
-            menuBtn2.name = "Btn8";
-            menuBtn3.name = "Btn9";
-            menuBtn4.name = "Btn10";
+            menuBtn1.name = "Btn8";
+            menuBtn2.name = "Btn9";
+            menuBtn3.name = "Btn10";
+            menuBtn4.name = "Btn11";
 
         }
 
@@ -74,28 +74,6 @@ public class MainPageSetUp : MonoBehaviour
         {
             Menu.SetActive(true);
             isOpening = true;
-            // user page
-            if (nowState == 0)
-            {
-                menuBtn1.name = "Btn6";
-                menuBtn2.name = "Btn7";
-                menuBtn3.name = "Btn8";
-            }
-            // plan page 
-            else if (nowState == 1)
-            {
-                menuBtn1.name = "Btn5";
-                menuBtn2.name = "Btn6";
-                menuBtn3.name = "Btn7";
-            }
-            // train page 
-            else
-            {
-                menuBtn1.name = "Btn7";
-                menuBtn2.name = "Btn8";
-                menuBtn3.name = "Btn9";
-            }
-
         }
         else
         {

@@ -149,7 +149,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 80613060}
   m_LocalRotation: {x: 0.00000004378049, y: 0.00000027594533, z: -0.15669648, w: 0.9876468}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -158,8 +158,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -18.03}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 463, y: -120}
-  m_SizeDelta: {x: 148.778, y: 146.84}
+  m_AnchoredPosition: {x: 555, y: -541}
+  m_SizeDelta: {x: 306.174, y: 351.196}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &80613062
 MonoBehaviour:
@@ -2154,6 +2154,7 @@ MonoBehaviour:
   mainPageSetUp: {fileID: 0}
   selectLevel: {fileID: 0}
   inquireDataPageUI: {fileID: 0}
+  selectPartSet: {fileID: 0}
   isAddingWeight: 0
   isChangingColor: 0
   nowSelectChoice: 
@@ -2319,18 +2320,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1953445088}
-  m_LocalRotation: {x: -0.109104976, y: 0.0040152054, z: -0.18618183, w: 0.9764305}
-  m_LocalPosition: {x: 0, y: 0, z: 40}
+  m_LocalRotation: {x: -0.10669505, y: 0.023155646, z: -0.35513294, w: 0.9284184}
+  m_LocalPosition: {x: 0, y: 0, z: -31}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 744124348}
   m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: -12.214, y: 2.842, z: -21.895}
+  m_LocalEulerAnglesHint: {x: -10.467, y: 6.938, z: -42.501}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 549, y: -538}
-  m_SizeDelta: {x: 300.698, y: 338.286}
+  m_AnchoredPosition: {x: 391, y: -164}
+  m_SizeDelta: {x: 148.676, y: 164.139}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1953445090
 MonoBehaviour:
