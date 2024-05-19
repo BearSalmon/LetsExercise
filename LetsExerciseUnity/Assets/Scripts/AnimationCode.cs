@@ -27,9 +27,42 @@ public class AnimationCode : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        countDownTimer = GameObject.Find("ManagerToBeKeep").GetComponent<CountDownTimer>();
+        countDownTimer = GetComponent<CountDownTimer>();
         isAnimating = false;
-        wholeSampleSceneManager = GameObject.Find("ManagerToBeKeep").GetComponent<WholeSampleSceneManager>();
+        wholeSampleSceneManager = GetComponent<WholeSampleSceneManager>();
+  
+        udpsend = GameObject.Find("WholeManager").GetComponent<UDPSend>();
+        udpreceive = GameObject.Find("WholeManager").GetComponent<UDPReceive>();
+
+        Body_for_Ready = new GameObject[33];
+        Body_for_Exercise = new GameObject[33];
+        for (var i = 0; i <= 32; i++)
+        {
+            GameObject gb = GameObject.Find("r" + i);
+            Body_for_Ready[i] = gb;
+        }
+
+    }
+
+    public void setBodyList()
+    {
+        
+        if (wholeSampleSceneManager.nowState == 0)
+        {
+            for (var i = 0; i <= 32; i++)
+            {
+                GameObject gb = GameObject.Find("e" + i);
+                Body_for_Exercise[i] = gb;
+            }
+        }
+        else
+        {
+            for (var i = 0; i <= 32; i++)
+            {
+                GameObject gb = GameObject.Find("r" + i);
+                Body_for_Ready[i] = gb;
+            }
+        }
     }
 
     // Update is called once per frame

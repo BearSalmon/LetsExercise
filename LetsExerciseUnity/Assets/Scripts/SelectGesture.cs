@@ -19,7 +19,7 @@ public class SelectGesture : MonoBehaviour
     void Start()
     {
         button.onClick.AddListener(() => ButtonClick());
-        udpSend = GameObject.Find("Manager").GetComponent<UDPSend>();
+        udpSend = GameObject.Find("WholeManager").GetComponent<UDPSend>();
         countDownTimer = GetComponent<CountDownTimer>();
     }
 

@@ -31,6 +31,7 @@ public class SelectLevel : MonoBehaviour
     public void updateLevel(string level)
     {
         poseSet = dBUtils.GetPoseSetById(buttonEvent.poseSetID);
+        Debug.Log(buttonEvent.poseSetID);
         nowLevel = level;
         calories.text = (poseSet.Calories * exchageLevelval(level)).ToString() + " cal";
         duration.text = (poseSet.Duration * exchageLevelval(level)).ToString() + " s";
