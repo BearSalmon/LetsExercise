@@ -31,8 +31,8 @@ public class WholeSampleSceneManager : MonoBehaviour
         Exercise.SetActive(false);
         Ready.SetActive(true);
         nowState = 1;
-        animationCode = GameObject.Find("Manager").GetComponent<AnimationCode>();
-        dBUtils = GameObject.Find("Manager").GetComponent<DBUtils>();
+        animationCode = GetComponent<AnimationCode>();
+        dBUtils = GameObject.Find("WholeManager").GetComponent<DBUtils>();
         countDownTimer = GetComponent<CountDownTimer>();
         readyPageUi = GetComponent<ReadyPageUi>();
         exercisePageUI = GetComponent<ExercisePageUI>();
@@ -43,6 +43,7 @@ public class WholeSampleSceneManager : MonoBehaviour
         SetUpPath();
         readyPageUi.SetUp(poses.Skip(nowPose - 1).FirstOrDefault().Name, nowPose, poseSetCount, "test123");
         //countDownTimer.StartCountDown(5f);
+       
     }
 
     public void SetUpPath()
@@ -57,6 +58,7 @@ public class WholeSampleSceneManager : MonoBehaviour
         {
             nowState = 0;
             Exercise.SetActive(true);
+            animationCode.setBodyList();
             Ready.SetActive(false);
 
 
@@ -64,12 +66,14 @@ public class WholeSampleSceneManager : MonoBehaviour
 
             exercisePageUI.CallDrawer();
             countDownTimer.StartCountDown(10f);
+
         }
         else
         {
             nowState = 1;
             Exercise.SetActive(false);
             Ready.SetActive(true);
+            animationCode.setBodyList();
 
             nowPose += 1;
             SetUpPath();

@@ -32,7 +32,7 @@ public class ExercisePageUI : MonoBehaviour
 
     void Start()
     {
-        udpReceive = GameObject.Find("Manager").GetComponent<UDPReceive>();
+        udpReceive = GameObject.Find("WholeManager").GetComponent<UDPReceive>();
         //alignment.fillAmount = 0f;
         alignment.enabled = false;
         isIncreasing = false;

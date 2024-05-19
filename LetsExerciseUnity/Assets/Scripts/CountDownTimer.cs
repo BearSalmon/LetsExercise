@@ -22,7 +22,7 @@ public class CountDownTimer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        animationCode = GameObject.Find("Manager").GetComponent<AnimationCode>();
+        animationCode = GetComponent<AnimationCode>();
         wholeSampleSceneManager = GetComponent<WholeSampleSceneManager>();
         progressBar.fillAmount = 0f;
         progressBar = GameObject.Find("Timer1_Cover").GetComponent<Image>();

@@ -192,28 +192,33 @@ public class UDPReceive : MonoBehaviour
 
         if (m_Scene.buildIndex != f_Scene.buildIndex)
         {
+            if (m_Scene.name != "SampleScene")
+            {
+                mouse = GameObject.Find("Mouse");
+                Canvas canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
+                canvasRectTransform = canvas.GetComponent<RectTransform>();
+                transformPosition[0] = mouse.transform.localPosition.x;
+                transformPosition[1] = mouse.transform.localPosition.y;
+                transformPosition[2] = mouse.transform.localPosition.z;
 
-            mouse = GameObject.Find("Mouse");
-            Canvas canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
-            canvasRectTransform = canvas.GetComponent<RectTransform>();
-            transformPosition[0] = mouse.transform.localPosition.x;
-            transformPosition[1] = mouse.transform.localPosition.y;
-            transformPosition[2] = mouse.transform.localPosition.z;
+                canva_xMin = canvasRectTransform.rect.xMin;
+                canva_xMax = canvasRectTransform.rect.xMax;
+                canva_yMin = canvasRectTransform.rect.yMin;
+                canva_yMax = canvasRectTransform.rect.yMax;
+                buttonEvent = GetComponent<ButtonEvent>();
+                circleDrawer = GetComponent<CircleDrawer>();
 
-            canva_xMin = canvasRectTransform.rect.xMin;
-            canva_xMax = canvasRectTransform.rect.xMax;
-            canva_yMin = canvasRectTransform.rect.yMin;
-            canva_yMax = canvasRectTransform.rect.yMax;
-            buttonEvent = GetComponent<ButtonEvent>();
-            circleDrawer = GetComponent<CircleDrawer>();
+            }
+
+            
         }
         f_Scene = SceneManager.GetActiveScene();
-
-        mouse.transform.position = new Vector3(transformPosition[0], transformPosition[1], transformPosition[2]);
+       
 
         if (m_Scene.name != "SampleScene")
         {
             //circleDrawer.StopIncreasing();
+            mouse.transform.position = new Vector3(transformPosition[0], transformPosition[1], transformPosition[2]);
             buttonEvent.Check_if_button();
 
             if (circleDrawer.circleImage == null)

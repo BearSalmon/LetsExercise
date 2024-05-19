@@ -28,11 +28,15 @@ public class CircleDrawer : MonoBehaviour
         m_Scene = SceneManager.GetActiveScene();
         if (m_Scene.buildIndex != f_Scene.buildIndex)
         {
-            StopIncreasing();
+         
             buttonEvent = GetComponent<ButtonEvent>();
-            circleImage = GameObject.Find("Circle").GetComponent<Image>();
-            circleImage.fillAmount = 0f;
-
+       
+            if (m_Scene.name != "SampleScene")
+            {
+                StopIncreasing();
+                circleImage = GameObject.Find("Circle").GetComponent<Image>();
+                circleImage.fillAmount = 0f;
+            }
         }
         f_Scene = SceneManager.GetActiveScene();
 

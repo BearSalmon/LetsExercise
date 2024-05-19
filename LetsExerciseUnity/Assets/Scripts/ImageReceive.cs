@@ -37,7 +37,7 @@ public class ImageReceive : MonoBehaviour
         if (m_Scene.name == "SampleScene")
         {
 
-            wholeSampleSceneManager = GameObject.Find("ManagerToBeKeep").GetComponent<WholeSampleSceneManager>();
+            wholeSampleSceneManager = GameObject.Find("Manager").GetComponent<WholeSampleSceneManager>();
 
             if (wholeSampleSceneManager.nowState == 0)
             {

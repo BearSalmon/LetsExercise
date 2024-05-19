@@ -71,6 +71,7 @@ public class ButtonEvent : MonoBehaviour
         m_Scene = SceneManager.GetActiveScene();
         f_Scene = SceneManager.GetActiveScene();
         SetButtonList();
+        poseSetID = 1;
     }
 
     // Update is called once per frame
@@ -209,6 +210,10 @@ public class ButtonEvent : MonoBehaviour
         {
             selectLevel = GameObject.Find("Manager").GetComponent<SelectLevel>();
             numOfButton = 4;
+        }
+        else if (m_Scene.name == "SampleScene")
+        {
+            numOfButton = 0;
         }
 
         else if (m_Scene.name == "ExitGame")
@@ -639,7 +644,7 @@ public class ButtonEvent : MonoBehaviour
             }
             else if (btn.name == "Btn4")
             {
-
+                SceneManager.LoadScene((int)SceneName.SampleScene);
             }
 
         }
