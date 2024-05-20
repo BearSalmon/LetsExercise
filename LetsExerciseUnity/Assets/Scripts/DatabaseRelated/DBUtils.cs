@@ -54,6 +54,7 @@ public class DBUtils : MonoBehaviour
             Weight = "63,65,",
             Height = 170,
             Recommendation = "1,0,0,0,0,1,0,0,",
+            HasUnfinishedPlan = false,
         };
         int pk = userService.AddUser(user);
 
@@ -70,6 +71,7 @@ public class DBUtils : MonoBehaviour
             Calories = 100,
             Height = 170,
             Recommendation = "1,0,0,0,0,1,0,0,",
+            HasUnfinishedPlan = false,
         };
         pk = userService.AddUser(user);
 
@@ -86,6 +88,7 @@ public class DBUtils : MonoBehaviour
             Calories = 100,
             Height = 170,
             Recommendation = "1,0,0,0,0,1,0,0,",
+            HasUnfinishedPlan = false,
         };
         pk = userService.AddUser(user);
         
@@ -165,10 +168,9 @@ public class DBUtils : MonoBehaviour
         {
             PoseSetName = "hello",
             Calories = 130f,
-            NumberOfGesture = 10,
+            NumberOfGesture = 5,
             Part = "arms abs",
-            Duration = 100,
-
+            TrainPoseSet = "arm1,arm2,arm3,arm4,arm5,",
         };
         poseSetService.AddPoseSet(poseSet);
 
@@ -176,10 +178,9 @@ public class DBUtils : MonoBehaviour
         {
             PoseSetName = "how to become a cute salmon",
             Calories = 500f,
-            NumberOfGesture = 7,
+            NumberOfGesture = 5,
             Part = "body",
-            Duration = 70,
-
+            TrainPoseSet = "arm1,arm2,arm3,arm4,arm5,",
         };
 
         poseSetService.AddPoseSet(poseSet);
@@ -188,10 +189,9 @@ public class DBUtils : MonoBehaviour
         {
             PoseSetName = "hi hi",
             Calories = 300f,
-            NumberOfGesture = 8,
+            NumberOfGesture = 5,
             Part = "body",
-            Duration = 200,
-
+            TrainPoseSet = "arm1,arm2,arm3,arm4,arm5,",
         };
 
         poseSetService.AddPoseSet(poseSet);
@@ -224,7 +224,8 @@ public class DBUtils : MonoBehaviour
             Hair = "000000FF",
             Body = "FFDBC6FF",
             Cloth = "CAEE8AFF",
-            Recommendation = "0,0,0,0,0,0,0,0,"
+            Recommendation = "0,0,0,0,0,0,0,0,",
+            HasUnfinishedPlan = false
         };
         int pk = userService.AddUser(user);
         Debug.Log("Primary key = " + pk);
@@ -292,7 +293,6 @@ public class DBUtils : MonoBehaviour
     public IEnumerable<Pose> GetPoseByPart(string part)
     {
         IEnumerable<Pose> poses = poseService.GetPoseByPart(part);
-        ToConsole2(poses);
         return poses;
     }
 

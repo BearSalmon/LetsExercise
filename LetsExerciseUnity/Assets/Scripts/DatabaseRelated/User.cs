@@ -22,6 +22,10 @@ public class User
     public int Calories { get; set; }
     public string Recommendation { get; set; } // array of int
 
+    public bool HasUnfinishedPlan { get; set; }
+
+    public string RecommendationPoseSet { get; set; } // array of pose name
+
     public override string ToString()
     {
         return string.Format("[Player: Id={0}, Name={1},  Age={2}, Weight={3}, Height={4}, Gender={5}, PreferPart={6}, Level={7}, Hair={8}, Body={9}, Cloth={10}, LastLogin={11}",

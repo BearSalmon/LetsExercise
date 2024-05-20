@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Linq;
+using System;
 
 public class SelectPlayer : MonoBehaviour
 {
@@ -32,6 +34,8 @@ public class SelectPlayer : MonoBehaviour
         dBUtils = GameObject.Find("WholeManager").GetComponent<DBUtils>();
         number = dBUtils.CountUsers();
         updatePlayer(nowSelect);
+
+        GenerateAllUserRecommendation();
     }
 
     public void nextOption()
@@ -80,5 +84,101 @@ public class SelectPlayer : MonoBehaviour
     public void Save()
     {
         dBUtils.nowPlayer = "User" + nowSelect.ToString();
+    }
+
+
+    void GenerateAllUserRecommendation()
+    {
+        int userNum = dBUtils.CountUsers();
+        for (int i = 1; i <= userNum; i++)
+        {
+            User user = dBUtils.GetUserByName("User" + i);
+            if (user.HasUnfinishedPlan == false)
+            {
+                string[] recommendValues;
+                recommendValues = user.Recommendation.TrimEnd(',').Split(',');
+                int[] recommendValuesInt = Array.ConvertAll(recommendValues, int.Parse);
+
+                int maxIndex_0_4 = -1;
+                int maxValue_0_4 = int.MinValue;
+
+                for (int j = 0; j < 5; j++)
+                {
+                    if (recommendValuesInt[i] > maxValue_0_4)
+                    {
+                        maxValue_0_4 = recommendValuesInt[i];
+                        maxIndex_0_4 = i;
+                    }
+                }
+
+                int maxIndex_5_7 = -1;
+                int maxValue_5_7 = int.MinValue;
+
+                for (int j = 5; j < 8; j++)
+                {
+                    if (recommendValuesInt[i] > maxValue_5_7)
+                    {
+                        maxValue_5_7 = recommendValuesInt[i];
+                        maxIndex_5_7 = i;
+                    }
+                }
+
+                string part = GetRecommendLabel(maxIndex_0_4);
+                string level = GetRecommendLabel(maxIndex_5_7);
+
+                // wait to be update 
+                user.RecommendationPoseSet = "";
+                IEnumerable<Pose> poses;
+                poses = dBUtils.GetPoseByPart("arms");
+                IEnumerable<string> poseNames = poses.Select(p => p.Name);
+                List<string> poseNameList = poseNames.ToList();
+                foreach (string name in poseNameList)
+                {
+                    user.RecommendationPoseSet += name + ',';
+                }
+                // end
+
+                Debug.Log(user.RecommendationPoseSet);
+
+                user.HasUnfinishedPlan = true;
+                dBUtils.UpdateUser(user);
+            }
+        }
+    }
+
+    string GetRecommendLabel(int index)
+    {
+        if (index == 0)
+        {
+            return "Arms";
+        }
+        else if (index == 1)
+        {
+            return "Abs";
+        }
+        else if (index == 2)
+        {
+            return "Buttocks";
+        }
+        else if (index == 3)
+        {
+            return "Legs";
+        }
+        else if (index == 4)
+        {
+            return "Whole Body";
+        }
+        else if (index == 5)
+        {
+            return "Easy";
+        }
+        else if (index == 6)
+        {
+            return "Medium";
+        }
+        else
+        {
+            return "Hard";
+        }
     }
 }

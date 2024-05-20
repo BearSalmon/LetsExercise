@@ -42,6 +42,7 @@ public class UserService
     // Count player number
     public int CountUsers()
     {
+        Debug.Log("hi");
         return dataBase.GetUserConnection().Table<User>().Count();
     }
 }

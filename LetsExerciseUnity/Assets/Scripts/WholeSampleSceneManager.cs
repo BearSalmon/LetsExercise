@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class WholeSampleSceneManager : MonoBehaviour
 {
@@ -76,10 +77,17 @@ public class WholeSampleSceneManager : MonoBehaviour
             animationCode.setBodyList();
 
             nowPose += 1;
-            SetUpPath();
-            readyPageUi.SetUp(poses.Skip(nowPose - 1).FirstOrDefault().Name, nowPose, poseSetCount, "test123");
+            if (nowPose > poseSetCount)
+            {
+                SceneManager.LoadScene(11);
+            }
+            else
+            {
+                SetUpPath();
+                readyPageUi.SetUp(poses.Skip(nowPose - 1).FirstOrDefault().Name, nowPose, poseSetCount, "test123");
 
-            countDownTimer.StartCountDown(5f);
+                countDownTimer.StartCountDown(5f);
+            } 
         }
     }
 

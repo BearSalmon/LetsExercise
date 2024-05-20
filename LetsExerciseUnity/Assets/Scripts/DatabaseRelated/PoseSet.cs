@@ -10,7 +10,7 @@ public class PoseSet
     public string PoseSetName { get; set; }
     public string Part { get; set; }
     public int NumberOfGesture { get; set; }
-    public int Duration { get; set; }
+    public string TrainPoseSet { get; set; }
     public float Calories { get; set; }
 
 }
