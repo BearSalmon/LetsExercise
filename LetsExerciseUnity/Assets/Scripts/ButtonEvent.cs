@@ -54,10 +54,13 @@ public class ButtonEvent : MonoBehaviour
 
     public string nowSelectChoice; // for button
 
+    // for select train pose set
     public int poseSetID;
 
     public Button currentClickingButton;
 
+    // for plan system
+    public Pose[] planPoseSet;
 
     // for test (click button count)
     int count = 0;

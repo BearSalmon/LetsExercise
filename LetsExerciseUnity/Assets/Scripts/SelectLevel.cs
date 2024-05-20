@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using TMPro;
 using UnityEngine;
 
@@ -28,13 +29,28 @@ public class SelectLevel : MonoBehaviour
         else return 2;
     }
 
+    int GetDuration(string level)
+    {
+        int numOfPose = poseSet.NumberOfGesture;
+        if (level == "easy")
+        {
+            return 55 * numOfPose;
+        }
+        else if (level == "medium") return 70 * numOfPose;
+        else return 85 * numOfPose;
+    }
+
     public void updateLevel(string level)
     {
         poseSet = dBUtils.GetPoseSetById(buttonEvent.poseSetID);
-        Debug.Log(buttonEvent.poseSetID);
         nowLevel = level;
+        int d = GetDuration(nowLevel);
+        string min = (d / 60).ToString();
+        string sec = (d % 60).ToString();
+
         calories.text = (poseSet.Calories * exchageLevelval(level)).ToString() + " cal";
-        duration.text = (poseSet.Duration * exchageLevelval(level)).ToString() + " s";
+        duration.text = min + "m " + sec + "s";
+
 
         poseSetName.text = poseSet.PoseSetName;
     }
