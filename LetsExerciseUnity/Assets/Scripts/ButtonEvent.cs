@@ -62,6 +62,10 @@ public class ButtonEvent : MonoBehaviour
     // for plan system
     public Pose[] planPoseSet;
 
+
+    // plan = 0 ; train = 1; 
+    public int planOrTrain = 0;
+
     // for test (click button count)
     int count = 0;
 
@@ -529,6 +533,7 @@ public class ButtonEvent : MonoBehaviour
             {
                 mainPageSetUp.nowState = 1;
                 mainPageSetUp.ChangeState(1);
+                planOrTrain = 0;
                 SetButtonList();
 
             }
@@ -536,6 +541,7 @@ public class ButtonEvent : MonoBehaviour
             {
                 mainPageSetUp.nowState = 2;
                 mainPageSetUp.ChangeState(2);
+                planOrTrain = 1; 
                 SetButtonList();
             }
             else if (btn.name == "Btn3")
@@ -596,6 +602,10 @@ public class ButtonEvent : MonoBehaviour
                 else if (btn.name == "Btn9")
                 {
                     SceneManager.LoadScene((int)SceneName.ExitGame);
+                }
+                else if (btn.name == "Btn10")
+                {
+                    SceneManager.LoadScene((int)SceneName.SampleScene);
                 }
             }
             // train page

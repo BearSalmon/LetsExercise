@@ -55,6 +55,7 @@ public class DBUtils : MonoBehaviour
             Height = 170,
             Recommendation = "1,0,0,0,0,1,0,0,",
             HasUnfinishedPlan = false,
+            PreferPart = "Arms",
         };
         int pk = userService.AddUser(user);
 
@@ -72,6 +73,7 @@ public class DBUtils : MonoBehaviour
             Height = 170,
             Recommendation = "1,0,0,0,0,1,0,0,",
             HasUnfinishedPlan = false,
+            PreferPart = "Abs",
         };
         pk = userService.AddUser(user);
 
@@ -89,6 +91,7 @@ public class DBUtils : MonoBehaviour
             Height = 170,
             Recommendation = "1,0,0,0,0,1,0,0,",
             HasUnfinishedPlan = false,
+            PreferPart = "Whole Body",
         };
         pk = userService.AddUser(user);
         
@@ -103,7 +106,7 @@ public class DBUtils : MonoBehaviour
             Name = "arm1",
             Path = "/PoseDataset/arms/arm1.txt",
             CheckPoint = 4,
-            Part = "arms",
+            Part = "Arms",
             Description = ""
         };
 
@@ -114,7 +117,7 @@ public class DBUtils : MonoBehaviour
             Name = "arm2",
             Path = "/PoseDataset/arms/arm2.txt",
             CheckPoint = 4,
-            Part = "arms",
+            Part = "Arms",
             Description = ""
 
         };
@@ -127,7 +130,7 @@ public class DBUtils : MonoBehaviour
             Name = "arm3",
             Path = "/PoseDataset/arms/arm3.txt",
             CheckPoint = 4,
-            Part = "arms",
+            Part = "Arms",
             Description = ""
 
         };
@@ -140,7 +143,7 @@ public class DBUtils : MonoBehaviour
             Name = "arm4",
             Path = "/PoseDataset/arms/arm4.txt",
             CheckPoint = 4,
-            Part = "arms",
+            Part = "Arms",
             Description = ""
 
         };
@@ -152,7 +155,7 @@ public class DBUtils : MonoBehaviour
             Name = "arm5",
             Path = "/PoseDataset/arms/arm5.txt",
             CheckPoint = 4,
-            Part = "arms",
+            Part = "Arms",
             Description = ""
 
         };
@@ -169,7 +172,7 @@ public class DBUtils : MonoBehaviour
             PoseSetName = "hello",
             Calories = 130f,
             NumberOfGesture = 5,
-            Part = "arms abs",
+            Part = "Arms,Abs,",
             TrainPoseSet = "arm1,arm2,arm3,arm4,arm5,",
         };
         poseSetService.AddPoseSet(poseSet);
@@ -179,7 +182,7 @@ public class DBUtils : MonoBehaviour
             PoseSetName = "how to become a cute salmon",
             Calories = 500f,
             NumberOfGesture = 5,
-            Part = "body",
+            Part = "Whole Body,",
             TrainPoseSet = "arm1,arm2,arm3,arm4,arm5,",
         };
 
@@ -190,7 +193,7 @@ public class DBUtils : MonoBehaviour
             PoseSetName = "hi hi",
             Calories = 300f,
             NumberOfGesture = 5,
-            Part = "body",
+            Part = "Legs,",
             TrainPoseSet = "arm1,arm2,arm3,arm4,arm5,",
         };
 

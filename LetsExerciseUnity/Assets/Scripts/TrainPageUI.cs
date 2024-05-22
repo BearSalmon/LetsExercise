@@ -64,26 +64,26 @@ public class TrainPageUI : MonoBehaviour
         numberOfGesture.text = poseSet.NumberOfGesture.ToString();
 
       
-        string[] parts = poseSet.Part.Split(" ");
+        string[] parts = poseSet.Part.TrimEnd(',').Split(',');
 
         for (int i=0; i < parts.Length; i++)
         {
-            if (parts[i] == "arms")
+            if (parts[i] == "Arms")
             {
                 arms.color = color2;
             }
-            else if (parts[i] == "abs")
+            else if (parts[i] == "Abs")
             {
                 abs.color = color2;
             }
-            else if (parts[i] == "legs")
+            else if (parts[i] == "Legs")
             {
                 legs.color = color2;
             }
-            else if (parts[i] == "buttocks")
+            else if (parts[i] == "Buttocks")
             {
                 buttocks1.color = color2;
-                buttocks2.color = color2;
+                buttocks2.color = color3;
             }
             else
             {

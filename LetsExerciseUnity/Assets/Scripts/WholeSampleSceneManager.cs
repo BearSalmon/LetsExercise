@@ -20,6 +20,7 @@ public class WholeSampleSceneManager : MonoBehaviour
     public AnimationCode animationCode;
     public ReadyPageUi readyPageUi;
     public ExercisePageUI exercisePageUI;
+    ButtonEvent buttonEvent;
 
     public GameObject Exercise;
     public GameObject Ready;
@@ -34,6 +35,7 @@ public class WholeSampleSceneManager : MonoBehaviour
         nowState = 1;
         animationCode = GetComponent<AnimationCode>();
         dBUtils = GameObject.Find("WholeManager").GetComponent<DBUtils>();
+        buttonEvent = GameObject.Find("WholeManager").GetComponent<ButtonEvent>();
         countDownTimer = GetComponent<CountDownTimer>();
         readyPageUi = GetComponent<ReadyPageUi>();
         exercisePageUI = GetComponent<ExercisePageUI>();
@@ -45,6 +47,19 @@ public class WholeSampleSceneManager : MonoBehaviour
         readyPageUi.SetUp(poses.Skip(nowPose - 1).FirstOrDefault().Name, nowPose, poseSetCount, "test123");
         //countDownTimer.StartCountDown(5f);
        
+    }
+
+    public void SetUpPoseSet()
+    {
+        // plan
+        if (buttonEvent.planOrTrain == 0)
+        {
+
+        }
+        else
+        {
+
+        }
     }
 
     public void SetUpPath()

@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using TMPro;
 
 using UnityEngine.SceneManagement;
+using System.Linq;
+using System;
 
 public class Trainer2PageUI : MonoBehaviour
 {
@@ -46,9 +48,37 @@ public class Trainer2PageUI : MonoBehaviour
         P2.SetActive(false);
         P3.SetActive(false);
         P4.SetActive(false);
-
+        GenerateUserRecommendation();
         progress1();
     }
+    void GenerateUserRecommendation()
+    {
+        if (user.HasUnfinishedPlan == false)
+        {
+
+            string part = user.PreferPart;
+            string level = user.Level;
+
+            ////////  wait to be update 
+            user.RecommendationPoseSet = "";
+            IEnumerable<Pose> poses;
+            poses = dBUtils.GetPoseByPart("Arms");
+            IEnumerable<string> poseNames = poses.Select(p => p.Name);
+            List<string> poseNameList = poseNames.ToList();
+            foreach (string name in poseNameList)
+            {
+                user.RecommendationPoseSet += name + ',';
+            }
+            /////// end 
+
+            user.Level = level;
+            user.PreferPart = part;
+            user.HasUnfinishedPlan = true;
+            dBUtils.UpdateUser(user);
+        }
+    }
+
+    
 
     void progress1()
     {

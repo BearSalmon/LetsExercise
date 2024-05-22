@@ -5,7 +5,6 @@ using UnityEngine.UI;
 using TMPro;
 using System.Linq;
 using System;
-
 public class SelectPlayer : MonoBehaviour
 {
     DBUtils dBUtils;
@@ -100,46 +99,46 @@ public class SelectPlayer : MonoBehaviour
                 int[] recommendValuesInt = Array.ConvertAll(recommendValues, int.Parse);
 
                 int maxIndex_0_4 = -1;
-                int maxValue_0_4 = int.MinValue;
+                int maxValue_0_4 = -1;
 
                 for (int j = 0; j < 5; j++)
                 {
-                    if (recommendValuesInt[i] > maxValue_0_4)
+                    if (recommendValuesInt[j] > maxValue_0_4)
                     {
-                        maxValue_0_4 = recommendValuesInt[i];
-                        maxIndex_0_4 = i;
+                        maxValue_0_4 = recommendValuesInt[j];
+                        maxIndex_0_4 = j;
                     }
                 }
 
                 int maxIndex_5_7 = -1;
-                int maxValue_5_7 = int.MinValue;
+                int maxValue_5_7 = -1;
 
                 for (int j = 5; j < 8; j++)
                 {
-                    if (recommendValuesInt[i] > maxValue_5_7)
+                    if (recommendValuesInt[j] > maxValue_5_7)
                     {
-                        maxValue_5_7 = recommendValuesInt[i];
-                        maxIndex_5_7 = i;
+                        maxValue_5_7 = recommendValuesInt[j];
+                        maxIndex_5_7 = j;
                     }
                 }
 
                 string part = GetRecommendLabel(maxIndex_0_4);
                 string level = GetRecommendLabel(maxIndex_5_7);
 
-                // wait to be update 
+                ////////  wait to be update 
                 user.RecommendationPoseSet = "";
                 IEnumerable<Pose> poses;
-                poses = dBUtils.GetPoseByPart("arms");
+                poses = dBUtils.GetPoseByPart("Arms");
                 IEnumerable<string> poseNames = poses.Select(p => p.Name);
                 List<string> poseNameList = poseNames.ToList();
                 foreach (string name in poseNameList)
                 {
                     user.RecommendationPoseSet += name + ',';
                 }
-                // end
-
-                Debug.Log(user.RecommendationPoseSet);
-
+                /////// end 
+                
+                user.Level = level;
+                user.PreferPart = part;
                 user.HasUnfinishedPlan = true;
                 dBUtils.UpdateUser(user);
             }
