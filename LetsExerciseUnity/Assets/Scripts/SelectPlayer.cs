@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Linq;
 using System;
+
 public class SelectPlayer : MonoBehaviour
 {
     DBUtils dBUtils;
@@ -124,7 +125,7 @@ public class SelectPlayer : MonoBehaviour
 
                 string part = GetRecommendLabel(maxIndex_0_4);
                 string level = GetRecommendLabel(maxIndex_5_7);
-
+ 
                 ////////  wait to be update 
                 user.RecommendationPoseSet = "";
                 IEnumerable<Pose> poses;

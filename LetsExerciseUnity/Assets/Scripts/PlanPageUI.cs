@@ -23,8 +23,6 @@ public class PlanPageUI : MonoBehaviour
 
     User user;
 
-    List<Pose> plan = new List<Pose>();
-
     void Start()
     {
         
@@ -62,7 +60,6 @@ public class PlanPageUI : MonoBehaviour
 
     void setPlanSet()
     {
-        plan.Clear();
         string[] poseNames;
         poseNames = user.RecommendationPoseSet.TrimEnd(',').Split(',');
 
@@ -70,12 +67,6 @@ public class PlanPageUI : MonoBehaviour
         string min = (d / 60).ToString();
         string sec = (d % 60).ToString();
         duration.text = min + "m " + sec + "s";
-
-        foreach (string name in poseNames)
-        {
-            Pose pose = dBUtils.GetPoseByName(name);
-            plan.Add(pose);
-        }
 
         Color color;
         ColorUtility.TryParseHtmlString("#".ToString() + "CCC4C4", out color);
@@ -91,7 +82,6 @@ public class PlanPageUI : MonoBehaviour
         legs.color = color;
         buttocks1.color = color;
         buttocks2.color = color;
-        Debug.Log(user.PreferPart);
 
         if (user.PreferPart == "Arms")
         {

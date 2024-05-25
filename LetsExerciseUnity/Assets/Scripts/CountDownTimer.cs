@@ -15,14 +15,11 @@ public class CountDownTimer : MonoBehaviour
     // start time
     float timeDuration;
 
-    public AnimationCode animationCode;
-
     public WholeSampleSceneManager wholeSampleSceneManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        animationCode = GetComponent<AnimationCode>();
         wholeSampleSceneManager = GetComponent<WholeSampleSceneManager>();
         progressBar.fillAmount = 0f;
         progressBar = GameObject.Find("Timer1_Cover").GetComponent<Image>();
@@ -36,7 +33,7 @@ public class CountDownTimer : MonoBehaviour
         currentTime = startingTime;
         count.text = startingTime.ToString();
         progressBar.fillAmount = 0f;
-        animationCode.StartAnimation();
+        wholeSampleSceneManager.StartAnimation();
     }
 
     void Update()
@@ -60,7 +57,7 @@ public class CountDownTimer : MonoBehaviour
         {
             count.text = timeDuration.ToString(); 
             currentTime = -1;
-            animationCode.StopAnimation();
+            wholeSampleSceneManager.StopAnimation();
             wholeSampleSceneManager.ChangeView();
         }
     }

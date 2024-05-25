@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
 using TMPro;
+using System.Runtime.InteropServices;
 
 public class ButtonEvent : MonoBehaviour
 {
@@ -58,12 +59,10 @@ public class ButtonEvent : MonoBehaviour
 
     // for select train pose set
     public int poseSetID;
+    public string poseSetLevel; 
 
+    // 
     public Button currentClickingButton;
-
-    // for plan system
-    public Pose[] planPoseSet;
-
 
     // plan = 0 ; train = 1; 
     public int planOrTrain = 0;
@@ -192,7 +191,7 @@ public class ButtonEvent : MonoBehaviour
                 }
                 else if (mainPageSetUp.nowState == 1) // plan page
                 {
-                    numOfButton = 5;
+                    numOfButton = 6;
                 }
                 else if (mainPageSetUp.nowState == 2) // train page
                 {
@@ -207,7 +206,7 @@ public class ButtonEvent : MonoBehaviour
                 }
                 else if (mainPageSetUp.nowState == 1) // plan page
                 {
-                    numOfButton = 9;
+                    numOfButton = 10;
                 }
                 else if (mainPageSetUp.nowState == 2) // train page
                 {
@@ -284,7 +283,7 @@ public class ButtonEvent : MonoBehaviour
     {
 
         count++;
-        Debug.Log(count);
+        //Debug.Log(count);
         // Game Start
         if (m_Scene.name == "GameStart")
         {
@@ -605,23 +604,22 @@ public class ButtonEvent : MonoBehaviour
             {
                 if (btn.name == "Btn6")
                 {
-                    SceneManager.LoadScene((int)SceneName.CharacterDecorate);
+                    SceneManager.LoadScene((int)SceneName.SampleScene);
                 }
                 else if (btn.name == "Btn7")
                 {
-                    SceneManager.LoadScene((int)SceneName.SelectPlayer);
+                    SceneManager.LoadScene((int)SceneName.CharacterDecorate);
                 }
                 else if (btn.name == "Btn8")
                 {
-                    
+                    SceneManager.LoadScene((int)SceneName.SelectPlayer);
                 }
                 else if (btn.name == "Btn9")
                 {
-                    SceneManager.LoadScene((int)SceneName.ExitGame);
                 }
                 else if (btn.name == "Btn10")
                 {
-                    SceneManager.LoadScene((int)SceneName.SampleScene);
+                    SceneManager.LoadScene((int)SceneName.ExitGame);
                 }
             }
             // train page
@@ -658,16 +656,19 @@ public class ButtonEvent : MonoBehaviour
             if (btn.name == "Btn1")
             {
                 selectLevel.updateLevel("easy");
+                poseSetLevel = "Easy";
                 nowSelectChoice = btn.name;
             }
             else if (btn.name == "Btn2")
             {
                 selectLevel.updateLevel("medium");
+                poseSetLevel = "Medium";
                 nowSelectChoice = btn.name;
             }
             else if (btn.name == "Btn3")
             {
                 selectLevel.updateLevel("hard");
+                poseSetLevel = "Hard";
                 nowSelectChoice = btn.name;
             }
             else if (btn.name == "Btn4")

@@ -107,7 +107,7 @@ pose = {
     },
     "arm5":  # 畫出大圓
     {
-        "path": "./video_lmlist/arms/arm5.txt",
+        "path": "/PoseDataset/arms/arm5.txt",
         "check_angle":[
             {
                 "point1": "left_shoulder",
