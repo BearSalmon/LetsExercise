@@ -2162,6 +2162,7 @@ MonoBehaviour:
   nowSelectChoice: 
   poseSetID: 0
   currentClickingButton: {fileID: 0}
+  planOrTrain: 0
 --- !u!114 &1768877322
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -3,8 +3,8 @@ import PoseModule
 # from cvzone.PoseModule import PoseDetector
 from cvzone.HandTrackingModule import HandDetector
 import socket
-from utils import find_angle, get_landmark_features , get_Wrong_Message , get_WrongPart_Message
-from pose_dataset import get_pose_db
+from utils import find_angle, get_landmark_features, get_Wrong_Message, get_WrongPart_Message
+from pose_dataset import get_pose_db, find_pose_key_by_path
 import json
 import time
 import os
@@ -15,8 +15,8 @@ if __name__ == "__main__":
     # 取得資料庫
     pose_db = get_pose_db()
 
-    check_point = pose_db["很像在舉重"]["check_angle"]
-    file_path = pose_db["很像在舉重"]["path"]
+    check_point = pose_db["arm1"]["check_angle"]
+    file_path = pose_db["arm1"]["path"]
     exact_path = os.getcwd() + file_path
 
     with open(exact_path, "r") as lm_file:
@@ -54,7 +54,7 @@ if __name__ == "__main__":
     width, height = 360, 480
 
     # Webcam
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
     if not cap.isOpened():
         print("Cannot open camera")
         exit()
@@ -156,7 +156,14 @@ if __name__ == "__main__":
         #     break
         if received_data_for_poseset:
             # TODO: after receiving poseset from unity
-            print("hi")
+            print(received_data_for_poseset)
+            now_pose = find_pose_key_by_path(received_data_for_poseset)
+            check_point = pose_db[now_pose]["check_angle"]
+            exact_path = os.getcwd() + received_data_for_poseset
+
+            with open(exact_path, "r") as lm_file:
+                lines = lm_file.readlines()
+
 
         if received_data_for_counter:
             if received_data_for_counter == "start":

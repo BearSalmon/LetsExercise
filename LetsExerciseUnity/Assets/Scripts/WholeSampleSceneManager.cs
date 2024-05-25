@@ -27,6 +27,9 @@ public class WholeSampleSceneManager : MonoBehaviour
 
     IEnumerable<Pose> poses;
 
+    public UDPSend udpsend;
+    public UDPReceive udpreceive;
+
     void Start()
     {
 
@@ -40,8 +43,11 @@ public class WholeSampleSceneManager : MonoBehaviour
         readyPageUi = GetComponent<ReadyPageUi>();
         exercisePageUI = GetComponent<ExercisePageUI>();
 
+        udpsend = GameObject.Find("WholeManager").GetComponent<UDPSend>();
+        udpreceive = GameObject.Find("WholeManager").GetComponent<UDPReceive>();
+
         nowPose = 1;
-        poses = dBUtils.GetPoseByPart("arms");
+        poses = dBUtils.GetPoseByPart("Arms");
         poseSetCount = poses.Count();
         SetUpPath();
         readyPageUi.SetUp(poses.Skip(nowPose - 1).FirstOrDefault().Name, nowPose, poseSetCount, "test123");
@@ -66,6 +72,7 @@ public class WholeSampleSceneManager : MonoBehaviour
     {
         string path = poses.Skip(nowPose - 1).FirstOrDefault().Path;
         animationCode.ChangeLineList(path);
+        udpsend.SendDataForPoseset(path.ToString());
     }
 
     public void ChangeView()
