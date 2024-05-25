@@ -5,7 +5,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Calendar : MonoBehaviour
+
+public class CalendarUI : MonoBehaviour
 {
     public class Day
     {
@@ -47,35 +48,18 @@ public class Calendar : MonoBehaviour
     public TextMeshProUGUI Month;
     public DateTime currDate = DateTime.Now;
 
-    public Button left;
-    public Button right;
 
-    private void Start()
+    void Start()
     {
         UpdateCalendar(DateTime.Now.Year, DateTime.Now.Month);
-        left.onClick.AddListener(() => ButtonClick(left));
-        right.onClick.AddListener(() => ButtonClick(right));
-    }
-
-    public void ButtonClick(Button btn)
-    {
-        if (btn.name == "Btn1")
-        {
-            SwitchMonth(1);
-        }
-        else
-        {
-            SwitchMonth(-1);
-
-        }
     }
     
 
-    void UpdateCalendar(int year, int month)
+    public void UpdateCalendar(int year, int month)
     {
         DateTime temp = new DateTime(year, month, 1);
         currDate = temp;
-        Month.text = temp.ToString("MMMM") + " " + temp.Year.ToString();
+        Month.text = temp.Month.ToString() + " " + temp.Year.ToString();
         int startDay = GetMonthStartDay(year, month);
         int endDay = GetTotalNumberOfDays(year, month);
 
@@ -98,6 +82,7 @@ public class Calendar : MonoBehaviour
                     else
                     {
                         newDay = new Day(currDay - startDay, Color.white, weeks[w * 7 + i]);
+                        
                     }
                     days.Add(newDay);
                     days[w * 7 + i].UpdateDay(w * 7 + i - startDay);
