@@ -41,7 +41,7 @@ public class WholeSampleSceneManager : MonoBehaviour
         exercisePageUI = GetComponent<ExercisePageUI>();
 
         nowPose = 1;
-        poses = dBUtils.GetPoseByPart("arms");
+        poses = dBUtils.GetPoseByPart("Arms");
         poseSetCount = poses.Count();
         SetUpPath();
         readyPageUi.SetUp(poses.Skip(nowPose - 1).FirstOrDefault().Name, nowPose, poseSetCount, "test123");
