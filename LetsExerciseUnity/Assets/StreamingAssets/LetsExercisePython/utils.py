@@ -75,6 +75,5 @@ def get_Wrong_Message(check_point,wrong_offset,dict_features):
         else :
             wrong_message += "Please lower your " + dict_features_return[ref_point]
 
-
     return wrong_message
     
