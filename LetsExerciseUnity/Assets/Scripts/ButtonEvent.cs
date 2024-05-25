@@ -24,7 +24,8 @@ public class ButtonEvent : MonoBehaviour
         MainPage = 11,
         SelectLevel = 12,
         SampleScene = 13,
-        ExitGame = 14
+        ExitGame = 14,
+        Calendar = 15
     }
     public GameObject mouse;
     public Button[] buttons;
@@ -46,6 +47,7 @@ public class ButtonEvent : MonoBehaviour
     public SelectPartSet selectPartSet;
     public InvestigateSet investigateSet;
     public ExitGameUI exitGameUI;
+    public CalendarUI calendarUI;
 
     public bool isAddingWeight;
     public bool isChangingColor;
@@ -244,6 +246,11 @@ public class ButtonEvent : MonoBehaviour
                 numOfButton = 1;
             }
         }
+        else if (m_Scene.name == "Calendar")
+        {
+            numOfButton = 44; 
+            calendarUI = GameObject.Find("Manager").GetComponent<CalendarUI>();
+        }
 
 
         
@@ -271,11 +278,11 @@ public class ButtonEvent : MonoBehaviour
         count++;
         Debug.Log(count);
         // Game Start
-        if ( m_Scene.name == "GameStart")
+        if (m_Scene.name == "GameStart")
         {
             if (btn.name == "Btn1")
             {
-                SceneManager.LoadScene((int) SceneName.Trainer);
+                SceneManager.LoadScene((int)SceneName.Trainer);
             }
 
         }
@@ -356,7 +363,7 @@ public class ButtonEvent : MonoBehaviour
                 {
                     user.Cloth = ColorUtility.ToHtmlStringRGBA(color);
                 }
-                
+
             }
             else if (btn.name == "Btn7")
             {
@@ -369,7 +376,7 @@ public class ButtonEvent : MonoBehaviour
                 }
                 else
                 {
-                    if(isChangingColor == false)
+                    if (isChangingColor == false)
                     {
                         isChangingColor = true;
                         SceneManager.LoadScene((int)SceneName.InquireData);
@@ -379,15 +386,15 @@ public class ButtonEvent : MonoBehaviour
                         SceneManager.LoadScene((int)SceneName.MainPage);
 
                     }
-                    
+
                 }
-                    
+
             }
             else if (btn.name == "Btn8")
             {
                 SceneManager.LoadScene((int)SceneName.SelectSex);
             }
-            
+
         }
         // Inquire Data (Age , Weight , Height)
         else if (m_Scene.name == "InquireData")
@@ -409,7 +416,7 @@ public class ButtonEvent : MonoBehaviour
 
                     dBUtils.UpdateUser(user);
                     inquireDataPageUI.state = 0;
-              
+
                     SceneManager.LoadScene((int)SceneName.SelectPart);
                 }
                 if (btn.name == "Btn4")
@@ -433,7 +440,7 @@ public class ButtonEvent : MonoBehaviour
                     SceneManager.LoadScene((int)SceneName.MainPage);
                 }
             }
-            
+
             if (btn.name == "Btn1")
             {
                 if (inquireDataPageUI.state == 0)
@@ -446,7 +453,7 @@ public class ButtonEvent : MonoBehaviour
                 {
                     inquireDataPageUI.Increase();
                 }
-                
+
             }
             else if (btn.name == "Btn2")
             {
@@ -458,10 +465,10 @@ public class ButtonEvent : MonoBehaviour
                 {
                     inquireDataPageUI.Decrease();
                 }
-                
+
             }
 
-            
+
         }
         // Select Prefer Part 
         else if (m_Scene.name == "SelectPart")
@@ -496,7 +503,7 @@ public class ButtonEvent : MonoBehaviour
                 user.Recommendation = selectPartSet.SetRecommandation(user.PreferPart);
                 SceneManager.LoadScene((int)SceneName.Investigation);
                 dBUtils.UpdateUser(user);
-            } 
+            }
 
         }
         // Investidation ( the level of user )
@@ -525,7 +532,7 @@ public class ButtonEvent : MonoBehaviour
                 isAddingWeight = true;
                 SceneManager.LoadScene((int)SceneName.Trainer2);
             }
-            
+
         }
         else if (m_Scene.name == "MainPage")
         {
@@ -541,7 +548,7 @@ public class ButtonEvent : MonoBehaviour
             {
                 mainPageSetUp.nowState = 2;
                 mainPageSetUp.ChangeState(2);
-                planOrTrain = 1; 
+                planOrTrain = 1;
                 SetButtonList();
             }
             else if (btn.name == "Btn3")
@@ -552,6 +559,7 @@ public class ButtonEvent : MonoBehaviour
             }
             else if (btn.name == "Btn4")
             {
+                SceneManager.LoadScene((int)SceneName.Calendar);
             }
             else if (btn.name == "Btn5")
             {
@@ -576,7 +584,7 @@ public class ButtonEvent : MonoBehaviour
                 }
                 else if (btn.name == "Btn9")
                 {
-                   
+                    
                 }
                 else if (btn.name == "Btn10")
                 {
@@ -597,7 +605,7 @@ public class ButtonEvent : MonoBehaviour
                 }
                 else if (btn.name == "Btn8")
                 {
-
+                    
                 }
                 else if (btn.name == "Btn9")
                 {
@@ -629,14 +637,13 @@ public class ButtonEvent : MonoBehaviour
                 }
                 else if (btn.name == "Btn10")
                 {
-
                 }
                 else if (btn.name == "Btn11")
                 {
                     SceneManager.LoadScene((int)SceneName.ExitGame);
                 }
             }
-            
+
         }
         else if (m_Scene.name == "SelectLevel")
         {
@@ -700,7 +707,7 @@ public class ButtonEvent : MonoBehaviour
                 exitGameUI.ChangeState(3);
                 SetButtonList();
             }
-            else if(exitGameUI.nowState == 3)
+            else if (exitGameUI.nowState == 3)
             {
                 if (btn.name == "Btn1")
                 {
@@ -708,6 +715,17 @@ public class ButtonEvent : MonoBehaviour
                     dBUtils.UpdateUser(user);
                     Application.Quit();
                 }
+            }
+        }
+        else if (m_Scene.name == "Calendar")
+        {
+            if (btn.name == "Btn1")
+            {
+                calendarUI.SwitchMonth(1);
+            }
+            else if (btn.name == "Btn2")
+            {
+                calendarUI.SwitchMonth(-1);
             }
         }
 

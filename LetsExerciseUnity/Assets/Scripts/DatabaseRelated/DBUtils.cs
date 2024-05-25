@@ -9,6 +9,7 @@ public class DBUtils : MonoBehaviour
     UserService userService;
     PoseService poseService;
     PoseSetService poseSetService;
+    RecordService recordService;
     
     DataBase dataBase;
 
@@ -21,16 +22,19 @@ public class DBUtils : MonoBehaviour
         userService = new UserService(dataBase);
         poseService = new PoseService(dataBase);
         poseSetService = new PoseSetService(dataBase);
+        recordService = new RecordService(dataBase);
 
         // Create tables
         userService.CreateUserTable();
         poseService.CreatePoseTable();
         poseSetService.CreatePoseSetTable();
+        recordService.CreateRecordTable();
 
         // Add test data
         TestAddUsers();
         TestAddPoses();
         TestAddPoseSets();
+        TestAddRecords();
         Debug.Log("Game start!");
     }
 
@@ -203,6 +207,31 @@ public class DBUtils : MonoBehaviour
 
     }
 
+    public void TestAddRecords()
+    {
+        Record record = new Record
+        {
+            Name = "User1",
+            Date = "20240525",
+            Parts = "",
+            Duration = 0,
+            Mood = ""
+        };
+        int pk = recordService.AddRecord(record);
+
+
+        record = new Record
+        {
+            Name = "User2",
+            Date = "20240525",
+            Parts = "",
+            Duration = 0,
+            Mood = ""
+        };
+        pk = recordService.AddRecord(record);
+
+    }
+
 
     /////////////////////////////////// User API ///////////////////////////////////////////////////////////////////
 
@@ -336,8 +365,48 @@ public class DBUtils : MonoBehaviour
     {
         return poseSetService.CountPoseSets();
     }
+    ////////////////////////////////////// PoseSet API /////////////////////////////////////////////////////////////
+    ///
 
-    
+    ////////////////////////////////////// Record API /////////////////////////////////////////////////////////////
+    public void AddRecord(string name , string date)
+    {
+
+        Record record = new Record
+        {
+            Name = name,
+            Date = date,
+            Parts = "",
+            Duration = 0,
+            Mood = ""
+        };
+        int pk = recordService.AddRecord(record);
+
+    }
+
+    public Record GetRecordByNameAndDate(string name, string date)
+    {
+        return recordService.GetRecordByNameAndDate(name,date);
+    }
+
+    public IEnumerable<Record> GetRecordByName(string name)
+    {
+        return recordService.GetRecordByName(name);
+    }
+
+    public int UpdateRecord(Record record)
+    {
+        return recordService.UpdateRecord(record);
+    }
+
+    public int CountRecords()
+    {
+        return recordService.CountRecords();
+    }
+
+
+    ////////////////////////////////////// Record API /////////////////////////////////////////////////////////////
+
 
 
 
