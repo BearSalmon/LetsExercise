@@ -50,10 +50,10 @@ public class MainPageSetUp : MonoBehaviour
             UserPage.SetActive(false);
             PlanPage.SetActive(true);
             TrainPage.SetActive(false);
-            menuBtn1.name = "Btn6";
-            menuBtn2.name = "Btn7";
-            menuBtn3.name = "Btn8";
-            menuBtn4.name = "Btn9";
+            menuBtn1.name = "Btn7";
+            menuBtn2.name = "Btn8";
+            menuBtn3.name = "Btn9";
+            menuBtn4.name = "Btn10";
         }
         else if (state == 2)
         {

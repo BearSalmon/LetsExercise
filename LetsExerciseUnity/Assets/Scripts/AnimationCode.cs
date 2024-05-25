@@ -19,28 +19,17 @@ public class AnimationCode : MonoBehaviour
 
     public CountDownTimer countDownTimer;
 
-    public bool isAnimating;
-
-
-    
-
     // Start is called before the first frame update
     void Start()
     {
         countDownTimer = GetComponent<CountDownTimer>();
-        isAnimating = false;
         wholeSampleSceneManager = GetComponent<WholeSampleSceneManager>();
   
         udpsend = GameObject.Find("WholeManager").GetComponent<UDPSend>();
         udpreceive = GameObject.Find("WholeManager").GetComponent<UDPReceive>();
 
-        Body_for_Ready = new GameObject[33];
-        Body_for_Exercise = new GameObject[33];
-        for (var i = 0; i <= 32; i++)
-        {
-            GameObject gb = GameObject.Find("r" + i);
-            Body_for_Ready[i] = gb;
-        }
+        //Body_for_Ready = new GameObject[33];
+        //Body_for_Exercise = new GameObject[33];
 
     }
 
@@ -69,7 +58,7 @@ public class AnimationCode : MonoBehaviour
     void Update()
     {
         udpreceive.canContinue = true;
-        if (isAnimating && udpreceive.canContinue)
+        if (wholeSampleSceneManager.isAnimating && udpreceive.canContinue)
         {
             udpsend.SendDataForCounter(counter.ToString());
             string[] points = lines[counter++].Split(',');
@@ -84,10 +73,12 @@ public class AnimationCode : MonoBehaviour
 
                 if (wholeSampleSceneManager.nowState == 0)
                 {
+                    //Debug.Log("no");
                     Body_for_Exercise[i].transform.localPosition = new Vector3(x, y, z);
                 }
                 else
                 {
+                    //Debug.Log("hi");
                     Body_for_Ready[i].transform.localPosition = new Vector3(x, y, z);
                 }
                 
@@ -104,15 +95,7 @@ public class AnimationCode : MonoBehaviour
         
     }
 
-    public void StartAnimation()
-    {
-        isAnimating = true;
-    }
-
-    public void StopAnimation()
-    {
-        isAnimating = false;
-    }
+    
 
     public void ChangeLineList(string path)
     {
