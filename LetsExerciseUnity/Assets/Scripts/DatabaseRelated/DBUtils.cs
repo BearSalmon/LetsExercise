@@ -213,7 +213,7 @@ public class DBUtils : MonoBehaviour
         {
             Name = "User1",
             Date = "20240525",
-            Parts = "",
+            Parts = "Buttocks,Legs,",
             Duration = 0,
             Mood = ""
         };
@@ -222,9 +222,9 @@ public class DBUtils : MonoBehaviour
 
         record = new Record
         {
-            Name = "User2",
-            Date = "20240525",
-            Parts = "",
+            Name = "User1",
+            Date = "20240526",
+            Parts = "Arms,",
             Duration = 0,
             Mood = ""
         };

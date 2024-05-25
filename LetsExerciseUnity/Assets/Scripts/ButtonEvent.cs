@@ -248,8 +248,16 @@ public class ButtonEvent : MonoBehaviour
         }
         else if (m_Scene.name == "Calendar")
         {
-            numOfButton = 44; 
             calendarUI = GameObject.Find("Manager").GetComponent<CalendarUI>();
+
+            if (calendarUI.detailIsOpen == true)
+            {
+                numOfButton = 46;
+            }
+            else
+            {
+                numOfButton = 45;
+            }
         }
 
 
@@ -726,6 +734,26 @@ public class ButtonEvent : MonoBehaviour
             else if (btn.name == "Btn2")
             {
                 calendarUI.SwitchMonth(-1);
+            }
+            else if (btn.name == "Btn45")
+            {
+                SceneManager.LoadScene((int)SceneName.MainPage);
+            }
+            else if (btn.name == "Btn46")
+            {
+                calendarUI.detailIsOpen = false;
+                calendarUI.SetUpDetail("");
+            }
+            else
+            {   
+                // is valid day
+                if (btn.GetComponentInChildren<TextMeshProUGUI>().text != "")
+                {
+                    calendarUI.detailIsOpen = true;
+                    calendarUI.SetUpDetail(btn.GetComponentInChildren<TextMeshProUGUI>().text);
+                    SetButtonList();
+                }
+                
             }
         }
 
