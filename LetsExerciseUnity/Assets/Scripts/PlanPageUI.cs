@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Runtime.InteropServices;
+using System;
 
 public class PlanPageUI : MonoBehaviour
 {
@@ -22,6 +23,9 @@ public class PlanPageUI : MonoBehaviour
     public RawImage buttocks2;
 
     User user;
+    Record record;
+    DateTime currDate = DateTime.Now;
+    int d;
 
     void Start()
     {
@@ -31,6 +35,39 @@ public class PlanPageUI : MonoBehaviour
         user = dBUtils.GetUserByName(dBUtils.nowPlayer);
         setPlanPassOrNot();
         setPlanSet();
+    }
+
+    public void updateCalendarRecord()
+    {
+        string serchTerm = "";
+        if (currDate.Month < 10)
+        {
+            serchTerm = currDate.Year.ToString() + "0" + currDate.Month.ToString();
+        }
+        else
+        {
+            serchTerm = currDate.Year.ToString() + currDate.Month.ToString();
+        }
+        if (currDate.Day < 10)
+        {
+            serchTerm += "0" + currDate.Day.ToString();
+        }
+        else
+        {
+            serchTerm += currDate.Day.ToString();
+        }
+        record = dBUtils.GetRecordByNameAndDate(dBUtils.nowPlayer, serchTerm);
+        record.Duration += d;
+        record.Parts += user.PreferPart + ",";
+        dBUtils.UpdateRecord(record);
+    }
+
+
+    public void updateUser()
+    {
+        user.Duration += d;
+        user.HasUnfinishedPlan = false;
+        dBUtils.UpdateUser(user);
     }
 
     void setPlanPassOrNot()
@@ -63,7 +100,7 @@ public class PlanPageUI : MonoBehaviour
         string[] poseNames;
         poseNames = user.RecommendationPoseSet.TrimEnd(',').Split(',');
 
-        int d = GetDuration(user.Level,poseNames.Length);
+        d = GetDuration(user.Level,poseNames.Length);
         string min = (d / 60).ToString();
         string sec = (d % 60).ToString();
         duration.text = min + "m " + sec + "s";

@@ -48,6 +48,7 @@ public class ButtonEvent : MonoBehaviour
     public SelectPartSet selectPartSet;
     public InvestigateSet investigateSet;
     public ExitGameUI exitGameUI;
+    public PlanPageUI planPageUI;
     public CalendarUI calendarUI;
 
     public bool isAddingWeight;
@@ -181,6 +182,7 @@ public class ButtonEvent : MonoBehaviour
         else if (m_Scene.name == "MainPage")
         {
             trainPageUI = GameObject.Find("Manager").GetComponent<TrainPageUI>();
+            planPageUI = GameObject.Find("Manager").GetComponent<PlanPageUI>();
             mainPageSetUp = GameObject.Find("Manager").GetComponent<MainPageSetUp>();
             user = dBUtils.GetUserByName(dBUtils.nowPlayer);
             if (mainPageSetUp.isOpening == false) // menu is not opening
@@ -237,6 +239,10 @@ public class ButtonEvent : MonoBehaviour
                 numOfButton = 3;
             }
             else if (exitGameUI.nowState == 2)
+            {
+                numOfButton = 5;
+            }
+            else if (exitGameUI.nowState == 3)
             {
                 numOfButton = 5;
             }
@@ -303,8 +309,6 @@ public class ButtonEvent : MonoBehaviour
             }
             else if (btn.name == "Btn2")
             {
-                isAddingWeight = true;
-                isChangingColor = true;
                 SceneManager.LoadScene((int)SceneName.SelectPlayer);
             }
 
@@ -315,6 +319,8 @@ public class ButtonEvent : MonoBehaviour
             if (btn.name == "Btn1")
             {
                 selectPlayer.Save();
+                isAddingWeight = true;
+                isChangingColor = true;
                 SceneManager.LoadScene((int)SceneName.MainPage);
             }
             else if (btn.name == "Btn2")
@@ -604,6 +610,8 @@ public class ButtonEvent : MonoBehaviour
             {
                 if (btn.name == "Btn6")
                 {
+                    planPageUI.updateCalendarRecord();
+                    planPageUI.updateUser();
                     SceneManager.LoadScene((int)SceneName.SampleScene);
                 }
                 else if (btn.name == "Btn7")
@@ -673,6 +681,8 @@ public class ButtonEvent : MonoBehaviour
             }
             else if (btn.name == "Btn4")
             {
+                selectLevel.updateCalendarRecord();
+                selectLevel.updateUser();
                 SceneManager.LoadScene((int)SceneName.SampleScene);
             }
 
@@ -710,13 +720,39 @@ public class ButtonEvent : MonoBehaviour
             }
             else if (exitGameUI.nowState == 2)
             {
-                Debug.Log(btn.GetComponentInChildren<TextMeshProUGUI>().text);
                 user.Recommendation = exitGameUI.SetRecommandation(btn.GetComponentInChildren<TextMeshProUGUI>().text);
                 dBUtils.UpdateUser(user);
                 exitGameUI.ChangeState(3);
                 SetButtonList();
             }
             else if (exitGameUI.nowState == 3)
+            {
+                string mood = "";
+                if (btn.name == "Btn1")
+                {
+                    mood = "Happy";
+                }
+                else if (btn.name == "Btn2")
+                {
+                    mood = "Sad";
+                }
+                else if (btn.name == "Btn3")
+                {
+                    mood = "Angry";
+                }
+                else if (btn.name == "Btn4")
+                {
+                    mood = "Tired";
+                }
+                else if (btn.name == "Btn5")
+                {
+                    mood = "Confuse";
+                }
+                exitGameUI.updateMood(mood);
+                exitGameUI.ChangeState(4);
+                SetButtonList();
+            }
+            else if (exitGameUI.nowState == 4)
             {
                 if (btn.name == "Btn1")
                 {

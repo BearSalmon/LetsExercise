@@ -2,9 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.UI;
-using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 public class UserPageUI : MonoBehaviour
 {
@@ -65,7 +63,11 @@ public class UserPageUI : MonoBehaviour
         }
         DrawLineChart(dataPoints);
         curWeight.text = dataValues[dataValues.Length - 1];
-        duration.text = user.Duration.ToString();
+
+        string min = (user.Duration / 60).ToString();
+        string sec = (user.Duration % 60).ToString();
+        duration.text = min + " m " + sec + " s ";
+
         calories.text = user.Calories.ToString();
         int weight = int.Parse(dataValues[dataValues.Length - 1]);
         float heightInMeters = user.Height / 100f;
