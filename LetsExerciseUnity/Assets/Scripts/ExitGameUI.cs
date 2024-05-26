@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,12 +8,15 @@ public class ExitGameUI : MonoBehaviour
     // Start is called before the first frame update
 
     DBUtils dBUtils;
+    Record record;
+    DateTime currDate = DateTime.Now;
 
     User user;
 
     public GameObject Coach;
     public GameObject Level;
     public GameObject PreferPart;
+    public GameObject Mood;
     public GameObject Bye;
 
     public int nowState = 0;
@@ -27,8 +31,33 @@ public class ExitGameUI : MonoBehaviour
         Coach.SetActive(true);
         Level.SetActive(false);
         PreferPart.SetActive(false);
+        Mood.SetActive(false);
         Bye.SetActive(false);
         
+    }
+
+    public void updateMood(string mood)
+    {
+        string serchTerm = "";
+        if (currDate.Month < 10)
+        {
+            serchTerm = currDate.Year.ToString() + "0" + currDate.Month.ToString();
+        }
+        else
+        {
+            serchTerm = currDate.Year.ToString() + currDate.Month.ToString();
+        }
+        if (currDate.Day < 10)
+        {
+            serchTerm += "0" + currDate.Day.ToString();
+        }
+        else
+        {
+            serchTerm += currDate.Day.ToString();
+        }
+        record = dBUtils.GetRecordByNameAndDate(dBUtils.nowPlayer, serchTerm);
+        record.Mood = mood;
+        dBUtils.UpdateRecord(record);
     }
 
     public void ChangeState(int state)
@@ -47,8 +76,13 @@ public class ExitGameUI : MonoBehaviour
         else if (state == 3)
         {
             PreferPart.SetActive(false);
-            Bye.SetActive(true);
+            Mood.SetActive(true);
 
+        }
+        else if (state == 4)
+        {
+            Mood.SetActive(false);
+            Bye?.SetActive(true);
         }
 
     }

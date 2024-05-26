@@ -215,7 +215,7 @@ public class DBUtils : MonoBehaviour
             Date = "20240525",
             Parts = "Buttocks,Legs,",
             Duration = 0,
-            Mood = ""
+            Mood = "Angry"
         };
         int pk = recordService.AddRecord(record);
 
@@ -226,7 +226,7 @@ public class DBUtils : MonoBehaviour
             Date = "20240526",
             Parts = "Arms,",
             Duration = 0,
-            Mood = ""
+            Mood = "Happy"
         };
         pk = recordService.AddRecord(record);
 

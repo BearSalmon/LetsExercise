@@ -25,6 +25,12 @@ public class CalendarUI : MonoBehaviour
     public RawImage buttocks1;
     public RawImage buttocks2;
 
+    public Image happy;
+    public Image sad;
+    public Image tired;
+    public Image angry;
+    public Image confuse;
+
     public bool detailIsOpen;
 
 
@@ -34,7 +40,11 @@ public class CalendarUI : MonoBehaviour
         dBUtils = GameObject.Find("WholeManager").GetComponent<DBUtils>();
         Detail.SetActive(false);
         detailIsOpen = false;
-
+        happy.enabled = false ;
+        sad.enabled = false;
+        tired.enabled = false;
+        confuse.enabled = false;
+        angry.enabled = false;
     }
 
     void Update()
@@ -179,6 +189,11 @@ public class CalendarUI : MonoBehaviour
         }
         else
         {
+            happy.enabled = false;
+            sad.enabled = false;
+            tired.enabled = false;
+            confuse.enabled = false;
+            angry.enabled = false;
             Detail.SetActive(true);
             string [] time = Month.text.Split(" ");
             int month = MonthStringToInt(time[0]);
@@ -255,44 +270,72 @@ public class CalendarUI : MonoBehaviour
             day.text = "Sunday";
         }
 
-
         if (record == null)
         {
             duration.text = "no record";
         }
         else
         {
-            duration.text = record.Duration.ToString();
+            string min = (record.Duration / 60).ToString();
+            string sec = (record.Duration % 60).ToString();
+            duration.text = min + "m " + sec + "s";
 
-            string[] parts = record.Parts.TrimEnd(',').Split(',');
-
-            for (int i = 0; i < parts.Length; i++)
+            if (record.Parts != "")
             {
-                if (parts[i] == "Arms")
+                string[] parts = record.Parts.TrimEnd(',').Split(',');
+
+                for (int i = 0; i < parts.Length; i++)
                 {
-                    arms.color = color2;
+                    if (parts[i] == "Arms")
+                    {
+                        arms.color = color2;
+                    }
+                    else if (parts[i] == "Abs")
+                    {
+                        abs.color = color2;
+                    }
+                    else if (parts[i] == "Legs")
+                    {
+                        legs.color = color2;
+                    }
+                    else if (parts[i] == "Buttocks")
+                    {
+                        buttocks1.color = color2;
+                        buttocks2.color = color3;
+                    }
+                    else
+                    {
+                        arms.color = color2;
+                        abs.color = color2;
+                        legs.color = color2;
+                        buttocks1.color = color2;
+                        buttocks2.color = color3;
+                    }
                 }
-                else if (parts[i] == "Abs")
-                {
-                    abs.color = color2;
-                }
-                else if (parts[i] == "Legs")
-                {
-                    legs.color = color2;
-                }
-                else if (parts[i] == "Buttocks")
-                {
-                    buttocks1.color = color2;
-                    buttocks2.color = color3;
-                }
-                else
-                {
-                    arms.color = color2;
-                    abs.color = color2;
-                    legs.color = color2;
-                    buttocks1.color = color2;
-                    buttocks2.color = color3;
-                }
+
+            }
+
+            
+
+            if (record.Mood == "Happy")
+            {
+                happy.enabled = true;
+            }
+            else if (record.Mood == "Sad")
+            {
+                sad.enabled = true;
+            }
+            else if (record.Mood == "Tired")
+            {
+                tired.enabled = true;
+            }
+            else if (record.Mood == "Confuse")
+            {
+                confuse.enabled = true;
+            }
+            else if (record.Mood == "Angry")
+            {
+                angry.enabled = true;
             }
 
         }

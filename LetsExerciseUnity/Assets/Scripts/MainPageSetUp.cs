@@ -1,7 +1,8 @@
+using Microsoft.Win32;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,14 +23,47 @@ public class MainPageSetUp : MonoBehaviour
     public Button menuBtn3;
     public Button menuBtn4;
 
+    DBUtils dBUtils;
+    Record record;
+    DateTime currDate = DateTime.Now;
+
     // Start is called before the first frame update
     void Start()
     {
+        dBUtils = GameObject.Find("WholeManager").GetComponent<DBUtils>();
+
         nowState = 0;
         ChangeState(nowState);
 
         Menu.SetActive(false);
         isOpening = false;
+        addCalendarRecord();
+    }
+
+    public void addCalendarRecord()
+    {
+        string serchTerm = "";
+        if (currDate.Month < 10)
+        {
+            serchTerm = currDate.Year.ToString() + "0" + currDate.Month.ToString();
+        }
+        else
+        {
+            serchTerm = currDate.Year.ToString() + currDate.Month.ToString();
+        }
+        if (currDate.Day < 10)
+        {
+            serchTerm += "0" + currDate.Day.ToString();
+        }
+        else
+        {
+            serchTerm += currDate.Day.ToString();
+        }
+        record = dBUtils.GetRecordByNameAndDate(dBUtils.nowPlayer, serchTerm);
+        if (record == null)
+        {
+            dBUtils.AddRecord(dBUtils.nowPlayer, serchTerm);
+        }
     }
 
     public void ChangeState(int state)

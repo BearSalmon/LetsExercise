@@ -1,6 +1,7 @@
+using Microsoft.Win32;
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using TMPro;
 using UnityEngine;
 
@@ -11,7 +12,10 @@ public class SelectLevel : MonoBehaviour
     public TextMeshProUGUI calories;
     public TextMeshProUGUI duration;
     DBUtils dBUtils;
+    User user;
     PoseSet poseSet;
+    Record record;
+    DateTime currDate = DateTime.Now;
 
     ButtonEvent buttonEvent;
 
@@ -19,6 +23,7 @@ public class SelectLevel : MonoBehaviour
     void Start()
     {
         dBUtils = GameObject.Find("WholeManager").GetComponent<DBUtils>();
+        user = dBUtils.GetUserByName(dBUtils.nowPlayer);
         buttonEvent = GameObject.Find("WholeManager").GetComponent<ButtonEvent>();
         updateLevel("easy");
     }
@@ -28,6 +33,39 @@ public class SelectLevel : MonoBehaviour
         else if (level == "medium") return 1.5f;
         else return 2;
     }
+
+    public void updateCalendarRecord()
+    {
+        string serchTerm = "";
+        if (currDate.Month < 10)
+        {
+            serchTerm = currDate.Year.ToString() + "0" + currDate.Month.ToString();
+        }
+        else
+        {
+            serchTerm = currDate.Year.ToString() + currDate.Month.ToString();
+        }
+        if (currDate.Day < 10)
+        {
+            serchTerm += "0" + currDate.Day.ToString();
+        }
+        else
+        {
+            serchTerm += currDate.Day.ToString();
+        }
+        record = dBUtils.GetRecordByNameAndDate(dBUtils.nowPlayer, serchTerm);
+        record.Duration += GetDuration(nowLevel);
+        record.Parts += poseSet.Part;
+        dBUtils.UpdateRecord(record);
+    }
+
+
+    public void updateUser()
+    {
+        user.Duration += GetDuration(nowLevel);
+        dBUtils.UpdateUser(user);
+    }
+
 
     int GetDuration(string level)
     {
