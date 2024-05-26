@@ -405,7 +405,15 @@ public class ButtonEvent : MonoBehaviour
             }
             else if (btn.name == "Btn8")
             {
-                SceneManager.LoadScene((int)SceneName.SelectSex);
+                if (isChangingColor == false)
+                {
+                    SceneManager.LoadScene((int)SceneName.SelectSex);
+                }
+                else
+                {
+                    SceneManager.LoadScene((int)SceneName.MainPage);
+
+                }
             }
 
         }
