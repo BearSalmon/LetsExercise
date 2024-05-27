@@ -1417,7 +1417,10 @@ MonoBehaviour:
   SFXSource: {fileID: 1588388246}
   voiceSource: {fileID: 1478726030}
   BGMStart: {fileID: 8300000, guid: 429046a5d9817e44ea3afcf3ddc65713, type: 3}
-  TrainerIntroduce: {fileID: 8300000, guid: 4de4dcf39de0f3e4383725ed2162fa24, type: 3}
+  buttonClick: {fileID: 8300000, guid: eefd56297c057d74687e451d94d15ab4, type: 3}
+  trainerIntroduce: {fileID: 8300000, guid: 4de4dcf39de0f3e4383725ed2162fa24, type: 3}
+  askIfNewUser: {fileID: 8300000, guid: 750ba9126f24523439f3f7c5bb89cc4e, type: 3}
+  selectOldUser: {fileID: 8300000, guid: 9cbac3443b6822a49a9866e041c1b352, type: 3}
   cheerUp:
   - {fileID: 8300000, guid: 69e06bb7592ac6740af726caf241e8ba, type: 3}
   - {fileID: 8300000, guid: 2f9ee77b39256d4468912f95ca97833d, type: 3}
@@ -1560,7 +1563,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -2146,6 +2149,7 @@ MonoBehaviour:
   mouse: {fileID: 1052761715}
   buttons:
   - {fileID: 795696609}
+  audioManager: {fileID: 0}
   characterDeorate: {fileID: 0}
   selectPlayer: {fileID: 0}
   circleDrawer: {fileID: 0}
@@ -2157,10 +2161,12 @@ MonoBehaviour:
   selectPartSet: {fileID: 0}
   investigateSet: {fileID: 0}
   exitGameUI: {fileID: 0}
+  calendarUI: {fileID: 0}
   isAddingWeight: 0
   isChangingColor: 0
   nowSelectChoice: 
   poseSetID: 0
+  poseSetLevel: 
   currentClickingButton: {fileID: 0}
   planOrTrain: 0
 --- !u!114 &1768877322
