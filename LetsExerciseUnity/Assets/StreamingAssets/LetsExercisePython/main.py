@@ -182,7 +182,7 @@ if __name__ == "__main__":
                     offset_angle = find_angle(point1,point2,ref_point)
                     video_offset_angle = find_angle(video_point1,video_point2,video_ref_point)
                     wrong = offset_angle - video_offset_angle
-                    if wrong > 20 or abs(wrong) > 20:
+                    if wrong > 30 or abs(wrong) > 30:
                         wrongPart_message += get_WrongPart_Message(check_point[index],dict_features)
                         wrong_message = get_Wrong_Message(check_point[index],wrong,dict_features)
                     else :

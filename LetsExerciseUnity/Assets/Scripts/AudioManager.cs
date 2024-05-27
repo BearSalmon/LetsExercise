@@ -11,7 +11,10 @@ public class AudioManager : MonoBehaviour
 
     [Header("-------AudioClip-------")]
     public AudioClip BGMStart;
-    public AudioClip TrainerIntroduce;
+    public AudioClip buttonClick;
+    public AudioClip trainerIntroduce;
+    public AudioClip askIfNewUser;
+    public AudioClip selectOldUser;
     public List<AudioClip> cheerUp;
 
     // Start is called before the first frame update

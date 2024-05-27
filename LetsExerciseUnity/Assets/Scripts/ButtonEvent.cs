@@ -36,6 +36,8 @@ public class ButtonEvent : MonoBehaviour
 
     int numOfButton;
 
+    public AudioManager audioManager;
+
     // imported components
     public CharacterDeorate characterDeorate;
     public SelectPlayer selectPlayer;
@@ -81,6 +83,7 @@ public class ButtonEvent : MonoBehaviour
         f_Scene = SceneManager.GetActiveScene();
         SetButtonList();
         poseSetID = 1;
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
     }
 
     // Update is called once per frame
@@ -287,7 +290,7 @@ public class ButtonEvent : MonoBehaviour
     // button 命名格式 : Btn + 編號
     public void ButtonClick(Button btn)
     {
-
+        audioManager.PlaySFX(audioManager.buttonClick);
         count++;
         //Debug.Log(count);
         // Game Start
@@ -296,6 +299,7 @@ public class ButtonEvent : MonoBehaviour
             if (btn.name == "Btn1")
             {
                 SceneManager.LoadScene((int)SceneName.Trainer);
+                audioManager.TrainerSpeak(audioManager.trainerIntroduce);
             }
 
         }
@@ -310,6 +314,7 @@ public class ButtonEvent : MonoBehaviour
             else if (btn.name == "Btn2")
             {
                 SceneManager.LoadScene((int)SceneName.SelectPlayer);
+                audioManager.TrainerSpeak(audioManager.selectOldUser);
             }
 
         }
@@ -339,6 +344,7 @@ public class ButtonEvent : MonoBehaviour
             if (btn.name == "Btn1")
             {
                 SceneManager.LoadScene((int)SceneName.CheckIfNew);
+                audioManager.TrainerSpeak(audioManager.askIfNewUser);
             }
 
         }
