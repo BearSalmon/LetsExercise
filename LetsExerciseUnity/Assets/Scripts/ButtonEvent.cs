@@ -103,9 +103,9 @@ public class ButtonEvent : MonoBehaviour
 
     void RemoveListener()
     {
-        for (var i = 1; i <= numOfButton; i++)
+        for (var i = 0; i < numOfButton; i++)
         {
-            buttons[i - 1].onClick.RemoveAllListeners();
+            buttons[i].onClick.RemoveAllListeners();
         }
     }
 
@@ -113,7 +113,10 @@ public class ButtonEvent : MonoBehaviour
     // 每次 change scene 後都會呼叫 ， 重新設定 button list
     void SetButtonList()
     {
-        RemoveListener();
+        if (m_Scene.name != "CheckPosition")
+        {
+            RemoveListener();
+        }
 
         mouse = GameObject.Find("Mouse");
         dBUtils = GetComponent<DBUtils>();
@@ -123,6 +126,10 @@ public class ButtonEvent : MonoBehaviour
         if (m_Scene.name == "GameStart")
         {
             numOfButton = 1;
+        }
+        else if (m_Scene.name == "CheckPosition")
+        {
+            numOfButton = 0;
         }
         else if (m_Scene.name == "CheckIfNew")
         {

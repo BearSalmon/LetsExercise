@@ -46,7 +46,7 @@ public class PositionPageUI : MonoBehaviour
         if (loadingCompleted)
         {
             pos_message.text = udpReceive.dataPos;
-
+            //SceneManager.LoadScene((int)ButtonEvent.SceneName.GameStart);
             if (pos_message.text != "")
             {
                 StopIncreasing();
@@ -97,6 +97,7 @@ public class PositionPageUI : MonoBehaviour
 
         //alignment_check.fillAmount = 0f;
         isIncreasing = false;
+        
         if (alignment_check.fillAmount == endProgress)
         {
             countdown_message.text = "3";

@@ -29,6 +29,7 @@ public class ImageReceive : MonoBehaviour
         tex = new Texture2D(1280, 720);
 
         m_Scene = SceneManager.GetActiveScene();
+        positionPageUI = GameObject.Find("Manager").GetComponent<PositionPageUI>();
     }
 
     // Update is called once per frame
