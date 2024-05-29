@@ -46,7 +46,7 @@ public class CircleDrawer : MonoBehaviour
     {
         if (!isIncreasing) 
         {
-            increaseCoroutine = StartCoroutine(IncreaseProgressOverTime(1.5f));
+            increaseCoroutine = StartCoroutine(IncreaseProgressOverTime(2f));
         }
 
     }
@@ -82,7 +82,6 @@ public class CircleDrawer : MonoBehaviour
         // click
         buttonEvent.ButtonClick(buttonEvent.currentClickingButton);
         isIncreasing = false;
-
     }
 }
 

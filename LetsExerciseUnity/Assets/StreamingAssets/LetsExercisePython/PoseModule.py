@@ -104,7 +104,7 @@ class PoseDetector:
                              "width": x2 - x1, "height": y2 - y1}
 
             if draw:
-                cv2.rectangle(img, bbox, (255, 0, 255), 3)
+                #cv2.rectangle(img, bbox, (255, 0, 255), 3)
                 cv2.circle(img, (cx, cy), 5, (255, 0, 0), cv2.FILLED)
 
         return self.lmList, self.bboxInfo

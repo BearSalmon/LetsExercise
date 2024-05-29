@@ -19,6 +19,7 @@ public class ImageReceive : MonoBehaviour
     Texture2D tex;
 
     public WholeSampleSceneManager wholeSampleSceneManager;
+    public PositionPageUI positionPageUI;
     Scene m_Scene;
 
     // Start is called before the first frame update
@@ -45,9 +46,16 @@ public class ImageReceive : MonoBehaviour
                 tex.LoadImage(imageDatas);
                 img.texture = tex;
             }
-
         }
-
+        else if (m_Scene.name == "CheckPosition")
+        {
+            if (positionPageUI.loadingCompleted)
+            {
+                img = GameObject.Find("PlayerCamera").GetComponent<RawImage>();
+                tex.LoadImage(imageDatas);
+                img.texture = tex;
+            }
+        }
     }
 
     void InitTcp()

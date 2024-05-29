@@ -26,6 +26,7 @@ public class WholeSampleSceneManager : MonoBehaviour
 
     public GameObject Exercise;
     public GameObject Ready;
+    public NormalizeBody normalizeBody;
 
     public UDPSend udpsend;
     public UDPReceive udpreceive;
@@ -72,6 +73,8 @@ public class WholeSampleSceneManager : MonoBehaviour
         //animationCode.setBodyList();
         SetUpPath();
 
+        // normalizeBody.changeBodyScale();
+
         // plan
         if (buttonEvent.planOrTrain == 0)
         {
@@ -81,7 +84,8 @@ public class WholeSampleSceneManager : MonoBehaviour
         else {
             readyPageUi.SetUp(poses[nowPose].Name, nowPose + 1, poseSetCount, poseSet.PoseSetName);
         }
-        countDownTimer.StartCountDown(5f);
+        countDownTimer.StartCountDown(10f);
+        //normalizeBody.changeBodyScale();
     }
 
     public void SetUpPoseSet()
@@ -156,16 +160,18 @@ public class WholeSampleSceneManager : MonoBehaviour
             nowState = 1;
             Exercise.SetActive(false);
             Ready.SetActive(true);
-           // animationCode.setBodyList();
+            // animationCode.setBodyList();
 
+            // normalizeBody.changeBodyScale();
             nowPose += 1;
+            // normalizeBody.changeBodyScale();
             if (nowPose == poseSetCount)
             {
-                SceneManager.LoadScene(11);
+                SceneManager.LoadScene((int)ButtonEvent.SceneName.MainPage);
             }
             else
             {
-                SetUpPath();
+                SetUpPath();      
                 // plan
                 if (buttonEvent.planOrTrain == 0)
                 {
@@ -177,7 +183,8 @@ public class WholeSampleSceneManager : MonoBehaviour
                     readyPageUi.SetUp(poses[nowPose].Name, nowPose + 1, poseSetCount, poseSet.PoseSetName);
                 }
 
-                countDownTimer.StartCountDown(5f);
+                countDownTimer.StartCountDown(10f);
+                //normalizeBody.changeBodyScale();
             } 
         }
     }

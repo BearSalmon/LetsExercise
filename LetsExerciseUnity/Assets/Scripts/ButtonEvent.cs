@@ -11,22 +11,23 @@ public class ButtonEvent : MonoBehaviour
 {
     public enum SceneName
     {
-        GameStart = 0,
-        Trainer = 1,
-        Intro = 2,
-        CheckIfNew = 3,
-        SelectPlayer = 4,
-        SelectSex = 5,
-        CharacterDecorate = 6,
-        InquireData = 7,
-        SelectPart = 8,
-        Investigation = 9,
-        Trainer2 = 10,
-        MainPage = 11,
-        SelectLevel = 12,
-        SampleScene = 13,
-        ExitGame = 14,
-        Calendar = 15
+        CheckPosition = 0,
+        GameStart = 1,
+        Trainer = 2,
+        Intro = 3,
+        CheckIfNew = 4,
+        SelectPlayer = 5,
+        SelectSex = 6,
+        CharacterDecorate = 7,
+        InquireData = 8,
+        SelectPart = 9,
+        Investigation = 10,
+        Trainer2 = 11,
+        MainPage = 12,
+        SelectLevel = 13,
+        SampleScene = 14,
+        ExitGame = 15,
+        Calendar = 16
     }
     public GameObject mouse;
     public Button[] buttons;
@@ -885,10 +886,10 @@ public class ButtonEvent : MonoBehaviour
     bool Check_touch_button(Button btn)
     {
         float[] button_info = Get_button_info(btn);
-        float buffer = 25f;
+        float buffer = 60f;
         if (mouse.transform.position.x > button_info[0] - button_info[2] / 2 + buffer
             && mouse.transform.position.x < button_info[0] + button_info[2] / 2 - buffer
-            && mouse.transform.position.y > button_info[1] - button_info[3] / 2 +buffer
+            && mouse.transform.position.y > button_info[1] - button_info[3] / 2 + buffer
             && mouse.transform.position.y < button_info[1] + button_info[3] / 2 - buffer)
         {
             return true;

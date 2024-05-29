@@ -5,6 +5,7 @@ public class TeleType : MonoBehaviour
 {
     private TextMeshProUGUI m_textMeshPro;
     public TMP_Text text;
+    public GameObject nextText;
     IEnumerator Start()
     {
         text.ForceMeshUpdate();
@@ -32,6 +33,11 @@ public class TeleType : MonoBehaviour
 
             yield return new WaitForSeconds(0.03f);
         }
-        
+        yield return new WaitForSeconds(1.8f);
+        if (nextText != null)
+        {
+            gameObject.SetActive(false);
+            nextText.SetActive(true);
+        }
     }
 }

@@ -174,19 +174,23 @@ if __name__ == "__main__":
 
                 points = lines[counter].split(',')
                 video_lmlist = [[int(point) for point in points[i:i+3]] for i in range(0, len(points)-1, 3)]
+                wrong_message = ""
                 wrongPart_message = ""
 
                 for index in range(len(check_point)):
-                    point1,point2,ref_point = get_landmark_features(lmList,dict_features,check_point[index])
-                    video_point1,video_point2,video_ref_point = get_landmark_features(video_lmlist,dict_features,check_point[index])
-                    offset_angle = find_angle(point1,point2,ref_point)
-                    video_offset_angle = find_angle(video_point1,video_point2,video_ref_point)
-                    wrong = offset_angle - video_offset_angle
-                    if wrong > 30 or abs(wrong) > 30:
-                        wrongPart_message += get_WrongPart_Message(check_point[index],dict_features)
-                        wrong_message = get_Wrong_Message(check_point[index],wrong,dict_features)
-                    else :
-                        wrong_message = "nice"
+                    try:
+                        point1,point2,ref_point = get_landmark_features(lmList,dict_features,check_point[index])
+                        video_point1,video_point2,video_ref_point = get_landmark_features(video_lmlist,dict_features,check_point[index])
+                        offset_angle = find_angle(point1,point2,ref_point)
+                        video_offset_angle = find_angle(video_point1,video_point2,video_ref_point)
+                        wrong = offset_angle - video_offset_angle
+                        if wrong > 25 or abs(wrong) > 25:
+                            wrongPart_message += get_WrongPart_Message(check_point[index],dict_features)
+                            wrong_message = get_Wrong_Message(check_point[index],wrong,dict_features)
+                        else :
+                            wrong_message = "nice"
+                    except:
+                        pass
                     
                 # udp
                 udp_sock_for_counter.sendto(str.encode(str(wrong_message)), serverAddressPort_angle)

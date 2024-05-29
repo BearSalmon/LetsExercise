@@ -35,39 +35,39 @@ public class DataBase
         string poseDbPath = string.Format(@"Assets/StreamingAssets/{0}", poseDatabaseName);
         string poseSetDbPath = string.Format(@"Assets/StreamingAssets/{0}", poseSetDatabaseName);
         string recordDbPath = string.Format(@"Assets/StreamingAssets/{0}", recordDatabaseName);
-       
+
 
 #else
         // comment under this (bug)
         // Check if files exist in Application.persistentDataPath
-        string userDbPath = Application.streamingAssetsPath + "/" + userDatabaseName;
-        string poseDbPath = Application.streamingAssetsPath + "/" + poseDatabaseName;
-        string poseSetDbPath = Application.streamingAssetsPath + "/" + poseSetDatabaseName;
-        string recordDbPath = Application.streamingAssetsPath + "/" + recordDatabaseName;
+        string userDbPath = UnityEngine.Application.streamingAssetsPath + "/" + userDatabaseName;
+        string poseDbPath = UnityEngine.Application.streamingAssetsPath + "/" + poseDatabaseName;
+        string poseSetDbPath = UnityEngine.Application.streamingAssetsPath + "/" + poseSetDatabaseName;
+        string recordDbPath = UnityEngine.Application.streamingAssetsPath + "/" + recordDatabaseName;
 
 
         if (!File.Exists(userDbPath))
         {
             //CopyDatabaseFromStreamingAssets(userDatabaseName, userDbPath);
-            Debug.Log(userDbPath);
+            UnityEngine.Debug.Log(userDbPath);
         }
 
         if (!File.Exists(poseDbPath))
         {
             //CopyDatabaseFromStreamingAssets(poseDatabaseName, poseDbPath);
-            Debug.Log(poseDbPath);
+            UnityEngine.Debug.Log(poseDbPath);
         }
 
         if (!File.Exists(poseSetDbPath))
         {
             //CopyDatabaseFromStreamingAssets(poseDatabaseName, poseSetDbPath);
-            Debug.Log(poseSetDbPath);
+            UnityEngine.Debug.Log(poseSetDbPath);
         }
 
         if (!File.Exists(recordDbPath))
         {
             //CopyDatabaseFromStreamingAssets(poseDatabaseName, poseSetDbPath);
-            Debug.Log(recordDbPath);
+            UnityEngine.Debug.Log(recordDbPath);
         }
 #endif
 

@@ -16,8 +16,10 @@ public class AnimationCode : MonoBehaviour
     public UDPReceive udpreceive;
 
     public WholeSampleSceneManager wholeSampleSceneManager;
+    public NormalizeBody normalizeBody;
 
     public CountDownTimer countDownTimer;
+    public bool positionSet = false;
 
     // Start is called before the first frame update
     void Start()
@@ -83,6 +85,11 @@ public class AnimationCode : MonoBehaviour
                 }
                 
             }
+
+            if (counter == 3 && loop_cnt == 0 && wholeSampleSceneManager.nowState == 1)
+            {
+                normalizeBody.changeBodyScale();
+            }
             if (counter >= lines.Count)
             {
                 counter = 0;
@@ -101,5 +108,6 @@ public class AnimationCode : MonoBehaviour
     {
         lines = System.IO.File.ReadLines(Application.streamingAssetsPath + "/LetsExercisePython" + path).ToList();
         counter = 0;
+        loop_cnt = 0;
     }
 }
