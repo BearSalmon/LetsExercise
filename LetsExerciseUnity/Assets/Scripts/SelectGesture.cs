@@ -32,7 +32,7 @@ public class SelectGesture : MonoBehaviour
     void ButtonClick()
     {
         udpSend.SendDataForCounter("start");
-        countDownTimer.StartCountDown(5f);
+        countDownTimer.StartCountDown(10f);
 
     }
 

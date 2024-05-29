@@ -192,7 +192,7 @@ public class UDPReceive : MonoBehaviour
 
         if (m_Scene.buildIndex != f_Scene.buildIndex)
         {
-            if (m_Scene.name != "SampleScene")
+            if (m_Scene.name != "SampleScene" && m_Scene.name != "CheckPosition")
             {
                 mouse = GameObject.Find("Mouse");
                 Canvas canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
@@ -215,7 +215,7 @@ public class UDPReceive : MonoBehaviour
         f_Scene = SceneManager.GetActiveScene();
        
 
-        if (m_Scene.name != "SampleScene")
+        if (m_Scene.name != "SampleScene" && m_Scene.name != "CheckPosition")
         {
             //circleDrawer.StopIncreasing();
             mouse.transform.position = new Vector3(transformPosition[0], transformPosition[1], transformPosition[2]);
