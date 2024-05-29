@@ -143,7 +143,7 @@ public class Trainer2PageUI : MonoBehaviour
         }
         else
         {
-            SceneManager.LoadScene(11);
+            SceneManager.LoadScene(12);
         }
     }
 
