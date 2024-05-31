@@ -165,7 +165,82 @@ public class DBUtils : MonoBehaviour
         };
         poseService.AddPose(pose);
 
+        pose = new Pose
+        {
+            Name = "abs1",
+            Path = "/PoseDataset/abs/abs1.txt",
+            CheckPoint = 4,
+            Part = "Abs",
+            Description = ""
 
+        };
+        poseService.AddPose(pose);
+
+        pose = new Pose
+        {
+            Name = "abs2",
+            Path = "/PoseDataset/abs/abs2.txt",
+            CheckPoint = 4,
+            Part = "Abs",
+            Description = ""
+
+        };
+        poseService.AddPose(pose);
+
+        pose = new Pose
+        {
+            Name = "abs2-1",
+            Path = "/PoseDataset/abs/abs2-1.txt",
+            CheckPoint = 4,
+            Part = "Abs",
+            Description = ""
+
+        };
+        poseService.AddPose(pose);
+
+        pose = new Pose
+        {
+            Name = "body1",
+            Path = "/PoseDataset/body/body1.txt",
+            CheckPoint = 4,
+            Part = "Whole Body",
+            Description = ""
+
+        };
+        poseService.AddPose(pose);
+
+        pose = new Pose
+        {
+            Name = "body2",
+            Path = "/PoseDataset/body/body2.txt",
+            CheckPoint = 4,
+            Part = "Whole Body",
+            Description = ""
+
+        };
+        poseService.AddPose(pose);
+
+        pose = new Pose
+        {
+            Name = "body3",
+            Path = "/PoseDataset/body/body3.txt",
+            CheckPoint = 4,
+            Part = "Whole Body",
+            Description = ""
+
+        };
+        poseService.AddPose(pose);
+
+        pose = new Pose
+        {
+            Name = "body1-2",
+            Path = "/PoseDataset/body/body1-2.txt",
+            CheckPoint = 4,
+            Part = "Whole Body",
+            Description = ""
+
+        };
+        poseService.AddPose(pose);
     }
 
     public void TestAddPoseSets()
@@ -199,6 +274,17 @@ public class DBUtils : MonoBehaviour
             NumberOfGesture = 5,
             Part = "Legs,",
             TrainPoseSet = "arm1,arm2,arm3,arm4,arm5,",
+        };
+
+        poseSetService.AddPoseSet(poseSet);
+
+        poseSet = new PoseSet
+        {
+            PoseSetName = "fuck you",
+            Calories = 300f,
+            NumberOfGesture = 9,
+            Part = "Whole Body,",
+            TrainPoseSet = "body1,body1-2,abs1,abs2,abs2-1,arm2,body2,arm4,body3,",
         };
 
         poseSetService.AddPoseSet(poseSet);

@@ -158,7 +158,75 @@ pose = {
                 "point1": "right_elbow",
                 "point2": "right_hip",
                 "ref_point": "right_shoulder"
-            }
+            },
+            {
+                "point1": "right_shoulder",
+                "point2": "right_knee",
+                "ref_point": "right_hip"
+            },
+            {
+                "point1": "left_shoulder",
+                "point2": "left_knee",
+                "ref_point": "left_hip"
+            },
+            {
+                "point1": "right_hip",
+                "point2": "right_ankle",
+                "ref_point": "right_knee"
+            },
+            {
+                "point1": "left_hip",
+                "point2": "left_ankle",
+                "ref_point": "left_knee"
+            },
+        ],
+    },
+
+    "body1-2":  #
+    {
+        "path": "/PoseDataset/body/body1-2.txt",
+        "check_angle": [
+            {
+                "point1": "left_shoulder",
+                "point2": "left_wrist",
+                "ref_point": "left_elbow"
+            },
+            {
+                "point1": "right_shoulder",
+                "point2": "right_wrist",
+                "ref_point": "right_elbow"
+            },
+            {
+                "point1": "left_elbow",
+                "point2": "left_hip",
+                "ref_point": "left_shoulder"
+            },
+            {
+                "point1": "right_elbow",
+                "point2": "right_hip",
+                "ref_point": "right_shoulder"
+            },
+            {
+                "point1": "right_shoulder",
+                "point2": "right_knee",
+                "ref_point": "right_hip"
+            },
+            {
+                "point1": "left_shoulder",
+                "point2": "left_knee",
+                "ref_point": "left_hip"
+            },
+            {
+                "point1": "right_hip",
+                "point2": "right_ankle",
+                "ref_point": "right_knee"
+            },
+            {
+                "point1": "left_hip",
+                "point2": "left_ankle",
+                "ref_point": "left_knee"
+            },
+
         ],
     },
 
@@ -185,7 +253,26 @@ pose = {
                 "point1": "right_elbow",
                 "point2": "right_hip",
                 "ref_point": "right_shoulder"
-            }
+            },{
+                "point1": "right_shoulder",
+                "point2": "right_knee",
+                "ref_point": "right_hip"
+            },
+            {
+                "point1": "left_shoulder",
+                "point2": "left_knee",
+                "ref_point": "left_hip"
+            },
+            {
+                "point1": "right_hip",
+                "point2": "right_ankle",
+                "ref_point": "right_knee"
+            },
+            {
+                "point1": "left_hip",
+                "point2": "left_ankle",
+                "ref_point": "left_knee"
+            },
         ],
     },
 
@@ -212,7 +299,27 @@ pose = {
                 "point1": "right_elbow",
                 "point2": "right_hip",
                 "ref_point": "right_shoulder"
-            }
+            },
+            {
+                "point1": "right_shoulder",
+                "point2": "right_knee",
+                "ref_point": "right_hip"
+            },
+            {
+                "point1": "left_shoulder",
+                "point2": "left_knee",
+                "ref_point": "left_hip"
+            },
+            {
+                "point1": "right_hip",
+                "point2": "right_ankle",
+                "ref_point": "right_knee"
+            },
+            {
+                "point1": "left_hip",
+                "point2": "left_ankle",
+                "ref_point": "left_knee"
+            },
         ],
     },
 
@@ -269,10 +376,9 @@ pose = {
             }
         ],
     },
-
-    "legs1":  #
+    "abs2-1":  #
     {
-        "path": "/PoseDataset/legs/legs1.txt",
+        "path": "/PoseDataset/abs/abs2-1.txt",
         "check_angle": [
             {
                 "point1": "left_shoulder",
@@ -296,6 +402,8 @@ pose = {
             }
         ],
     },
+
+    
 }
 
 def get_pose_db():

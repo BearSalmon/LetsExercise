@@ -53,6 +53,10 @@ dict_features_return_part = {
     14 : "left fore arm",
     11 : "right upper arm",
     12 : "left upper arm",
+    23 : "right thigh",
+    24 : "left thigh",
+    25 : "right calf",
+    26 : "left calf",
 
 }
 

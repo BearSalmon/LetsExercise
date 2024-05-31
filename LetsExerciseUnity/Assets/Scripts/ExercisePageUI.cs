@@ -18,6 +18,10 @@ public class ExercisePageUI : MonoBehaviour
     public LineRenderer leftUpperArm;
     public LineRenderer rightForeArm;
     public LineRenderer leftForeArm;
+    public LineRenderer rightThigh;
+    public LineRenderer leftThigh;
+    public LineRenderer rightCalf;
+    public LineRenderer leftCalf;
 
     string [] wrongPart;
 
@@ -44,11 +48,13 @@ public class ExercisePageUI : MonoBehaviour
     {
         if (exercise.activeSelf == true && !isProcessing)
         {
-            wrong_message.text = udpReceive.dataAngle;
-            pos_message.text = udpReceive.dataPos;
-            wrongPart = udpReceive.dataWrongPart.Split(",");
-
-            StartCoroutine(ProcessWrongParts());
+            // wrong_message.text = udpReceive.dataAngle;
+            // pos_message.text = udpReceive.dataPos;
+            if (udpReceive.dataWrongPart != "fuck")
+            {
+                wrongPart = udpReceive.dataWrongPart.TrimEnd(',').Split(",");
+                StartCoroutine(ProcessWrongParts());
+            }
         }
 
         if (pos_message.text != "")
@@ -85,6 +91,22 @@ public class ExercisePageUI : MonoBehaviour
             {
                 SetLineWrongColor(leftUpperArm);
             }
+            else if (part == "right thigh")
+            {
+                SetLineWrongColor(rightThigh);
+            }
+            else if (part == "left thigh")
+            {
+                SetLineWrongColor(leftThigh);
+            }
+            else if (part == "right calf")
+            {
+                SetLineWrongColor(rightCalf);
+            }
+            else if (part == "left calf")
+            {
+                SetLineWrongColor(leftCalf);
+            }
         }
 
         yield return new WaitForSeconds(1f); // Add a one-second time gap
@@ -106,6 +128,22 @@ public class ExercisePageUI : MonoBehaviour
             else if (part == "left upper arm")
             {
                 SetLineCorrectColor(leftUpperArm);
+            }
+            else if (part == "right thigh")
+            {
+                SetLineCorrectColor(rightThigh);
+            }
+            else if (part == "left thigh")
+            {
+                SetLineCorrectColor(leftThigh);
+            }
+            else if (part == "right calf")
+            {
+                SetLineCorrectColor(rightCalf);
+            }
+            else if (part == "left calf")
+            {
+                SetLineCorrectColor(leftCalf);
             }
         }
 

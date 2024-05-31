@@ -1151,6 +1151,7 @@ MonoBehaviour:
   r24: {fileID: 0}
   scaleValue1: 0
   scaleValue2: 0
+  shiftHeight: 0
   bodies: []
 --- !u!1 &141555800
 GameObject:
@@ -4719,6 +4720,10 @@ MonoBehaviour:
   leftUpperArm: {fileID: 1326676046}
   rightForeArm: {fileID: 1900772206}
   leftForeArm: {fileID: 1107873176}
+  rightThigh: {fileID: 1216472004}
+  leftThigh: {fileID: 1261722463}
+  rightCalf: {fileID: 1223290784}
+  leftCalf: {fileID: 1284106239}
   alignment: {fileID: 729572391}
   alignment_check: {fileID: 399641287}
 --- !u!114 &901737316
@@ -4857,7 +4862,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 901737311}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbfd4df5ad5e5e2468fdabe5a4e5aea0, type: 3}
   m_Name: 
@@ -4866,6 +4871,7 @@ MonoBehaviour:
   r24: {fileID: 803037501}
   scaleValue1: 0
   scaleValue2: 0
+  shiftHeight: 0
   bodies:
   - {fileID: 116356349}
   - {fileID: 1622919855}
@@ -9786,6 +9792,7 @@ MonoBehaviour:
   r24: {fileID: 0}
   scaleValue1: 0
   scaleValue2: 0
+  shiftHeight: 0
   bodies: []
 --- !u!1 &1633657909
 GameObject:
