@@ -29,31 +29,6 @@ public class AnimationCode : MonoBehaviour
   
         udpsend = GameObject.Find("WholeManager").GetComponent<UDPSend>();
         udpreceive = GameObject.Find("WholeManager").GetComponent<UDPReceive>();
-
-        //Body_for_Ready = new GameObject[33];
-        //Body_for_Exercise = new GameObject[33];
-
-    }
-
-    public void setBodyList()
-    {
-        
-        if (wholeSampleSceneManager.nowState == 0)
-        {
-            for (var i = 0; i <= 32; i++)
-            {
-                GameObject gb = GameObject.Find("e" + i);
-                Body_for_Exercise[i] = gb;
-            }
-        }
-        else
-        {
-            for (var i = 0; i <= 32; i++)
-            {
-                GameObject gb = GameObject.Find("r" + i);
-                Body_for_Ready[i] = gb;
-            }
-        }
     }
 
     // Update is called once per frame
@@ -63,6 +38,7 @@ public class AnimationCode : MonoBehaviour
         if (wholeSampleSceneManager.isAnimating && udpreceive.canContinue)
         {
             udpsend.SendDataForCounter(counter.ToString());
+
             string[] points = lines[counter++].Split(',');
 
             for (int i = 0; i <= 32; i++)

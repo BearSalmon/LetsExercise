@@ -54,7 +54,8 @@ if __name__ == "__main__":
     width, height = 360, 480
 
     # Webcam
-    cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
+    # cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
+    cap = cv2.VideoCapture(0)
     if not cap.isOpened():
         print("Cannot open camera")
         exit()
@@ -170,41 +171,45 @@ if __name__ == "__main__":
                 print(received_data_for_counter)
 
             else:
+                print(received_data_for_counter)
                 counter = int(received_data_for_counter)
 
                 points = lines[counter].split(',')
                 video_lmlist = [[int(point) for point in points[i:i+3]] for i in range(0, len(points)-1, 3)]
                 wrong_message = ""
                 wrongPart_message = ""
-
-                for index in range(len(check_point)):
-                    try:
-                        point1,point2,ref_point = get_landmark_features(lmList,dict_features,check_point[index])
-                        video_point1,video_point2,video_ref_point = get_landmark_features(video_lmlist,dict_features,check_point[index])
-                        offset_angle = find_angle(point1,point2,ref_point)
-                        video_offset_angle = find_angle(video_point1,video_point2,video_ref_point)
-                        wrong = offset_angle - video_offset_angle
-                        if wrong > 25 or abs(wrong) > 25:
-                            wrongPart_message += get_WrongPart_Message(check_point[index],dict_features)
-                            wrong_message = get_Wrong_Message(check_point[index],wrong,dict_features)
-                        else :
-                            wrong_message = "nice"
-                    except:
-                        pass
-                    
+                if lmList and bboxInfo :  
+                    for index in range(len(check_point)):
+                        try:
+                            point1,point2,ref_point = get_landmark_features(lmList,dict_features,check_point[index])
+                            video_point1,video_point2,video_ref_point = get_landmark_features(video_lmlist,dict_features,check_point[index])
+                            offset_angle = find_angle(point1,point2,ref_point)
+                            video_offset_angle = find_angle(video_point1,video_point2,video_ref_point)
+                            wrong = offset_angle - video_offset_angle
+                            if wrong > 25 or abs(wrong) > 25:
+                                wrongPart_message += get_WrongPart_Message(check_point[index],dict_features)
+                                wrong_message = get_Wrong_Message(check_point[index],wrong,dict_features)
+                            else :
+                                wrong_message = "nice"
+                        except:
+                            pass
+                if (wrong_message == ""): wrong_message = "fuck"
+                if (wrongPart_message == ""): wrongPart_message = "fuck"
                 # udp
                 udp_sock_for_counter.sendto(str.encode(str(wrong_message)), serverAddressPort_angle)
-                udp_sock_for_counter.sendto(str.encode(str(wrongPart_message[:-1])), serverAddressPort_wrongPart)
+                udp_sock_for_counter.sendto(str.encode(str(wrongPart_message)), serverAddressPort_wrongPart)
 
         #print(lmList)
-        kp_inside = 0
-        for i in range(len(lmList)):
-            if 0 <= lmList[i][0] <= width and 0 <= lmList[i][1] <= height:
-                kp_inside += 1
-        if kp_inside == len(lmList):
-            udp_sock_for_counter.sendto(str.encode(""), serverAddressPort_pos)
-        else:
-            udp_sock_for_counter.sendto(str.encode("Align your body to the border"), serverAddressPort_pos)
+                
+        if lmList and bboxInfo :  
+            kp_inside = 0
+            for i in range(len(lmList)):
+                if 0 <= lmList[i][0] <= width and 0 <= lmList[i][1] <= height:
+                    kp_inside += 1
+            if kp_inside == len(lmList):
+                udp_sock_for_counter.sendto(str.encode(""), serverAddressPort_pos)
+            else:
+                udp_sock_for_counter.sendto(str.encode("Align your body to the border"), serverAddressPort_pos)
 
 
         #cv2.imshow("Image", img)

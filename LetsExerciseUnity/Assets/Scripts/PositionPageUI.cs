@@ -46,7 +46,7 @@ public class PositionPageUI : MonoBehaviour
         if (loadingCompleted)
         {
             pos_message.text = udpReceive.dataPos;
-            //SceneManager.LoadScene((int)ButtonEvent.SceneName.GameStart);
+            SceneManager.LoadScene((int)ButtonEvent.SceneName.GameStart);
             if (pos_message.text != "")
             {
                 StopIncreasing();

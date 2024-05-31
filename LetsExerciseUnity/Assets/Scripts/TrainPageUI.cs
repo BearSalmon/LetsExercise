@@ -25,7 +25,7 @@ public class TrainPageUI : MonoBehaviour
     void Start()
     {
         dBUtils = GameObject.Find("WholeManager").GetComponent<DBUtils>();
-        number = 3; 
+        number = dBUtils.CountPoseSets(); 
         updateTrainSet(nowSelect);
     }
 

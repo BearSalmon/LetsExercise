@@ -84,6 +84,7 @@ public class ButtonEvent : MonoBehaviour
         f_Scene = SceneManager.GetActiveScene();
         SetButtonList();
         poseSetID = 1;
+        poseSetLevel = "Easy";
         audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
     }
 

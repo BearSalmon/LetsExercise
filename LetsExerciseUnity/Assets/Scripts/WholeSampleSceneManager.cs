@@ -69,8 +69,6 @@ public class WholeSampleSceneManager : MonoBehaviour
 
         SetUpPoseSet();
         nowPose = 0;
-        
-        //animationCode.setBodyList();
         SetUpPath();
 
         // normalizeBody.changeBodyScale();
@@ -84,7 +82,7 @@ public class WholeSampleSceneManager : MonoBehaviour
         else {
             readyPageUi.SetUp(poses[nowPose].Name, nowPose + 1, poseSetCount, poseSet.PoseSetName);
         }
-        countDownTimer.StartCountDown(10f);
+        countDownTimer.StartCountDown(5f);
         //normalizeBody.changeBodyScale();
     }
 
@@ -121,6 +119,7 @@ public class WholeSampleSceneManager : MonoBehaviour
     public void StartAnimation()
     {
         isAnimating = true;
+        udpsend.SendDataForCounter("start");
     }
 
     public void StopAnimation()
@@ -134,7 +133,6 @@ public class WholeSampleSceneManager : MonoBehaviour
         {
             nowState = 0;
             Exercise.SetActive(true);
-            //animationCode.setBodyList();
             Ready.SetActive(false);
 
             exercisePageUI.SetUp(poses[nowPose].Name);
@@ -160,7 +158,6 @@ public class WholeSampleSceneManager : MonoBehaviour
             nowState = 1;
             Exercise.SetActive(false);
             Ready.SetActive(true);
-            // animationCode.setBodyList();
 
             // normalizeBody.changeBodyScale();
             nowPose += 1;
@@ -183,7 +180,7 @@ public class WholeSampleSceneManager : MonoBehaviour
                     readyPageUi.SetUp(poses[nowPose].Name, nowPose + 1, poseSetCount, poseSet.PoseSetName);
                 }
 
-                countDownTimer.StartCountDown(10f);
+                countDownTimer.StartCountDown(5f);
                 //normalizeBody.changeBodyScale();
             } 
         }
