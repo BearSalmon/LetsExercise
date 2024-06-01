@@ -46,7 +46,7 @@ public class AnimationCode : MonoBehaviour
                 // normoalize position
                 float x = float.Parse(points[0 + (i * 3)]) / 20;
                 float y = float.Parse(points[1 + (i * 3)]) / 20;
-                float z = float.Parse(points[2 + (i * 3)]) / 500;
+                float z = float.Parse(points[2 + (i * 3)]) / 600;
 
 
                 if (wholeSampleSceneManager.nowState == 0)
@@ -77,8 +77,6 @@ public class AnimationCode : MonoBehaviour
         }
         
     }
-
-    
 
     public void ChangeLineList(string path)
     {

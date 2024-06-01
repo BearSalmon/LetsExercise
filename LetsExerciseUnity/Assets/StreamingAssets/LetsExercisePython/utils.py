@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 import math
+import random
 
 def find_angle(p1, p2, ref_pt):
     p1_ref = p1 - ref_pt
@@ -66,19 +67,26 @@ def get_WrongPart_Message(check_point, dict_features):
     
 def get_Wrong_Message(check_point, wrong_offset, dict_features):
     wrong_message = ""
-    ref_point = dict_features[check_point["ref_point"]]
+    the_choice = random.choice(check_point)
+    ref_point = dict_features[the_choice["ref_point"]]
 
-    if check_point["ref_point"] == "right_elbow" or check_point["ref_point"] == "left_elbow":
+    if the_choice["ref_point"] == "right_elbow" or the_choice["ref_point"] == "left_elbow":
         if wrong_offset < 0:
             wrong_message += "Your " + dict_features_return[ref_point] + "is not straight enough"
         else :
             wrong_message += "Your " + dict_features_return[ref_point] + ""
 
-    elif check_point["ref_point"] == "left_shoulder" or check_point["ref_point"] == "right_shoulder":
+    elif the_choice["ref_point"] == "left_shoulder" or the_choice["ref_point"] == "right_shoulder":
         if wrong_offset < 0:
             wrong_message += "Please raise your " + dict_features_return[ref_point] + " higher"
         else :
             wrong_message += "Please lower your " + dict_features_return[ref_point]
+    elif the_choice["ref_point"] == "left_hip" or the_choice["ref_point"] == "right_hip":
+        if wrong_offset < 0:
+            wrong_message += "Please lower your " + dict_features_return[ref_point]
+        else :
+            wrong_message += "Please raise your " + dict_features_return[ref_point] + " higher"
+    
 
     return wrong_message
     
