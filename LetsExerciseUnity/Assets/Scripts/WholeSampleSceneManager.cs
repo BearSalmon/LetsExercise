@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine.SceneManagement;
 using System;
 using System.Diagnostics;
+using System.IO;
 
 public class WholeSampleSceneManager : MonoBehaviour
 {
@@ -132,6 +133,7 @@ public class WholeSampleSceneManager : MonoBehaviour
         if (nowState == 1)
         {
             nowState = 0;
+            animationCode.counter = 0;
             Exercise.SetActive(true);
             Ready.SetActive(false);
 
@@ -158,7 +160,6 @@ public class WholeSampleSceneManager : MonoBehaviour
             nowState = 1;
             Exercise.SetActive(false);
             Ready.SetActive(true);
-
             // normalizeBody.changeBodyScale();
             nowPose += 1;
             // normalizeBody.changeBodyScale();

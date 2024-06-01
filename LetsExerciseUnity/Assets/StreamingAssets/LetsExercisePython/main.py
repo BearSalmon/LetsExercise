@@ -165,20 +165,17 @@ if __name__ == "__main__":
             with open(exact_path, "r") as lm_file:
                 lines = lm_file.readlines()
 
-
         if received_data_for_counter:
             if received_data_for_counter == "start":
                 print(received_data_for_counter)
-
             else:
-                print(received_data_for_counter)
-                counter = int(received_data_for_counter)
-
-                points = lines[counter].split(',')
-                video_lmlist = [[int(point) for point in points[i:i+3]] for i in range(0, len(points)-1, 3)]
                 wrong_message = ""
                 wrongPart_message = ""
-                if lmList and bboxInfo :  
+                counter = int(received_data_for_counter)
+                points = lines[counter].split(',')
+                video_lmlist = [[int(point) for point in points[i:i+3]] for i in range(0, len(points)-1, 3)]
+                if lmList :  
+                    wrong_index = []
                     for index in range(len(check_point)):
                         try:
                             point1,point2,ref_point = get_landmark_features(lmList,dict_features,check_point[index])
@@ -188,16 +185,18 @@ if __name__ == "__main__":
                             wrong = offset_angle - video_offset_angle
                             if wrong > 25 or abs(wrong) > 25:
                                 wrongPart_message += get_WrongPart_Message(check_point[index],dict_features)
-                                wrong_message = get_Wrong_Message(check_point[index],wrong,dict_features)
-                            else :
-                                wrong_message = "nice"
+                                wrong_index.append(check_point[index])
                         except:
                             pass
-                if (wrong_message == ""): wrong_message = "fuck"
-                if (wrongPart_message == ""): wrongPart_message = "fuck"
+                    if len(wrong_index) == 0:
+                        wrong_message = "nice"
+                    else :
+                        wrong_message += get_Wrong_Message(wrong_index,wrong,dict_features)
+                if (wrong_message == ""): wrong_message = "please align your body to the border"
+                if (wrongPart_message == ""): wrongPart_message = "please align your body to the border"
                 # udp
                 udp_sock_for_counter.sendto(str.encode(str(wrong_message)), serverAddressPort_angle)
-                udp_sock_for_counter.sendto(str.encode(str(wrongPart_message)), serverAddressPort_wrongPart)
+                udp_sock_for_counter.sendto(str.encode(str(wrongPart_message)), serverAddressPort_wrongPart)    
 
         #print(lmList)
                 

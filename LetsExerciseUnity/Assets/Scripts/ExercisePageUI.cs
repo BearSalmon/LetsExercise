@@ -48,7 +48,7 @@ public class ExercisePageUI : MonoBehaviour
     {
         if (exercise.activeSelf == true && !isProcessing)
         {
-            // wrong_message.text = udpReceive.dataAngle;
+            wrong_message.text = udpReceive.dataAngle;
             // pos_message.text = udpReceive.dataPos;
             if (udpReceive.dataWrongPart != "fuck")
             {

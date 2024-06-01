@@ -169,16 +169,7 @@ pose = {
                 "point2": "left_knee",
                 "ref_point": "left_hip"
             },
-            {
-                "point1": "right_hip",
-                "point2": "right_ankle",
-                "ref_point": "right_knee"
-            },
-            {
-                "point1": "left_hip",
-                "point2": "left_ankle",
-                "ref_point": "left_knee"
-            },
+            
         ],
     },
 
@@ -216,17 +207,7 @@ pose = {
                 "point2": "left_knee",
                 "ref_point": "left_hip"
             },
-            {
-                "point1": "right_hip",
-                "point2": "right_ankle",
-                "ref_point": "right_knee"
-            },
-            {
-                "point1": "left_hip",
-                "point2": "left_ankle",
-                "ref_point": "left_knee"
-            },
-
+            
         ],
     },
 
@@ -263,16 +244,7 @@ pose = {
                 "point2": "left_knee",
                 "ref_point": "left_hip"
             },
-            {
-                "point1": "right_hip",
-                "point2": "right_ankle",
-                "ref_point": "right_knee"
-            },
-            {
-                "point1": "left_hip",
-                "point2": "left_ankle",
-                "ref_point": "left_knee"
-            },
+            
         ],
     },
 
@@ -310,16 +282,7 @@ pose = {
                 "point2": "left_knee",
                 "ref_point": "left_hip"
             },
-            {
-                "point1": "right_hip",
-                "point2": "right_ankle",
-                "ref_point": "right_knee"
-            },
-            {
-                "point1": "left_hip",
-                "point2": "left_ankle",
-                "ref_point": "left_knee"
-            },
+            
         ],
     },
 
