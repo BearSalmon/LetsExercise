@@ -72,10 +72,10 @@ public class SelectLevel : MonoBehaviour
         int numOfPose = poseSet.NumberOfGesture;
         if (level == "easy")
         {
-            return 55 * numOfPose;
+            return 60 * numOfPose;
         }
-        else if (level == "medium") return 70 * numOfPose;
-        else return 85 * numOfPose;
+        else if (level == "medium") return 75 * numOfPose;
+        else return 90 * numOfPose;
     }
 
     public void updateLevel(string level)

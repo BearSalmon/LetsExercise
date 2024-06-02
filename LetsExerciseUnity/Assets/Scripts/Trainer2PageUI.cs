@@ -62,10 +62,11 @@ public class Trainer2PageUI : MonoBehaviour
             ////////  wait to be update 
             user.RecommendationPoseSet = "";
             IEnumerable<Pose> poses;
-            poses = dBUtils.GetPoseByPart("Arms");
+            poses = dBUtils.GetPoseByPart(part);
             IEnumerable<string> poseNames = poses.Select(p => p.Name);
             List<string> poseNameList = poseNames.ToList();
-            foreach (string name in poseNameList)
+            List<string> randomList = poseNameList.OrderBy(x => Guid.NewGuid()).ToList();
+            foreach (string name in randomList)
             {
                 user.RecommendationPoseSet += name + ',';
             }

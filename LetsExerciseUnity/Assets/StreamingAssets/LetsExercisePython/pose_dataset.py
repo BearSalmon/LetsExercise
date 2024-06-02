@@ -1,6 +1,6 @@
 
 pose = {
-    "arm1":  # 很像在舉重
+    "Weightlifting":  # 很像在舉重
     {
         "path": "/PoseDataset/arms/arm1.txt",
         "check_angle": [
@@ -27,7 +27,7 @@ pose = {
         ]
     },
 
-    "arm2":  # 手臂90度往前伸
+    "Palm Down":  # 手臂90度往前伸
     {
         "path": "/PoseDataset/arms/arm2.txt",
         "check_angle":[
@@ -54,7 +54,7 @@ pose = {
         ],
     },
 
-    "arm3":  # 鋤頭式
+    "Arms Hoe":  # 鋤頭式
     {
         "path": "/PoseDataset/arms/arm3.txt",
         "check_angle":[
@@ -81,7 +81,7 @@ pose = {
         ],
     },
 
-    "arm4":  # 拍翅膀
+    "Flappings Wings":  # 拍翅膀
     {
         "path": "/PoseDataset/arms/arm4.txt",
         "check_angle":[
@@ -108,7 +108,7 @@ pose = {
         ],
     },
 
-    "arm5":  # 畫出大圓
+    "Arms Up And Down":  # 畫出大圓
     {
         "path": "/PoseDataset/arms/arm5.txt",
         "check_angle":[
@@ -135,7 +135,7 @@ pose = {
         ],
     },
 
-    "body1":  #
+    "Right Stretch":  #
     {
         "path": "/PoseDataset/body/body1.txt",
         "check_angle": [
@@ -173,7 +173,7 @@ pose = {
         ],
     },
 
-    "body1-2":  #
+    "Left Stretch":  #
     {
         "path": "/PoseDataset/body/body1-2.txt",
         "check_angle": [
@@ -211,7 +211,7 @@ pose = {
         ],
     },
 
-    "body2":  #
+    "Body Collection":  #
     {
         "path": "/PoseDataset/body/body2.txt",
         "check_angle": [
@@ -248,7 +248,7 @@ pose = {
         ],
     },
 
-    "body3":  #
+    "Jumping Jacks":  #
     {
         "path": "/PoseDataset/body/body3.txt",
         "check_angle": [
@@ -286,7 +286,7 @@ pose = {
         ],
     },
 
-    "abs1":  #
+    "Left Step On":  #
     {
         "path": "/PoseDataset/abs/abs1.txt",
         "check_angle": [
@@ -313,7 +313,7 @@ pose = {
         ],
     },
 
-    "abs2":  #
+    "Right Abs Shrink":  #
     {
         "path": "/PoseDataset/abs/abs2.txt",
         "check_angle": [
@@ -339,7 +339,7 @@ pose = {
             }
         ],
     },
-    "abs2-1":  #
+    "Left Abs Shrink":  #
     {
         "path": "/PoseDataset/abs/abs2-1.txt",
         "check_angle": [

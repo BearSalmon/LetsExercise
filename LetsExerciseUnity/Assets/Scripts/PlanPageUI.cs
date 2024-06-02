@@ -89,10 +89,10 @@ public class PlanPageUI : MonoBehaviour
     {
         if (level == "Easy")
         {
-            return 55 * numOfPose;
+            return 60 * numOfPose;
         }
-        else if (level == "Medium") return 70 * numOfPose;
-        else return 85 * numOfPose;
+        else if (level == "Medium") return 75 * numOfPose;
+        else return 90 * numOfPose;
     }
 
     void setPlanSet()

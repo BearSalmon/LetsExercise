@@ -37,8 +37,9 @@ public class PoseService
 
     public IEnumerable<Pose> GetPoseByPart(string part)
     {
-        return dataBase.GetPoseConnection().Table<Pose>().Where(x => x.Part == part);
+        return dataBase.GetPoseConnection().Table<Pose>().Where(x => x.Part.Contains(part));
     }
+
 
     // update pose by name
     public int UpdatePose(Pose pose)

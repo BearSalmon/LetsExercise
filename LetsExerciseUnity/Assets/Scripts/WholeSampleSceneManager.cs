@@ -1,11 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.SceneManagement;
-using System;
-using System.Diagnostics;
-using System.IO;
 
 public class WholeSampleSceneManager : MonoBehaviour
 {
@@ -104,6 +100,7 @@ public class WholeSampleSceneManager : MonoBehaviour
         }
         foreach (string name in poseNames)
         {
+            Debug.Log(name);
             Pose pose = dBUtils.GetPoseByName(name);
             poses.Add(pose);
         }
