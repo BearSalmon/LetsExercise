@@ -93,7 +93,7 @@ public class DBUtils : MonoBehaviour
             Duration = 100,
             Calories = 100,
             Height = 170,
-            Recommendation = "1,0,0,0,0,1,0,0,",
+            Recommendation = "0,0,1,0,0,1,0,0,",
             HasUnfinishedPlan = false,
             PreferPart = "Whole Body",
         };
@@ -107,7 +107,7 @@ public class DBUtils : MonoBehaviour
 
         Pose pose = new Pose
         {
-            Name = "arm1",
+            Name = "Weightlifting",
             Path = "/PoseDataset/arms/arm1.txt",
             CheckPoint = 4,
             Part = "Arms",
@@ -118,7 +118,7 @@ public class DBUtils : MonoBehaviour
 
         pose = new Pose
         {
-            Name = "arm2",
+            Name = "Palm Down",
             Path = "/PoseDataset/arms/arm2.txt",
             CheckPoint = 4,
             Part = "Arms",
@@ -131,7 +131,7 @@ public class DBUtils : MonoBehaviour
 
         pose = new Pose
         {
-            Name = "arm3",
+            Name = "Arms Hoe",
             Path = "/PoseDataset/arms/arm3.txt",
             CheckPoint = 4,
             Part = "Arms",
@@ -144,7 +144,7 @@ public class DBUtils : MonoBehaviour
 
         pose = new Pose
         {
-            Name = "arm4",
+            Name = "Flappings Wings",
             Path = "/PoseDataset/arms/arm4.txt",
             CheckPoint = 4,
             Part = "Arms",
@@ -156,7 +156,7 @@ public class DBUtils : MonoBehaviour
 
         pose = new Pose
         {
-            Name = "arm5",
+            Name = "Arms Up And Down",
             Path = "/PoseDataset/arms/arm5.txt",
             CheckPoint = 4,
             Part = "Arms",
@@ -167,10 +167,10 @@ public class DBUtils : MonoBehaviour
 
         pose = new Pose
         {
-            Name = "abs1",
+            Name = "Left Step On",
             Path = "/PoseDataset/abs/abs1.txt",
             CheckPoint = 4,
-            Part = "Abs",
+            Part = "Abs,Arms,Legs,",
             Description = ""
 
         };
@@ -178,10 +178,10 @@ public class DBUtils : MonoBehaviour
 
         pose = new Pose
         {
-            Name = "abs2",
+            Name = "Right Abs Shrink",
             Path = "/PoseDataset/abs/abs2.txt",
             CheckPoint = 4,
-            Part = "Abs",
+            Part = "Abs,Arms,Legs,",
             Description = ""
 
         };
@@ -189,10 +189,10 @@ public class DBUtils : MonoBehaviour
 
         pose = new Pose
         {
-            Name = "abs2-1",
+            Name = "Left Abs Shrink",
             Path = "/PoseDataset/abs/abs2-1.txt",
             CheckPoint = 4,
-            Part = "Abs",
+            Part = "Abs,Arms,Legs,",
             Description = ""
 
         };
@@ -200,10 +200,10 @@ public class DBUtils : MonoBehaviour
 
         pose = new Pose
         {
-            Name = "body1",
+            Name = "Right Stretch",
             Path = "/PoseDataset/body/body1.txt",
             CheckPoint = 4,
-            Part = "Whole Body",
+            Part = "Whole Body,Arms,Legs,Abs,Buttocks,",
             Description = ""
 
         };
@@ -211,10 +211,10 @@ public class DBUtils : MonoBehaviour
 
         pose = new Pose
         {
-            Name = "body2",
+            Name = "Body Collection",
             Path = "/PoseDataset/body/body2.txt",
             CheckPoint = 4,
-            Part = "Whole Body",
+            Part = "Whole Body,Arms,Legs,Abs,Buttocks,",
             Description = ""
 
         };
@@ -222,10 +222,10 @@ public class DBUtils : MonoBehaviour
 
         pose = new Pose
         {
-            Name = "body3",
+            Name = "Jumping Jacks",
             Path = "/PoseDataset/body/body3.txt",
             CheckPoint = 4,
-            Part = "Whole Body",
+            Part = "Whole Body,Arms,Legs,Abs,Buttocks,",
             Description = ""
 
         };
@@ -233,10 +233,10 @@ public class DBUtils : MonoBehaviour
 
         pose = new Pose
         {
-            Name = "body1-2",
+            Name = "Left Stretch",
             Path = "/PoseDataset/body/body1-2.txt",
             CheckPoint = 4,
-            Part = "Whole Body",
+            Part = "Whole Body,Arms,Legs,Abs,Buttocks,",
             Description = ""
 
         };
@@ -248,48 +248,35 @@ public class DBUtils : MonoBehaviour
 
         PoseSet poseSet = new PoseSet
         {
-            PoseSetName = "hello",
+            PoseSetName = "Abs & Assets",
             Calories = 130f,
-            NumberOfGesture = 5,
-            Part = "Arms,Abs,",
-            TrainPoseSet = "arm1,arm2,arm3,arm4,arm5,",
+            NumberOfGesture = 7,
+            Part = "Abs,",
+            TrainPoseSet = "Right Stretch,Left Stretch,Left Step On,Right Abs Shrink,Left Abs Shrink,Body Collection,Jumping Jacks,",
         };
         poseSetService.AddPoseSet(poseSet);
 
         poseSet = new PoseSet
         {
-            PoseSetName = "how to become a cute salmon",
+            PoseSetName = "Core Crusher",
             Calories = 500f,
             NumberOfGesture = 5,
             Part = "Whole Body,",
-            TrainPoseSet = "arm1,arm2,arm3,arm4,arm5,",
+            TrainPoseSet = "Right Stretch,Left Abs Shrink,Jumping Jacks,Weightlifting,Palm Down,Left Stretch,Arms Hoe,Right Abs Shrink,Flappings Wings,Left Step On,Arms Up And Down,Body Collection",
         };
 
         poseSetService.AddPoseSet(poseSet);
 
         poseSet = new PoseSet
         {
-            PoseSetName = "hi hi",
+            PoseSetName = "Arms Selected",
             Calories = 300f,
             NumberOfGesture = 5,
-            Part = "Legs,",
-            TrainPoseSet = "arm1,arm2,arm3,arm4,arm5,",
+            Part = "Arms,",
+            TrainPoseSet = "Weightlifting,Palm Down,Arms Hoe,Flappings Wings,Arms Up And Down,",
         };
 
         poseSetService.AddPoseSet(poseSet);
-
-        poseSet = new PoseSet
-        {
-            PoseSetName = "fuck you",
-            Calories = 300f,
-            NumberOfGesture = 9,
-            Part = "Whole Body,",
-            TrainPoseSet = "body1,body1-2,abs1,abs2,abs2-1,arm2,body2,arm4,body3,",
-        };
-
-        poseSetService.AddPoseSet(poseSet);
-
-
 
     }
 
@@ -411,6 +398,7 @@ public class DBUtils : MonoBehaviour
     public IEnumerable<Pose> GetPoseByPart(string part)
     {
         IEnumerable<Pose> poses = poseService.GetPoseByPart(part);
+        //ToConsole2(poses);
         return poses;
     }
 

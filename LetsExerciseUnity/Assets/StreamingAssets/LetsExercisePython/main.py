@@ -15,13 +15,6 @@ if __name__ == "__main__":
     # 取得資料庫
     pose_db = get_pose_db()
 
-    check_point = pose_db["arm1"]["check_angle"]
-    file_path = pose_db["arm1"]["path"]
-    exact_path = os.getcwd() + file_path
-
-    with open(exact_path, "r") as lm_file:
-        lines = lm_file.readlines()
-
     #tcp
     tcp_ip = '127.0.0.1'
     tcp_port = 5066

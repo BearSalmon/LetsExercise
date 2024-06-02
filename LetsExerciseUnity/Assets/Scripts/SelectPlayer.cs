@@ -125,14 +125,16 @@ public class SelectPlayer : MonoBehaviour
 
                 string part = GetRecommendLabel(maxIndex_0_4);
                 string level = GetRecommendLabel(maxIndex_5_7);
+
  
                 ////////  wait to be update 
                 user.RecommendationPoseSet = "";
                 IEnumerable<Pose> poses;
-                poses = dBUtils.GetPoseByPart("Arms");
+                poses = dBUtils.GetPoseByPart(part);
                 IEnumerable<string> poseNames = poses.Select(p => p.Name);
                 List<string> poseNameList = poseNames.ToList();
-                foreach (string name in poseNameList)
+                List<string> randomList = poseNameList.OrderBy(x => Guid.NewGuid()).ToList();
+                foreach (string name in randomList)
                 {
                     user.RecommendationPoseSet += name + ',';
                 }
