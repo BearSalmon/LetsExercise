@@ -140,7 +140,7 @@ public class WholeSampleSceneManager : MonoBehaviour
 
             if (level == "Easy")
             {
-                countDownTimer.StartCountDown(5f);
+                countDownTimer.StartCountDown(20f);
             }
             else if (level == "Medium")
             {

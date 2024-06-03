@@ -64,7 +64,7 @@ public class AnimationCode : MonoBehaviour
 
             if (counter == 3 && loop_cnt == 0 && wholeSampleSceneManager.nowState == 1)
             {
-                normalizeBody.changeBodyScale();
+                //normalizeBody.changeBodyScale();
             }
             if (counter >= lines.Count)
             {
