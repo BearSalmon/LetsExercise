@@ -33,13 +33,14 @@ public class ExercisePageUI : MonoBehaviour
     private Coroutine increaseCoroutine;
     private bool isIncreasing = false;
 
+    bool canGetWrongMessage;
+
 
     void Start()
     {
         udpReceive = GameObject.Find("WholeManager").GetComponent<UDPReceive>();
-        //alignment.fillAmount = 0f;
-        alignment.enabled = false;
-        isIncreasing = false;
+        wrong_message.text = "nice";
+        canGetWrongMessage = true;
     }
 
 
@@ -48,25 +49,22 @@ public class ExercisePageUI : MonoBehaviour
     {
         if (exercise.activeSelf == true && !isProcessing)
         {
-            wrong_message.text = udpReceive.dataAngle;
-            // pos_message.text = udpReceive.dataPos;
-            if (udpReceive.dataWrongPart != "fuck")
+            if (canGetWrongMessage)
             {
-                wrongPart = udpReceive.dataWrongPart.TrimEnd(',').Split(",");
-                StartCoroutine(ProcessWrongParts());
+                StartCoroutine(UpdateWrongMessageWithDelay());
             }
+            wrongPart = udpReceive.dataWrongPart.TrimEnd(',').Split(",");
+            StartCoroutine(ProcessWrongParts());
         }
 
-        if (pos_message.text != "")
-        {
-            StopIncreasing();
-            alignment.enabled = true;
-        }
+    }
 
-        if (pos_message.text == "")
-        {
-            CallDrawer();
-        }
+    private IEnumerator UpdateWrongMessageWithDelay()
+    {
+        canGetWrongMessage = false;
+        yield return new WaitForSeconds(5f); // Wait for 5 seconds
+        canGetWrongMessage = true;
+        wrong_message.text = udpReceive.dataAngle;
     }
 
     private IEnumerator ProcessWrongParts()

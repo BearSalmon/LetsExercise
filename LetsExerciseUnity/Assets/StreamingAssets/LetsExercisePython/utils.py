@@ -74,7 +74,7 @@ def get_Wrong_Message(check_point, wrong_offset, dict_features):
         if wrong_offset < 0:
             wrong_message += "Your " + dict_features_return[ref_point] + "is not straight enough"
         else :
-            wrong_message += "Your " + dict_features_return[ref_point] + ""
+            wrong_message += "Your " + dict_features_return[ref_point] + "is too straight"
 
     elif the_choice["ref_point"] == "left_shoulder" or the_choice["ref_point"] == "right_shoulder":
         if wrong_offset < 0:
