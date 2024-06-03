@@ -269,7 +269,7 @@ public class ButtonEvent : MonoBehaviour
 
             if (calendarUI.detailIsOpen == true)
             {
-                numOfButton = 46;
+                numOfButton = 1;
             }
             else
             {
@@ -280,15 +280,42 @@ public class ButtonEvent : MonoBehaviour
 
         
         buttons = new Button[numOfButton];
-        for (var i = 1; i <= numOfButton; i++)
+
+        if (m_Scene.name != "Calendar")
         {
-            Button btn = GameObject.Find("Btn" + i).GetComponent<Button>();
+            for (var i = 1; i <= numOfButton; i++)
+            {
+                Button btn = GameObject.Find("Btn" + i).GetComponent<Button>();
 
-            // 每個 button 新增鼠標點擊功能
-            btn.onClick.AddListener(() => ButtonClick(btn));
+                // 每個 button 新增鼠標點擊功能
+                btn.onClick.AddListener(() => ButtonClick(btn));
 
-            buttons[i-1] = btn; 
+                buttons[i - 1] = btn;
+            }
         }
+        else
+        {
+            if (calendarUI.detailIsOpen == true)
+            {
+                Button btn = GameObject.Find("Btn46").GetComponent<Button>();
+                btn.onClick.AddListener(() => ButtonClick(btn));
+                buttons[0] = btn;
+                Debug.Log("hi");
+            }
+            else
+            {
+                for (var i = 1; i <= numOfButton; i++)
+                {
+                    Button btn = GameObject.Find("Btn" + i).GetComponent<Button>();
+
+                    // 每個 button 新增鼠標點擊功能
+                    btn.onClick.AddListener(() => ButtonClick(btn));
+
+                    buttons[i - 1] = btn;
+                }
+            }
+        }
+        
 
     }
 
@@ -301,7 +328,9 @@ public class ButtonEvent : MonoBehaviour
     {
         audioManager.PlaySFX(audioManager.buttonClick);
         count++;
-        //Debug.Log(count);
+
+
+        Debug.Log(count);
         // Game Start
         if (m_Scene.name == "GameStart")
         {
@@ -787,9 +816,16 @@ public class ButtonEvent : MonoBehaviour
         }
         else if (m_Scene.name == "Calendar")
         {
+            
             if (btn.name == "Btn1")
             {
                 calendarUI.SwitchMonth(1);
+            }
+            else if (btn.name == "Btn46")
+            {
+                calendarUI.detailIsOpen = false;
+                calendarUI.SetUpDetail("");
+                SetButtonList();
             }
             else if (btn.name == "Btn2")
             {
@@ -799,17 +835,13 @@ public class ButtonEvent : MonoBehaviour
             {
                 SceneManager.LoadScene((int)SceneName.MainPage);
             }
-            else if (btn.name == "Btn46")
-            {
-                calendarUI.detailIsOpen = false;
-                calendarUI.SetUpDetail("");
-            }
             else
             {   
                 // is valid day
                 if (btn.GetComponentInChildren<TextMeshProUGUI>().text != "")
                 {
                     calendarUI.detailIsOpen = true;
+                    
                     calendarUI.SetUpDetail(btn.GetComponentInChildren<TextMeshProUGUI>().text);
                     SetButtonList();
                 }
@@ -894,7 +926,7 @@ public class ButtonEvent : MonoBehaviour
     bool Check_touch_button(Button btn)
     {
         float[] button_info = Get_button_info(btn);
-        float buffer = 60f;
+        float buffer = 50f;
         if (mouse.transform.position.x > button_info[0] - button_info[2] / 2 + buffer
             && mouse.transform.position.x < button_info[0] + button_info[2] / 2 - buffer
             && mouse.transform.position.y > button_info[1] - button_info[3] / 2 + buffer
