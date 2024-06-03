@@ -178,6 +178,17 @@ public class DBUtils : MonoBehaviour
 
         pose = new Pose
         {
+            Name = "Right Step On",
+            Path = "/PoseDataset/abs/abs1-2.txt",
+            CheckPoint = 4,
+            Part = "Abs,Arms,Legs,",
+            Description = ""
+
+        };
+        poseService.AddPose(pose);
+
+        pose = new Pose
+        {
             Name = "Right Abs Shrink",
             Path = "/PoseDataset/abs/abs2.txt",
             CheckPoint = 4,
@@ -252,7 +263,7 @@ public class DBUtils : MonoBehaviour
             Calories = 130f,
             NumberOfGesture = 7,
             Part = "Abs,",
-            TrainPoseSet = "Right Stretch,Left Stretch,Left Step On,Right Abs Shrink,Left Abs Shrink,Body Collection,Jumping Jacks,",
+            TrainPoseSet = "Body Collection,Right Stretch,Left Stretch,Left Step On,Right Abs Shrink,Left Abs Shrink,Jumping Jacks,",
         };
         poseSetService.AddPoseSet(poseSet);
 
