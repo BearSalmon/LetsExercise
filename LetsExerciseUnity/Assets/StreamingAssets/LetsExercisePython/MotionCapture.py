@@ -4,7 +4,7 @@ import os
 
 cap = cv2.VideoCapture('video.mp4')
 detector = PoseDetector()
-os.remove("lmList.txt")
+#os.remove("lmList.txt")
 postList = []
 
 while True:
