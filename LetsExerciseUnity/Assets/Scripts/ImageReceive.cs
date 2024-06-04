@@ -41,7 +41,7 @@ public class ImageReceive : MonoBehaviour
 
             wholeSampleSceneManager = GameObject.Find("Manager").GetComponent<WholeSampleSceneManager>();
 
-            if (wholeSampleSceneManager.nowState == 0)
+            if (wholeSampleSceneManager.nowState == 0 && wholeSampleSceneManager.isCounting == false)
             {
                 img = GameObject.Find("PlayerCamera").GetComponent<RawImage>();
                 tex.LoadImage(imageDatas);

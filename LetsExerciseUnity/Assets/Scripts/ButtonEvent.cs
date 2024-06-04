@@ -328,9 +328,7 @@ public class ButtonEvent : MonoBehaviour
     {
         audioManager.PlaySFX(audioManager.buttonClick);
         count++;
-
-
-        Debug.Log(count);
+        //Debug.Log(count);
         // Game Start
         if (m_Scene.name == "GameStart")
         {
@@ -435,7 +433,6 @@ public class ButtonEvent : MonoBehaviour
                 {
                     if (isChangingColor == false)
                     {
-                        isChangingColor = true;
                         SceneManager.LoadScene((int)SceneName.InquireData);
                     }
                     else
@@ -595,6 +592,7 @@ public class ButtonEvent : MonoBehaviour
                 user.Recommendation = investigateSet.SetRecommandation(user.Level);
                 dBUtils.UpdateUser(user);
                 isAddingWeight = true;
+                isChangingColor = true;
                 SceneManager.LoadScene((int)SceneName.Trainer2);
             }
 

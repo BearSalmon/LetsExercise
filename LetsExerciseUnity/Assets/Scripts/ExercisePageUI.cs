@@ -8,6 +8,7 @@ public class ExercisePageUI : MonoBehaviour
 {
     // Start is called before the first frame update
 
+
     public TextMeshProUGUI wrong_message;
     public TextMeshProUGUI pos_message;
     public TextMeshProUGUI poseName;
@@ -26,18 +27,14 @@ public class ExercisePageUI : MonoBehaviour
     string [] wrongPart;
 
     private bool isProcessing = false;
-
-    // alignment
-    public Image alignment;
-    public Image alignment_check;
-    private Coroutine increaseCoroutine;
-    private bool isIncreasing = false;
+    WholeSampleSceneManager wholeSampleSceneManager;
 
     bool canGetWrongMessage;
 
 
     void Start()
     {
+        wholeSampleSceneManager = GetComponent<WholeSampleSceneManager>();
         udpReceive = GameObject.Find("WholeManager").GetComponent<UDPReceive>();
         wrong_message.text = "nice";
         canGetWrongMessage = true;
@@ -47,7 +44,7 @@ public class ExercisePageUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (exercise.activeSelf == true && !isProcessing)
+        if (exercise.activeSelf == true && !isProcessing && wholeSampleSceneManager.isAnimating)
         {
             if (canGetWrongMessage)
             {
@@ -62,7 +59,7 @@ public class ExercisePageUI : MonoBehaviour
     private IEnumerator UpdateWrongMessageWithDelay()
     {
         canGetWrongMessage = false;
-        yield return new WaitForSeconds(5f); // Wait for 5 seconds
+        yield return new WaitForSeconds(3f); // Wait for 5 seconds
         canGetWrongMessage = true;
         wrong_message.text = udpReceive.dataAngle;
     }
@@ -167,43 +164,6 @@ public class ExercisePageUI : MonoBehaviour
     }
 
 
-    public void StopIncreasing()
-    {
-        if (isIncreasing && increaseCoroutine != null) // Check if increasing and coroutine is running
-        {
-            StopCoroutine(increaseCoroutine); // Stop the coroutine
-            alignment_check.fillAmount = 0f;
-            isIncreasing = false; // Reset the flag
 
-        }
-    }
-
-    public void CallDrawer()
-    {
-        if (!isIncreasing)
-        {
-            increaseCoroutine = StartCoroutine(IncreaseProgressOverTime(3f));
-        }
-    }
-
-    IEnumerator IncreaseProgressOverTime(float duration)
-    {
-        float timer = 0f;
-        float startProgress = alignment_check.fillAmount;
-        float endProgress = 1f;
-
-        isIncreasing = true;
-        while (timer < duration)
-        {
-            timer += Time.deltaTime;
-            alignment_check.fillAmount = Mathf.Lerp(startProgress, endProgress, timer / duration);
-            yield return null; // Wait for the next frame
-        }
-
-        alignment_check.fillAmount = endProgress;
-
-        alignment_check.fillAmount = 0f;
-        isIncreasing = false;
-
-    }
+   
 }

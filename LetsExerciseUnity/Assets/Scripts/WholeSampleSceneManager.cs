@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.SceneManagement;
+using TMPro;
+using System.Collections;
 
 public class WholeSampleSceneManager : MonoBehaviour
 {
@@ -29,9 +31,12 @@ public class WholeSampleSceneManager : MonoBehaviour
     public UDPReceive udpreceive;
 
     public bool isAnimating;
+    public bool isCounting;
 
     User user;
     public List<Pose> poses = new List<Pose>();
+
+    public TextMeshProUGUI countDownMessage;
 
     PoseSet poseSet;
 
@@ -40,6 +45,8 @@ public class WholeSampleSceneManager : MonoBehaviour
     void Start()
     {
         isAnimating = false;
+        isCounting = false;
+        countDownMessage.text = "";
         Exercise.SetActive(false);
         Ready.SetActive(true);
         nowState = 1;
@@ -68,8 +75,6 @@ public class WholeSampleSceneManager : MonoBehaviour
         nowPose = 0;
         SetUpPath();
 
-        // normalizeBody.changeBodyScale();
-
         // plan
         if (buttonEvent.planOrTrain == 0)
         {
@@ -80,7 +85,6 @@ public class WholeSampleSceneManager : MonoBehaviour
             readyPageUi.SetUp(poses[nowPose].Name, nowPose + 1, poseSetCount, poseSet.PoseSetName);
         }
         countDownTimer.StartCountDown(5f);
-        //normalizeBody.changeBodyScale();
     }
 
     public void SetUpPoseSet()
@@ -100,7 +104,6 @@ public class WholeSampleSceneManager : MonoBehaviour
         }
         foreach (string name in poseNames)
         {
-            Debug.Log(name);
             Pose pose = dBUtils.GetPoseByName(name);
             poses.Add(pose);
         }
@@ -123,7 +126,35 @@ public class WholeSampleSceneManager : MonoBehaviour
     public void StopAnimation()
     {
         isAnimating = false;
+        exercisePageUI.wrong_message.text = "nice";
     }
+
+    IEnumerator StartCountdownWithDelay()
+    {
+        isCounting = true;
+        for (int i = 3; i > 0; i--)
+        {
+            countDownMessage.text = i.ToString();
+            yield return new WaitForSeconds(1f);
+        }
+        countDownMessage.text = "";
+        isCounting = false;
+        Exercise.SetActive(true);
+
+        if (level == "Easy")
+        {
+            countDownTimer.StartCountDown(10f);
+        }
+        else if (level == "Medium")
+        {
+            countDownTimer.StartCountDown(10f);
+        }
+        else
+        {
+            countDownTimer.StartCountDown(15f);
+        }
+    }
+
 
     public void ChangeView()
     {
@@ -131,25 +162,13 @@ public class WholeSampleSceneManager : MonoBehaviour
         {
             nowState = 0;
             animationCode.counter = 0;
-            Exercise.SetActive(true);
             Ready.SetActive(false);
 
             exercisePageUI.SetUp(poses[nowPose].Name);
 
-            exercisePageUI.CallDrawer();
+            StartCoroutine(StartCountdownWithDelay());
 
-            if (level == "Easy")
-            {
-                countDownTimer.StartCountDown(20f);
-            }
-            else if (level == "Medium")
-            {
-                countDownTimer.StartCountDown(10f);
-            }
-            else
-            {
-                countDownTimer.StartCountDown(15f);
-            }
+            
 
         }
         else
@@ -157,9 +176,7 @@ public class WholeSampleSceneManager : MonoBehaviour
             nowState = 1;
             Exercise.SetActive(false);
             Ready.SetActive(true);
-            // normalizeBody.changeBodyScale();
             nowPose += 1;
-            // normalizeBody.changeBodyScale();
             if (nowPose == poseSetCount)
             {
                 SceneManager.LoadScene((int)ButtonEvent.SceneName.MainPage);
