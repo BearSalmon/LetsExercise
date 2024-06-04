@@ -70,22 +70,27 @@ def get_Wrong_Message(check_point, wrong_offset, dict_features):
     the_choice = random.choice(check_point)
     ref_point = dict_features[the_choice["ref_point"]]
 
-    if the_choice["ref_point"] == "right_elbow" or the_choice["ref_point"] == "left_elbow":
+    if the_choice["ref_point"] == "right_elbow":
         if wrong_offset < 0:
-            wrong_message += "Your " + dict_features_return[ref_point] + "is not straight enough"
+            wrong_message += "Your right arm is not straight enough"
         else :
-            wrong_message += "Your " + dict_features_return[ref_point] + "is too straight"
+            wrong_message += "Your right arm is too straight"
+    elif the_choice["ref_point"] == "left_elbow":
+        if wrong_offset < 0:
+            wrong_message += "Your left arm is not straight enough"
+        else :
+            wrong_message += "Your left arm is too straight"
 
     elif the_choice["ref_point"] == "left_shoulder" or the_choice["ref_point"] == "right_shoulder":
         if wrong_offset < 0:
-            wrong_message += "Please raise your " + dict_features_return[ref_point] + " higher"
+            wrong_message += "Please raise your " + dict_features_return_part[ref_point] + " higher"
         else :
-            wrong_message += "Please lower your " + dict_features_return[ref_point]
+            wrong_message += "Please lower your " + dict_features_return_part[ref_point]
     elif the_choice["ref_point"] == "left_hip" or the_choice["ref_point"] == "right_hip":
         if wrong_offset < 0:
-            wrong_message += "Please lower your " + dict_features_return[ref_point]
+            wrong_message += "Please lower your " + dict_features_return_part[ref_point]
         else :
-            wrong_message += "Please raise your " + dict_features_return[ref_point] + " higher"
+            wrong_message += "Please raise your " + dict_features_return_part[ref_point] + " higher"
     
 
     return wrong_message

@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class CountDownTimer : MonoBehaviour
 {
     public float currentTime = -1f;
-    [SerializeField] TextMeshProUGUI count;
+    public TextMeshProUGUI count;
 
     public Image progressBar;
 
@@ -55,10 +55,11 @@ public class CountDownTimer : MonoBehaviour
         }
         else if (Mathf.RoundToInt(currentTime) == 0)
         {
-            count.text = timeDuration.ToString(); 
-            currentTime = -1;
+            currentTime = -1f;
             wholeSampleSceneManager.StopAnimation();
+            count.text = "";
             wholeSampleSceneManager.ChangeView();
         }
     }
+
 }

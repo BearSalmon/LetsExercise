@@ -47,8 +47,8 @@ if __name__ == "__main__":
     width, height = 360, 480
 
     # Webcam
-    cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
-    # cap = cv2.VideoCapture(0)
+    #cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
+    cap = cv2.VideoCapture(0)
     if not cap.isOpened():
         print("Cannot open camera")
         exit()

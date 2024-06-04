@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731704, g: 0.13414727, b: 0.121078536, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731704, g: 0.13414726, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1984,7 +1984,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &512128021
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2062,6 +2062,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 542806007}
+  nextText: {fileID: 0}
 --- !u!114 &542806007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2324,7 +2325,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &720740563
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3648,6 +3649,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 1155307424}
+  nextText: {fileID: 0}
 --- !u!114 &1155307424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4204,6 +4206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 1278142912}
+  nextText: {fileID: 0}
 --- !u!114 &1278142912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6069,6 +6072,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 1986929255}
+  nextText: {fileID: 0}
 --- !u!114 &1986929255
 MonoBehaviour:
   m_ObjectHideFlags: 0
