@@ -1,8 +1,10 @@
+
 //using System.Collections;
 //using System.Collections.Generic;
 //using UnityEngine;
 //using UnityEditor.SceneManagement;
 //using UnityEditor;
+
 
 //[InitializeOnLoad]
 //public class AutoSave
@@ -11,6 +13,7 @@
 //    {
 //        EditorApplication.playModeStateChanged += SaveOnPlay;
 //    }
+
 
 //    private static void SaveOnPlay(PlayModeStateChange state)
 //    {

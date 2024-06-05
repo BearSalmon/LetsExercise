@@ -9,7 +9,6 @@ public class SelectLevel : MonoBehaviour
 {
     public string nowLevel ;
     public TextMeshProUGUI poseSetName;
-    public TextMeshProUGUI calories;
     public TextMeshProUGUI duration;
     DBUtils dBUtils;
     User user;
@@ -86,7 +85,6 @@ public class SelectLevel : MonoBehaviour
         string min = (d / 60).ToString();
         string sec = (d % 60).ToString();
 
-        calories.text = (poseSet.Calories * exchageLevelval(level)).ToString() + " cal";
         duration.text = min + "m " + sec + "s";
 
 
