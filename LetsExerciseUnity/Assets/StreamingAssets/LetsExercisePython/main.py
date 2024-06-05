@@ -182,11 +182,11 @@ if __name__ == "__main__":
                         except:
                             pass
                     if len(wrong_index) == 0:
-                        wrong_message = "nice"
+                        wrong_message = "Nice, you are doing well"
                     else :
                         wrong_message += get_Wrong_Message(wrong_index,wrong,dict_features)
-                if (wrong_message == ""): wrong_message = "please align your body to the border"
-                if (wrongPart_message == ""): wrongPart_message = "please align your body to the border"
+                if (wrong_message == ""): wrong_message = "Please align your body to the border"
+                if (wrongPart_message == ""): wrongPart_message = "Please align your body to the border"
                 # udp
                 udp_sock_for_counter.sendto(str.encode(str(wrong_message)), serverAddressPort_angle)
                 udp_sock_for_counter.sendto(str.encode(str(wrongPart_message)), serverAddressPort_wrongPart)    
