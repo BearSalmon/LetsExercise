@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731704, g: 0.13414726, b: 0.1210787, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1390,7 +1390,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 886243254}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6c4f05eb946971443851d5a56f4c09cd, type: 3}
   m_Name: 
@@ -1820,6 +1820,21 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 3b1b63710f1c3524697ffaa2f531ce4d, type: 3}
   - {fileID: 8300000, guid: 28e9d3d58ad026740b2b2083ddddaddc, type: 3}
   - {fileID: 8300000, guid: 1757a3d7ac59bcf439accf86329a8c1f, type: 3}
+  trainArm:
+  - {fileID: 8300000, guid: 6a4c7f1d96ff131449a2ac8ada6c414e, type: 3}
+  - {fileID: 8300000, guid: 2c89c7a0b1e61ce4697f4387b6d87fac, type: 3}
+  - {fileID: 8300000, guid: c0921ca0c32ef9e4a9f7c4baa6651533, type: 3}
+  - {fileID: 8300000, guid: dadb3d8e4a4d229488c21f2d3ea678ec, type: 3}
+  trainUpperarm:
+  - {fileID: 8300000, guid: 5d5058405f5067e48a07a7d0ac1769da, type: 3}
+  - {fileID: 8300000, guid: e00a28494bec5d94cacbf4f8cb5089ef, type: 3}
+  - {fileID: 8300000, guid: 99358a0c9d2f62a4da97a3c388f46cb0, type: 3}
+  - {fileID: 8300000, guid: d0fa97e3f63c42040869e932b48f788e, type: 3}
+  trainThigh:
+  - {fileID: 8300000, guid: 1760b9c499e3e9a4db7517b3ae0a9861, type: 3}
+  - {fileID: 8300000, guid: 4bd0c8b5c99f0a642b86f80c921a8966, type: 3}
+  - {fileID: 8300000, guid: 2cc13ad3e94d4b345a2204e3d68ddd0f, type: 3}
+  - {fileID: 8300000, guid: 1658f4d7cf1defa40a74f7ff09cabe76, type: 3}
 --- !u!4 &1161289169
 Transform:
   m_ObjectHideFlags: 0
