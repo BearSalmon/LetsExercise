@@ -30,6 +30,7 @@ public class ExercisePageUI : MonoBehaviour
     WholeSampleSceneManager wholeSampleSceneManager;
 
     bool canGetWrongMessage;
+    private int niceCount = 0;
 
 
     void Start()
@@ -49,6 +50,7 @@ public class ExercisePageUI : MonoBehaviour
         {
             if (canGetWrongMessage)
             {
+                canGetWrongMessage = false;
                 StartCoroutine(UpdateWrongMessageWithDelay());
             }
             wrongPart = udpReceive.dataWrongPart.TrimEnd(',').Split(",");
@@ -59,14 +61,15 @@ public class ExercisePageUI : MonoBehaviour
 
     private IEnumerator UpdateWrongMessageWithDelay()
     {
-        canGetWrongMessage = false;
-        yield return new WaitForSeconds(3f); // Wait for 5 seconds
-        canGetWrongMessage = true;
         wrong_message.text = udpReceive.dataAngle;
         if (wrong_message.text == "Nice, you are doing well")
         {
-            int rnd = Random.Range(0, audioManager.cheerUp.Count);
-            audioManager.TrainerSpeak(audioManager.cheerUp[rnd]);
+            niceCount++;
+            if (niceCount % 5 == 3)
+            {
+                int rnd = Random.Range(0, audioManager.cheerUp.Count);
+                audioManager.TrainerSpeak(audioManager.cheerUp[rnd]);
+            }
         }
         if (wrong_message.text == "Your right arm is not straight enough")
         {
@@ -116,6 +119,9 @@ public class ExercisePageUI : MonoBehaviour
         {
             audioManager.TrainerSpeak(audioManager.trainThigh[3]);
         }
+
+        yield return new WaitForSeconds(3f); // Wait for 5 seconds
+        canGetWrongMessage = true;
     }
 
     private IEnumerator ProcessWrongParts()
