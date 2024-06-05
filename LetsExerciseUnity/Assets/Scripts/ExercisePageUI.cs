@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class ExercisePageUI : MonoBehaviour
 {
     // Start is called before the first frame update
-
+    public AudioManager audioManager;
 
     public TextMeshProUGUI wrong_message;
     public TextMeshProUGUI pos_message;
@@ -38,6 +38,7 @@ public class ExercisePageUI : MonoBehaviour
         udpReceive = GameObject.Find("WholeManager").GetComponent<UDPReceive>();
         wrong_message.text = "nice";
         canGetWrongMessage = true;
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
     }
 
 
@@ -62,6 +63,59 @@ public class ExercisePageUI : MonoBehaviour
         yield return new WaitForSeconds(3f); // Wait for 5 seconds
         canGetWrongMessage = true;
         wrong_message.text = udpReceive.dataAngle;
+        if (wrong_message.text == "Nice, you are doing well")
+        {
+            int rnd = Random.Range(0, audioManager.cheerUp.Count);
+            audioManager.TrainerSpeak(audioManager.cheerUp[rnd]);
+        }
+        if (wrong_message.text == "Your right arm is not straight enough")
+        {
+            audioManager.TrainerSpeak(audioManager.trainArm[0]);
+        }
+        else if (wrong_message.text == "Your left arm is not straight enough")
+        {
+            audioManager.TrainerSpeak(audioManager.trainArm[1]);
+        }
+        else if (wrong_message.text == "Your right arm is too straight")
+        {
+            audioManager.TrainerSpeak(audioManager.trainArm[2]);
+        }
+        else if (wrong_message.text == "Your left arm is too straight")
+        {
+            audioManager.TrainerSpeak(audioManager.trainArm[3]);
+        }
+        if (wrong_message.text == "Please raise your right upper arm higher")
+        {
+            audioManager.TrainerSpeak(audioManager.trainUpperarm[0]);
+        }
+        else if (wrong_message.text == "Please raise your left upper arm higher")
+        {
+            audioManager.TrainerSpeak(audioManager.trainUpperarm[1]);
+        }
+        else if (wrong_message.text == "Please lower your right upper arm")
+        {
+            audioManager.TrainerSpeak(audioManager.trainUpperarm[2]);
+        }
+        else if (wrong_message.text == "Please lower your left upper arm")
+        {
+            audioManager.TrainerSpeak(audioManager.trainUpperarm[3]);
+        }
+        if (wrong_message.text == "Please lower your right thigh")
+        {
+            audioManager.TrainerSpeak(audioManager.trainThigh[0]);
+        }
+        else if (wrong_message.text == "Please lower your left thigh")
+        {
+            audioManager.TrainerSpeak(audioManager.trainThigh[1]);
+        }
+        else if (wrong_message.text == "Please raise your right thigh higher")
+        {
+            audioManager.TrainerSpeak(audioManager.trainThigh[2]);
+        }
+        else if (wrong_message.text == "Please raise your left thigh higher")
+        {
+            audioManager.TrainerSpeak(audioManager.trainThigh[3]);
+        }
     }
 
     private IEnumerator ProcessWrongParts()
