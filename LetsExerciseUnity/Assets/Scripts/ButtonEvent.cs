@@ -177,6 +177,7 @@ public class ButtonEvent : MonoBehaviour
         }
         else if (m_Scene.name == "SelectPart")
         {
+            audioManager.TrainerSpeak(audioManager.askFocusParts);
             numOfButton = 6;
             selectPartSet = GameObject.Find("Manager").GetComponent<SelectPartSet>(); 
             user = dBUtils.GetUserByName(dBUtils.nowPlayer);
@@ -205,6 +206,7 @@ public class ButtonEvent : MonoBehaviour
                 }
                 else if (mainPageSetUp.nowState == 1) // plan page
                 {
+                    audioManager.TrainerSpeak(audioManager.planExercise);
                     numOfButton = 6;
                 }
                 else if (mainPageSetUp.nowState == 2) // train page
@@ -434,6 +436,7 @@ public class ButtonEvent : MonoBehaviour
                     if (isChangingColor == false)
                     {
                         SceneManager.LoadScene((int)SceneName.InquireData);
+                        audioManager.TrainerSpeak(audioManager.inquireData);
                     }
                     else
                     {
@@ -686,6 +689,7 @@ public class ButtonEvent : MonoBehaviour
                 if (btn.name == "Btn6")
                 {
                     SceneManager.LoadScene((int)SceneName.SelectLevel);
+                    audioManager.TrainerSpeak(audioManager.askDifficulty);
                 }
                 else if (btn.name == "Btn7")
                 {

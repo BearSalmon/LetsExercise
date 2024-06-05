@@ -1801,9 +1801,15 @@ MonoBehaviour:
   voiceSource: {fileID: 1478726030}
   BGMStart: {fileID: 8300000, guid: 429046a5d9817e44ea3afcf3ddc65713, type: 3}
   buttonClick: {fileID: 8300000, guid: eefd56297c057d74687e451d94d15ab4, type: 3}
+  welcomeToFitIn: {fileID: 8300000, guid: dc3f6f2931e96da428c587c25d0e8b40, type: 3}
+  checkPosition: {fileID: 8300000, guid: d934bb15fc22e4b4c83b553c44fd1ee9, type: 3}
   trainerIntroduce: {fileID: 8300000, guid: 4de4dcf39de0f3e4383725ed2162fa24, type: 3}
   askIfNewUser: {fileID: 8300000, guid: 750ba9126f24523439f3f7c5bb89cc4e, type: 3}
   selectOldUser: {fileID: 8300000, guid: 9cbac3443b6822a49a9866e041c1b352, type: 3}
+  inquireData: {fileID: 8300000, guid: 3360d9da7085790418a4ea88c446ed6b, type: 3}
+  askFocusParts: {fileID: 8300000, guid: 91ea4bd6d9af0454b9d723cef59f5c49, type: 3}
+  planExercise: {fileID: 8300000, guid: 1df8f545d50cca94ab3e2530a1b912c3, type: 3}
+  askDifficulty: {fileID: 8300000, guid: 7b1ce4baa1f39924d9cf76157724dd75, type: 3}
   cheerUp:
   - {fileID: 8300000, guid: 69e06bb7592ac6740af726caf241e8ba, type: 3}
   - {fileID: 8300000, guid: 2f9ee77b39256d4468912f95ca97833d, type: 3}
