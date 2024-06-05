@@ -22,6 +22,9 @@ public class AudioManager : MonoBehaviour
     public AudioClip planExercise;
     public AudioClip askDifficulty;
     public List<AudioClip> cheerUp;
+    public List<AudioClip> trainArm;
+    public List<AudioClip> trainUpperarm;
+    public List<AudioClip> trainThigh;
 
 
     // Start is called before the first frame update

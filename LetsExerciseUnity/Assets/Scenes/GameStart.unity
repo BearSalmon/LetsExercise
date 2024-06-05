@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731704, g: 0.13414727, b: 0.121078536, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1448,9 +1448,15 @@ MonoBehaviour:
   voiceSource: {fileID: 1478726030}
   BGMStart: {fileID: 8300000, guid: 429046a5d9817e44ea3afcf3ddc65713, type: 3}
   buttonClick: {fileID: 8300000, guid: eefd56297c057d74687e451d94d15ab4, type: 3}
+  welcomeToFitIn: {fileID: 8300000, guid: dc3f6f2931e96da428c587c25d0e8b40, type: 3}
+  checkPosition: {fileID: 8300000, guid: d934bb15fc22e4b4c83b553c44fd1ee9, type: 3}
   trainerIntroduce: {fileID: 8300000, guid: 4de4dcf39de0f3e4383725ed2162fa24, type: 3}
   askIfNewUser: {fileID: 8300000, guid: 750ba9126f24523439f3f7c5bb89cc4e, type: 3}
   selectOldUser: {fileID: 8300000, guid: 9cbac3443b6822a49a9866e041c1b352, type: 3}
+  inquireData: {fileID: 8300000, guid: 3360d9da7085790418a4ea88c446ed6b, type: 3}
+  askFocusParts: {fileID: 8300000, guid: 91ea4bd6d9af0454b9d723cef59f5c49, type: 3}
+  planExercise: {fileID: 8300000, guid: 1df8f545d50cca94ab3e2530a1b912c3, type: 3}
+  askDifficulty: {fileID: 8300000, guid: 7b1ce4baa1f39924d9cf76157724dd75, type: 3}
   cheerUp:
   - {fileID: 8300000, guid: 69e06bb7592ac6740af726caf241e8ba, type: 3}
   - {fileID: 8300000, guid: 2f9ee77b39256d4468912f95ca97833d, type: 3}
@@ -1461,6 +1467,21 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 3b1b63710f1c3524697ffaa2f531ce4d, type: 3}
   - {fileID: 8300000, guid: 28e9d3d58ad026740b2b2083ddddaddc, type: 3}
   - {fileID: 8300000, guid: 1757a3d7ac59bcf439accf86329a8c1f, type: 3}
+  trainArm:
+  - {fileID: 8300000, guid: 6a4c7f1d96ff131449a2ac8ada6c414e, type: 3}
+  - {fileID: 8300000, guid: 2c89c7a0b1e61ce4697f4387b6d87fac, type: 3}
+  - {fileID: 8300000, guid: c0921ca0c32ef9e4a9f7c4baa6651533, type: 3}
+  - {fileID: 8300000, guid: dadb3d8e4a4d229488c21f2d3ea678ec, type: 3}
+  trainUpperarm:
+  - {fileID: 8300000, guid: 5d5058405f5067e48a07a7d0ac1769da, type: 3}
+  - {fileID: 8300000, guid: e00a28494bec5d94cacbf4f8cb5089ef, type: 3}
+  - {fileID: 8300000, guid: 99358a0c9d2f62a4da97a3c388f46cb0, type: 3}
+  - {fileID: 8300000, guid: d0fa97e3f63c42040869e932b48f788e, type: 3}
+  trainThigh:
+  - {fileID: 8300000, guid: 1760b9c499e3e9a4db7517b3ae0a9861, type: 3}
+  - {fileID: 8300000, guid: 4bd0c8b5c99f0a642b86f80c921a8966, type: 3}
+  - {fileID: 8300000, guid: 2cc13ad3e94d4b345a2204e3d68ddd0f, type: 3}
+  - {fileID: 8300000, guid: 1658f4d7cf1defa40a74f7ff09cabe76, type: 3}
 --- !u!4 &1161289169
 Transform:
   m_ObjectHideFlags: 0
