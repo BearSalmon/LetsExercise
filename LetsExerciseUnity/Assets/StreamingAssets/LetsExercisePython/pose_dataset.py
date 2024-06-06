@@ -312,6 +312,32 @@ pose = {
             }
         ],
     },
+    "Right Step On":  #
+    {
+        "path": "/PoseDataset/abs/abs1-2.txt",
+        "check_angle": [
+            {
+                "point1": "left_shoulder",
+                "point2": "left_wrist",
+                "ref_point": "left_elbow"
+            },
+            {
+                "point1": "right_shoulder",
+                "point2": "right_wrist",
+                "ref_point": "right_elbow"
+            },
+            {
+                "point1": "left_elbow",
+                "point2": "left_hip",
+                "ref_point": "left_shoulder"
+            },
+            {
+                "point1": "right_elbow",
+                "point2": "right_hip",
+                "ref_point": "right_shoulder"
+            }
+        ],
+    },
 
     "Right Abs Shrink":  #
     {
