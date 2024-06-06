@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine.SceneManagement;
 using TMPro;
 using System.Collections;
+using System;
 
 public class WholeSampleSceneManager : MonoBehaviour
 {
@@ -106,6 +107,11 @@ public class WholeSampleSceneManager : MonoBehaviour
         {
             Pose pose = dBUtils.GetPoseByName(name);
             poses.Add(pose);
+        }
+
+        if (buttonEvent.planOrTrain == 1)
+        {
+            poses = poses.OrderBy(x => Guid.NewGuid()).ToList();
         }
         poseSetCount = poses.Count();
     }

@@ -37,7 +37,7 @@ public class ExercisePageUI : MonoBehaviour
     {
         wholeSampleSceneManager = GetComponent<WholeSampleSceneManager>();
         udpReceive = GameObject.Find("WholeManager").GetComponent<UDPReceive>();
-        wrong_message.text = "nice";
+        wrong_message.text = "";
         canGetWrongMessage = true;
         audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
     }
