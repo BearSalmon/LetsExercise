@@ -12,7 +12,7 @@ public class RecordService
 
     public void CreateRecordTable()
     {
-        dataBase.GetRecordConnection().DropTable<Record>();
+        //dataBase.GetRecordConnection().DropTable<Record>();
         dataBase.GetRecordConnection().CreateTable<Record>();
     }
 

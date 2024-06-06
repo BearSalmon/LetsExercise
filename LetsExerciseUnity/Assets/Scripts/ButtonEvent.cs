@@ -347,6 +347,8 @@ public class ButtonEvent : MonoBehaviour
             if (btn.name == "Btn1")
             {
                 dBUtils.AddUser();
+                isAddingWeight = false;
+                isChangingColor = false;
                 SceneManager.LoadScene((int)SceneName.SelectSex);
             }
             else if (btn.name == "Btn2")
@@ -928,7 +930,7 @@ public class ButtonEvent : MonoBehaviour
     bool Check_touch_button(Button btn)
     {
         float[] button_info = Get_button_info(btn);
-        float buffer = 50f;
+        float buffer = 30f;
         if (mouse.transform.position.x > button_info[0] - button_info[2] / 2 + buffer
             && mouse.transform.position.x < button_info[0] + button_info[2] / 2 - buffer
             && mouse.transform.position.y > button_info[1] - button_info[3] / 2 + buffer
