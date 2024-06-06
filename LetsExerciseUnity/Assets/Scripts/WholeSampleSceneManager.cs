@@ -85,7 +85,7 @@ public class WholeSampleSceneManager : MonoBehaviour
         else {
             readyPageUi.SetUp(poses[nowPose].Name, nowPose + 1, poseSetCount, poseSet.PoseSetName);
         }
-        countDownTimer.StartCountDown(5f);
+        countDownTimer.StartCountDown(10f);
     }
 
     public void SetUpPoseSet()
@@ -153,11 +153,11 @@ public class WholeSampleSceneManager : MonoBehaviour
         }
         else if (level == "Medium")
         {
-            countDownTimer.StartCountDown(10f);
+            countDownTimer.StartCountDown(15f);
         }
         else
         {
-            countDownTimer.StartCountDown(15f);
+            countDownTimer.StartCountDown(20f);
         }
     }
 
@@ -201,7 +201,7 @@ public class WholeSampleSceneManager : MonoBehaviour
                     readyPageUi.SetUp(poses[nowPose].Name, nowPose + 1, poseSetCount, poseSet.PoseSetName);
                 }
 
-                countDownTimer.StartCountDown(5f);
+                countDownTimer.StartCountDown(10f);
                 //normalizeBody.changeBodyScale();
             } 
         }

@@ -46,7 +46,15 @@ public class CircleDrawer : MonoBehaviour
     {
         if (!isIncreasing) 
         {
-            increaseCoroutine = StartCoroutine(IncreaseProgressOverTime(2f));
+            if (m_Scene.name == "InquireData")
+            {
+                increaseCoroutine = StartCoroutine(IncreaseProgressOverTime(1f));
+            }
+            else
+            {
+                increaseCoroutine = StartCoroutine(IncreaseProgressOverTime(2f));
+            }
+            
         }
 
     }

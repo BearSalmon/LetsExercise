@@ -97,13 +97,13 @@ public class UDPReceive : MonoBehaviour
                 parts = dataHand.Trim('[', ']').Split(',');
 
                 float normalizedValue1 = normalize(float.Parse(parts[0]), 100, screen_width - 70, canva_xMin, canva_xMax) + (canva_width / 2);
-                float normalizedValue2 = canva_yMax - normalize(float.Parse(parts[1]), 0, screen_height - 275, canva_yMin, canva_yMax);
+                float normalizedValue2 = canva_yMax - normalize(float.Parse(parts[1]), 100, screen_height - 275, canva_yMin, canva_yMax);
                 string s = normalizedValue1.ToString() + "," + normalizedValue2.ToString();
                 //Debug.Log(s);
 
       
                 transformPosition[0] = normalizedValue1;
-                transformPosition[1] = normalizedValue2;
+                transformPosition[1] = normalizedValue2 + 400;
 
                 //Debug.Log(worldPos);
 

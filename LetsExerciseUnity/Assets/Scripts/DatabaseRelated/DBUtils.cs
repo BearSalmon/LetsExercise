@@ -31,10 +31,10 @@ public class DBUtils : MonoBehaviour
         recordService.CreateRecordTable();
 
         // Add test data
-        TestAddUsers();
+        //TestAddUsers();
         TestAddPoses();
         TestAddPoseSets();
-        TestAddRecords();
+        //TestAddRecords();
         Debug.Log("Game start!");
     }
 
@@ -271,9 +271,20 @@ public class DBUtils : MonoBehaviour
         {
             PoseSetName = "Core Crusher",
             Calories = 500f,
-            NumberOfGesture = 5,
+            NumberOfGesture = 12,
             Part = "Whole Body,",
             TrainPoseSet = "Right Stretch,Left Abs Shrink,Jumping Jacks,Weightlifting,Palm Down,Left Stretch,Arms Hoe,Right Abs Shrink,Flappings Wings,Left Step On,Arms Up And Down,Body Collection",
+        };
+
+        poseSetService.AddPoseSet(poseSet);
+
+        poseSet = new PoseSet
+        {
+            PoseSetName = "For Demo",
+            Calories = 300f,
+            NumberOfGesture = 1,
+            Part = "Arms,",
+            TrainPoseSet = "Weightlifting,",
         };
 
         poseSetService.AddPoseSet(poseSet);

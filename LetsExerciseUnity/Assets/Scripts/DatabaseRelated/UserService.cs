@@ -11,7 +11,7 @@ public class UserService
     }
     public void CreateUserTable()
     {
-        dataBase.GetUserConnection().DropTable<User>();
+        //dataBase.GetUserConnection().DropTable<User>();
         dataBase.GetUserConnection().CreateTable<User>();
     }
     // add new players 
